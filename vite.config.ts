@@ -20,7 +20,7 @@ export default defineConfig({
   ],
   ssr: {
     optimizeDeps: {
-      include: ['typographic-base'],
+      include: ['typographic-base', 'antd', 'react-geocode'],
     },
   },
   optimizeDeps: {

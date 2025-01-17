@@ -12,6 +12,9 @@ import {CartLoading} from '~/components/CartLoading';
 import {Input} from '~/components/Input';
 import {Drawer, useDrawer} from '~/components/Drawer';
 import {CountrySelector} from '~/components/CountrySelector';
+import FooterSocialPayment from '~/components/FooterSocialPayment';
+import FooterSubscribe from '~/components/FooterSubscribe';
+import FooterLocations from '~/components/FooterLocations';
 import {
   IconMenu,
   IconCaret,
@@ -413,24 +416,21 @@ function Footer({menu}: {menu?: EnhancedMenu}) {
     ? menu?.items?.length + 1 > 4
       ? 4
       : menu?.items?.length + 1
-    : [];
+    : 0;
 
   return (
     <Section
       divider={isHome ? 'none' : 'top'}
       as="footer"
       role="contentinfo"
-      className={`grid min-h-[25rem] items-start grid-flow-row w-full gap-6 py-8 px-6 md:px-8 lg:px-12 md:gap-8 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-${itemsCount}
-        bg-primary dark:bg-contrast dark:text-primary text-contrast overflow-hidden`}
+      className={`grid min-h-[25rem] items-start grid-flow-row w-full gap-6 px-0 py-8 md:gap-8 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-${itemsCount}
+        bg-primary text-contrast overflow-hidden`}
     >
+      <FooterLocations />
       <FooterMenu menu={menu} />
-      <CountrySelector />
-      <div
-        className={`self-end pt-8 opacity-50 md:col-span-2 lg:col-span-${itemsCount}`}
-      >
-        &copy; {new Date().getFullYear()} / Shopify, Inc. Hydrogen is an MIT
-        Licensed Open Source project.
-      </div>
+      <FooterSubscribe />
+      <FooterSocialPayment />
+      {/* <CountrySelector /> */}
     </Section>
   );
 }

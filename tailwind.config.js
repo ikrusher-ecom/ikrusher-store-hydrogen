@@ -11,6 +11,7 @@ export default {
         contrast: 'rgb(var(--color-contrast) / <alpha-value>)',
         notice: 'rgb(var(--color-accent) / <alpha-value>)',
         shopPay: 'rgb(var(--color-shop-pay) / <alpha-value>)',
+        themeColor: 'rgb(var(--color-theme) / <alpha-value>)',
       },
       screens: {
         sm: '32em',

@@ -22,6 +22,15 @@ export default async function handleRequest(
       'https://shopify.com',
       'https://www.google-analytics.com',
       'https://www.googletagmanager.com',
+      'https://*.googleapis.com',
+      ...(process.env.NODE_ENV !== 'production' ? ['http://localhost:*'] : []),
+    ],
+    connectSrc: [
+      'self',
+      'https://*.googleapis.com',
+      'https://*.shopify.com',
+      'https://*.myshopify.com',
+      'https://wss://conversely-moved-aardvark.ngrok-free.app:*',
       ...(process.env.NODE_ENV !== 'production' ? ['http://localhost:*'] : []),
     ],
   });
