@@ -15,6 +15,7 @@ import {CountrySelector} from '~/components/CountrySelector';
 import FooterSocialPayment from '~/components/FooterSocialPayment';
 import FooterSubscribe from '~/components/FooterSubscribe';
 import FooterLocations from '~/components/FooterLocations';
+import HeaderNestedMenu from '~/components/HeaderNestedMenu';
 import {
   IconMenu,
   IconCaret,
@@ -23,6 +24,11 @@ import {
   IconBag,
   IconSearch,
 } from '~/components/Icon';
+import arrowOpenedIcon from '~/assets/arrow-opened.svg';
+import arrowClosedIcon from '~/assets/arrow-closed.svg';
+import logoIcon from '~/assets/logo.svg';
+import wishlistIcon from '~/assets/wishlist-icon.svg';
+import loginIcon from '~/assets/login-icon.svg';
 import {
   type EnhancedMenu,
   type ChildEnhancedMenuItem,
@@ -112,7 +118,14 @@ function CartDrawer({isOpen, onClose}: {isOpen: boolean; onClose: () => void}) {
   if (!rootData) return null;
 
   return (
-    <Drawer open={isOpen} onClose={onClose} heading="Cart" openFrom="right">
+    <Drawer
+      open={isOpen}
+      onClose={onClose}
+      heading="Cart"
+      openFrom="right"
+      headingContent={<span>Cart</span>}
+      moreContent={null}
+    >
       <div className="grid">
         <Suspense fallback={<CartLoading />}>
           <Await resolve={rootData?.cart}>
@@ -133,13 +146,58 @@ export function MenuDrawer({
   onClose: () => void;
   menu: EnhancedMenu;
 }) {
+  const params = useParams();
+
   return (
-    <Drawer open={isOpen} onClose={onClose} openFrom="left" heading="Menu">
+    <Drawer
+      open={isOpen}
+      onClose={onClose}
+      openFrom="right"
+      heading="Menu"
+      headingContent={
+        <Link className="flex items-center flex-grow w-full h-full" to="/">
+          <img src={logoIcon} alt="iKrusher icon" />
+        </Link>
+      }
+      moreContent={
+        <>
+          {/* <Form
+            method="get"
+            action={params.locale ? `/${params.locale}/search` : '/search'}
+            className="items-center gap-2 sm:flex"
+          > */}
+          <a
+            href={params.locale ? `/${params.locale}/search` : '/search'}
+            className="relative flex items-center justify-center w-8 h-8"
+          >
+            <IconSearch />
+          </a>
+          {/* <Input
+              type="search"
+              variant="minisearch"
+              placeholder="Search"
+              name="q"
+            /> */}
+          {/* </Form> */}
+          <AccountLink className="relative flex items-center justify-center w-8 h-8" />
+          <a href="/pages/wishlist">
+            <img src={wishlistIcon} alt="iKrusher wishlist" />
+          </a>
+        </>
+      }
+    >
       <div className="grid">
         <MenuMobileNav menu={menu} onClose={onClose} />
       </div>
     </Drawer>
   );
+}
+
+interface MenuItem {
+  id: string;
+  title: string;
+  url?: string;
+  items: MenuItem[];
 }
 
 function MenuMobileNav({
@@ -150,24 +208,10 @@ function MenuMobileNav({
   onClose: () => void;
 }) {
   return (
-    <nav className="grid gap-4 p-6 sm:gap-6 sm:px-12 sm:py-8">
-      {/* Top level menu items */}
-      {(menu?.items || []).map((item) => (
-        <span key={item.id} className="block">
-          <Link
-            to={item.to}
-            target={item.target}
-            onClick={onClose}
-            className={({isActive}) =>
-              isActive ? 'pb-1 border-b -mb-px' : 'pb-1'
-            }
-          >
-            <Text as="span" size="copy">
-              {item.title}
-            </Text>
-          </Link>
-        </span>
-      ))}
+    <nav className="grid gap-4 py-6 sm:gap-6 sm:py-8">
+      <HeaderNestedMenu
+        menuProp={(menu?.items || []) as unknown as MenuItem[]}
+      />
     </nav>
   );
 }
@@ -190,20 +234,25 @@ function MobileHeader({
   return (
     <header
       role="banner"
-      className={`${
-        isHome
-          ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
-          : 'bg-contrast/80 text-primary'
-      } flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8`}
+      className={`bg-themeColor text-contrast flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8`}
     >
       <div className="flex items-center justify-start w-full gap-4">
+        <Link className="flex items-center flex-grow w-full h-full" to="/">
+          <img src={logoIcon} alt="iKrusher icon" />
+          <Heading className={`text-transparent w-0`} as="h1">
+            {title}
+          </Heading>
+        </Link>
+
         <button
           onClick={openMenu}
-          className="relative flex items-center justify-center w-8 h-8"
+          className="relative flex items-center justify-end w-8 h-8"
         >
           <IconMenu />
         </button>
-        <Form
+      </div>
+
+      {/* <Form
           method="get"
           action={params.locale ? `/${params.locale}/search` : '/search'}
           className="items-center gap-2 sm:flex"
@@ -225,25 +274,12 @@ function MobileHeader({
             placeholder="Search"
             name="q"
           />
-        </Form>
-      </div>
+        </Form> */}
 
-      <Link
-        className="flex items-center self-stretch leading-[3rem] md:leading-[4rem] justify-center flex-grow w-full h-full"
-        to="/"
-      >
-        <Heading
-          className="font-bold text-center leading-none"
-          as={isHome ? 'h1' : 'h2'}
-        >
-          {title}
-        </Heading>
-      </Link>
-
-      <div className="flex items-center justify-end w-full gap-4">
+      {/* <div className="flex items-center justify-end w-full gap-4">
         <AccountLink className="relative flex items-center justify-center w-8 h-8" />
         <CartCount isHome={isHome} openCart={openCart} />
-      </div>
+      </div> */}
     </header>
   );
 }
@@ -264,17 +300,14 @@ function DesktopHeader({
   return (
     <header
       role="banner"
-      className={`${
-        isHome
-          ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
-          : 'bg-contrast/80 text-primary'
-      } ${
-        !isHome && y > 50 && ' shadow-lightHeader'
-      } hidden h-nav lg:flex items-center sticky transition duration-300 backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-8`}
+      className={`bg-themeColor text-contrast hidden h-nav lg:flex items-center sticky transition duration-300 backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-8`}
     >
       <div className="flex gap-12">
         <Link className="font-bold" to="/" prefetch="intent">
-          {title}
+          <img src={logoIcon} alt="iKrusher icon" />
+          <Heading className={`text-transparent w-0 h-0`} as="h1">
+            {title}
+          </Heading>
         </Link>
         <nav className="flex gap-8">
           {/* Top level menu items */}
@@ -330,9 +363,13 @@ function AccountLink({className}: {className?: string}) {
 
   return (
     <Link to="/account" className={className}>
-      <Suspense fallback={<IconLogin />}>
-        <Await resolve={isLoggedIn} errorElement={<IconLogin />}>
-          {(isLoggedIn) => (isLoggedIn ? <IconAccount /> : <IconLogin />)}
+      <Suspense fallback={<img src={loginIcon} alt="iKrusher icon" />}>
+        <Await
+          resolve={isLoggedIn}
+          errorElement={<img src={loginIcon} alt="iKrusher icon" />}
+        >
+          {/* {(isLoggedIn) => (isLoggedIn ? <IconAccount /> : <IconLogin />)} */}
+          <img src={loginIcon} alt="iKrusher icon" />
         </Await>
       </Suspense>
     </Link>
@@ -423,7 +460,7 @@ function Footer({menu}: {menu?: EnhancedMenu}) {
       divider={isHome ? 'none' : 'top'}
       as="footer"
       role="contentinfo"
-      className={`grid min-h-[25rem] items-start grid-flow-row w-full gap-6 px-0 py-8 md:gap-8 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-${itemsCount}
+      className={`grid min-h-[25rem] items-start grid-flow-row w-full gap-5 px-0 py-8 md:gap-8 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-${itemsCount}
         bg-primary text-contrast overflow-hidden`}
     >
       <FooterLocations />
@@ -438,14 +475,24 @@ function Footer({menu}: {menu?: EnhancedMenu}) {
 function FooterLink({item}: {item: ChildEnhancedMenuItem}) {
   if (item.to.startsWith('http')) {
     return (
-      <a href={item.to} target={item.target} rel="noopener noreferrer">
+      <a
+        href={item.to}
+        target={item.target}
+        rel="noopener noreferrer"
+        className={`text-greyColor`}
+      >
         {item.title}
       </a>
     );
   }
 
   return (
-    <Link to={item.to} target={item.target} prefetch="intent">
+    <Link
+      to={item.to}
+      target={item.target}
+      prefetch="intent"
+      className={`text-greyColor`}
+    >
       {item.title}
     </Link>
   );
@@ -453,8 +500,8 @@ function FooterLink({item}: {item: ChildEnhancedMenuItem}) {
 
 function FooterMenu({menu}: {menu?: EnhancedMenu}) {
   const styles = {
-    section: 'grid gap-4',
-    nav: 'grid gap-2 pb-6',
+    section: 'grid gap-4 px-5 w-full mobile-border',
+    nav: 'grid gap-2 pb-5',
   };
 
   return (
@@ -465,11 +512,20 @@ function FooterMenu({menu}: {menu?: EnhancedMenu}) {
             {({open}) => (
               <>
                 <Disclosure.Button className="text-left md:cursor-default">
-                  <Heading className="flex justify-between" size="lead" as="h3">
+                  <Heading
+                    className="flex justify-between font-semibold text-[22px] m-0 items-center"
+                    size="lead"
+                    as="h4"
+                  >
                     {item.title}
                     {item?.items?.length > 0 && (
                       <span className="md:hidden">
-                        <IconCaret direction={open ? 'up' : 'down'} />
+                        {/* <IconCaret direction={open ? 'up' : 'down'} /> */}
+                        {open ? (
+                          <img src={arrowOpenedIcon} alt="iKrusher icon" />
+                        ) : (
+                          <img src={arrowClosedIcon} alt="iKrusher icon" />
+                        )}
                       </span>
                     )}
                   </Heading>
@@ -477,7 +533,7 @@ function FooterMenu({menu}: {menu?: EnhancedMenu}) {
                 {item?.items?.length > 0 ? (
                   <div
                     className={`${
-                      open ? `max-h-48 h-fit` : `max-h-0 md:max-h-fit`
+                      open ? `h-fit` : `max-h-0 md:max-h-fit`
                     } overflow-hidden transition-all duration-300`}
                   >
                     <Suspense data-comment="This suspense fixes a hydration bug in Disclosure.Panel with static prop">

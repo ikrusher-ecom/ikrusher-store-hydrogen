@@ -11,7 +11,7 @@ import discoverIcon from '~/assets/discover.svg';
 
 export default function FooterSocialPayment() {
   return (
-    <div className={`flex flex-col text-center items-center gap-y-4`}>
+    <div className={`flex flex-col text-center items-center gap-y-4 pt-3`}>
       <div className={`flex gap-x-3`}>
         <img alt="iKrusher icon" src={instagramIcon} />
         <img alt="iKrusher icon" src={facebookIcon} />

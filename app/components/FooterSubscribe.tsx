@@ -7,7 +7,7 @@ export default function FooterSubscribe() {
   const fetcher = useFetcher<typeof action>();
 
   return (
-    <div className={`p-5 flex flex-col w-full border-b-2 border-white`}>
+    <div className={`p-[0px_20px_20px] flex flex-col w-full mobile-border`}>
       <h4 className={`font-semibold text-[22px] m-0 leading-none`}>
         Subscribe here
       </h4>

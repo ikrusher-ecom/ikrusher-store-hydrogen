@@ -3,17 +3,13 @@ import {Menu} from 'antd';
 
 interface MenuItem {
   id: string;
-  resourceId?: string;
   title: string;
   url?: string;
   items: MenuItem[];
 }
 
 interface NestedMenuListProps {
-  menu?: MenuItem[];
-  primaryDomainUrl: string;
-  viewport: string;
-  publicStoreDomain: string;
+  menuProp: MenuItem[];
 }
 
 const FALLBACK_HEADER_MENU: MenuItem[] = [
@@ -43,27 +39,23 @@ const FALLBACK_HEADER_MENU: MenuItem[] = [
   },
 ];
 
-export default function NestedMenuList({
-  menu,
-  primaryDomainUrl,
-  publicStoreDomain,
-}: NestedMenuListProps) {
-  const items = (menu || FALLBACK_HEADER_MENU)
+export default function HeaderNestedMenu({menuProp}: NestedMenuListProps) {
+  const items = (menuProp?.length ? menuProp : FALLBACK_HEADER_MENU)
     .map((item) => {
       if (!item.url) return null;
-
-      const url =
-        item.url.includes('myshopify.com') ||
-        item.url.includes(publicStoreDomain) ||
-        item.url.includes(primaryDomainUrl)
-          ? new URL(item.url).pathname
-          : item.url;
 
       const result =
         item.items.length > 0
           ? {
-              key: item.resourceId || item.id,
-              label: <a href={url}>{item.title}</a>,
+              key: item.id,
+              label: (
+                <a
+                  className={`font-semibold text-2xl flex flex-row`}
+                  href={item.url}
+                >
+                  {item.title}
+                </a>
+              ),
               children: item.items
                 .map((subItem) => {
                   if (!subItem.url) return null;
@@ -77,7 +69,11 @@ export default function NestedMenuList({
             }
           : {
               key: item.id,
-              label: <a href={url}>{item.title}</a>,
+              label: (
+                <a className={`font-semibold text-2xl`} href={item.url}>
+                  {item.title}
+                </a>
+              ),
             };
 
       return result;

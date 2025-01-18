@@ -30,7 +30,7 @@ export default async function handleRequest(
       'https://*.googleapis.com',
       'https://*.shopify.com',
       'https://*.myshopify.com',
-      'https://wss://conversely-moved-aardvark.ngrok-free.app:*',
+      'wss://conversely-moved-aardvark.ngrok-free.app:*',
       ...(process.env.NODE_ENV !== 'production' ? ['http://localhost:*'] : []),
     ],
   });
