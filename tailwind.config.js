@@ -13,6 +13,7 @@ export default {
         shopPay: 'rgb(var(--color-shop-pay) / <alpha-value>)',
         themeColor: 'rgb(var(--color-theme) / <alpha-value>)',
         greyColor: 'rgb(var(--color-grey) / <alpha-value>)',
+        yellowColor: 'rgb(var(--color-yellow) / <alpha-value>)',
       },
       screens: {
         sm: '640px',

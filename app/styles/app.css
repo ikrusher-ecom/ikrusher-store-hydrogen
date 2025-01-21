@@ -8,6 +8,7 @@
 
 /* Tokens */
 :root {
+  --color-yellow: 225 255 104;
   --color-theme: 62 177 200;
   --color-grey: 159 159 159;
   --color-primary: 44 46 53;
@@ -76,6 +77,24 @@ shop-pay-button {
   width: 100%;
   height: 3rem;
   display: table;
+}
+
+.ant-carousel .slick-slide img.block {
+  display: block;
+}
+
+.ant-carousel .slick-slide img.hidden {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .ant-carousel .slick-slide img.hidden.md\:block {
+    display: block;
+  }
+
+  .ant-carousel .slick-slide img.block.md\:hidden {
+    display: none;
+  }
 }
 
 @layer base {
@@ -304,6 +323,42 @@ ul.ant-menu-sub li.ant-menu-item {
 .ant-menu-inline.ant-menu-root .ant-menu-item,
 .ant-menu-inline.ant-menu-root .ant-menu-submenu-title {
   padding-left: 1rem !important;
+}
+
+.ant-carousel .slick-dots li button {
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+  background-color: rgb(var(--color-theme));
+}
+
+.ant-carousel .slick-dots li {
+  transition: none;
+  flex: none;
+}
+
+.ant-carousel .slick-dots li.slick-active {
+  width: 16px;
+}
+
+.ant-carousel .slick-dots li button::after {
+  inset: 0;
+}
+
+.ant-carousel .slick-prev, 
+.ant-carousel .slick-next {
+  color: rgb(var(--color-theme));
+  width: 20px;
+  height: 20px;
+}
+
+.ant-carousel .slick-prev::after, 
+.ant-carousel .slick-next::after {
+  width: 16px;
+  height: 16px;
 }
 
 @media (max-width: 767px) {
