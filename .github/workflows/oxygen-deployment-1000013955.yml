@@ -41,7 +41,7 @@ jobs:
       - name: Build and Publish to Oxygen
         id: deploy
         run: |
-          npx shopify hydrogen deploy --auth-bypass-token --token "${{ secrets.OXYGEN_DEPLOYMENT_TOKEN_1000013955 }}"
+          npx shopify hydrogen deploy --auth-bypass-token --token "eyJhY2Nlc3NfdG9rZW4iOiJhdGtuXzBhYzEwNzVjZTQzOTE4MzgyYzZiMjc1ZTMwZWI5NzE1N2Y4ZDNmNmEyODdjNGZmZDZhMWE4ODM0MTZjMTdlYmUiLCJleHBpcmVzX2F0IjoiMjAyNi0wMS0xOFQwNzo1MDozNC4xMThaIiwiY2xpZW50IjoiZ2lkOi8vb3h5Z2VuLWh1Yi9DbGllbnQvMSIsImFsbG93ZWRfcmVzb3VyY2UiOiJnaWQ6Ly9veHlnZW4taHViL0FwcC8zMjU3MSIsIm5hbWVzcGFjZV9pZCI6ImdpZDovL294eWdlbi1odWIvTmFtZXNwYWNlLzM5NTkzIiwibmFtZXNwYWNlIjoiNTg1OTM4Njk4NzEiLCJhcHBfaWQiOiJnaWQ6Ly9veHlnZW4taHViL0FwcC8zMjU3MSJ9"
           echo "AUTH_BYPASS_TOKEN=$(jq -r '.authBypassToken' h2_deploy_log.json)" >> $GITHUB_ENV
           echo "DEPLOYMENT_URL=$(jq -r '.url' h2_deploy_log.json)" >> $GITHUB_ENV
 
