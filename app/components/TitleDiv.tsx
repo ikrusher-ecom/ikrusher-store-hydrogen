@@ -19,7 +19,7 @@ export function TitleDiv({
   link,
 }: TitleDivProps): JSX.Element {
   return (
-    <Flex vertical align="start" gap="small" className={`px-12 pt-6 pb-4`}>
+    <Flex vertical align="start" gap="small" className={`px-7 pt-6 pb-4`}>
       {subTitle && (
         <Text className={`text-greyColor text-base font-medium`}>
           {subTitle}

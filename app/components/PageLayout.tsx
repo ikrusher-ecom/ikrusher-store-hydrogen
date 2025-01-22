@@ -59,7 +59,11 @@ export function PageLayout({children, layout}: LayoutProps) {
         {headerMenu && layout?.shop.name && (
           <Header title={layout.shop.name} menu={headerMenu} />
         )}
-        <main role="main" id="mainContent" className="flex-grow">
+        <main
+          role="main"
+          id="mainContent"
+          className="flex-grow relative top-16"
+        >
           {children}
         </main>
       </div>
@@ -234,7 +238,7 @@ function MobileHeader({
   return (
     <header
       role="banner"
-      className={`bg-themeColor text-contrast flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8`}
+      className={`bg-themeColor text-contrast flex lg:hidden items-center h-nav fixed backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8`}
     >
       <div className="flex items-center justify-start w-full gap-4">
         <Link className="flex items-center flex-grow w-full h-full" to="/">
@@ -461,7 +465,7 @@ function Footer({menu}: {menu?: EnhancedMenu}) {
       as="footer"
       role="contentinfo"
       className={`grid min-h-[25rem] items-start grid-flow-row w-full gap-5 px-0 py-8 md:gap-8 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-${itemsCount}
-        bg-primary text-contrast overflow-hidden`}
+        bg-primary text-contrast overflow-hidden relative top-16`}
     >
       <FooterLocations />
       <FooterMenu menu={menu} />

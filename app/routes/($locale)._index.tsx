@@ -3,12 +3,14 @@ import {
   type MetaArgs,
   type LoaderFunctionArgs,
 } from '@shopify/remix-oxygen';
-import {Suspense} from 'react';
+import {CSSProperties, Suspense} from 'react';
 import {Await, useLoaderData} from '@remix-run/react';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 import {CarouselMain} from '~/components/CarouselMain';
 import {FlexSlide} from '~/components/FlexSlide';
+import {VimeoVideoPlayer} from '~/components/VimeoVideoPlayer';
+import {TitleDiv} from '~/components/TitleDiv';
 import {Hero} from '~/components/Hero';
 import {FeaturedCollections} from '~/components/FeaturedCollections';
 import {ProductSwimlane} from '~/components/ProductSwimlane';
@@ -148,6 +150,7 @@ interface SlideItem {
   imgUrl: string;
   mobileImgUrl: string;
   linkUrl: string;
+  customStyle?: CSSProperties;
 }
 
 const categorySlide: SlideItem[] = [
@@ -158,14 +161,22 @@ const categorySlide: SlideItem[] = [
     mobileImgUrl:
       'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
     linkUrl: '/collections/new-arrivals',
+    customStyle: {
+      aspectRatio: '3/4',
+      objectPosition: 'center 20%',
+    },
   },
   {
     id: 'slide-new-arrival-1',
     imgUrl:
-      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/65d9e7062985a229dc68aa85d4186d6e.png?v=1737583944',
     mobileImgUrl:
-      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/65d9e7062985a229dc68aa85d4186d6e.png?v=1737583944',
     linkUrl: '/collections/new-arrivals',
+    customStyle: {
+      aspectRatio: '3/4',
+      objectPosition: 'center 20%',
+    },
   },
   {
     id: 'slide-new-arrival-2',
@@ -174,6 +185,10 @@ const categorySlide: SlideItem[] = [
     mobileImgUrl:
       'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
     linkUrl: '/collections/new-arrivals',
+    customStyle: {
+      aspectRatio: '3/4',
+      objectPosition: 'center 20%',
+    },
   },
 ];
 
@@ -185,8 +200,63 @@ const categoryTitle = {
       <span className="text-themeColor">Taste</span>
     </span>
   ),
-  link: {href: '', text: 'View all products here'},
+  link: {href: '/collections/all-products', text: 'View all products here'},
 };
+
+const automationTitle = {
+  subTitle: 'Automation',
+  mainTitle: (
+    <span>
+      Filling <span className="text-themeColor">&</span>
+      <br />
+      Capping <span className="text-themeColor">Solution</span>
+    </span>
+  ),
+  description:
+    'With a proven track record of delivering high-quality vape hardware iKrusher has sold hundreds of millions',
+  link: {
+    href: '/pages/filling-capping',
+    text: 'Learn more',
+  },
+};
+
+const ikraftTitle = {
+  subTitle: 'iKraft',
+  mainTitle: (
+    <span>
+      Custom <span className="text-themeColor">Vapes</span> &<br />
+      <span className="text-themeColor">Packaging</span>
+    </span>
+  ),
+  description:
+    'With a proven track record of delivering high-quality vape hardware iKrusher has sold hundreds',
+};
+
+const iKraftSlide: SlideItem[] = [
+  {
+    id: 'slide-custom-vape',
+    imgUrl:
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/9d274bc771c116b25572123c09c93080.png?v=1737583844',
+    mobileImgUrl:
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/9d274bc771c116b25572123c09c93080.png?v=1737583844',
+    linkUrl: '/pages/custom-vape',
+    customStyle: {
+      aspectRatio: '1',
+    },
+  },
+  {
+    id: 'slide-custom-packaging',
+    imgUrl:
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/ed9dc586a74ff944ecab799ee3bc8b56.png?v=1737583844',
+    mobileImgUrl:
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/ed9dc586a74ff944ecab799ee3bc8b56.png?v=1737583844',
+    linkUrl: '/pages/custom-packaging',
+    customStyle: {
+      aspectRatio: '1',
+      backgroundColor: '#E0E0E0',
+    },
+  },
+];
 
 export default function Homepage() {
   const {
@@ -206,9 +276,20 @@ export default function Homepage() {
         <Hero {...primaryHero} height="full" top loading="eager" />
       )} */}
 
-      <CarouselMain />
+      <div className={`mb-4`}>
+        <CarouselMain />
+      </div>
 
       <FlexSlide slideData={categorySlide} titleData={categoryTitle} />
+
+      <div className={`mb-4`}>
+        <TitleDiv {...automationTitle} />
+        <div className={`px-7`}>
+          <VimeoVideoPlayer className={`rounded-2xl`} videoId="910983760" />
+        </div>
+      </div>
+
+      <FlexSlide slideData={iKraftSlide} titleData={ikraftTitle} />
 
       {/* {featuredProducts && (
         <Suspense>

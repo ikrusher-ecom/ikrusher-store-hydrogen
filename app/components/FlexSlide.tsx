@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {CSSProperties, useState} from 'react';
 import {Flex} from 'antd';
 
 import {TitleDiv} from '~/components/TitleDiv';
@@ -10,6 +10,7 @@ interface SlideItem {
   imgUrl: string;
   mobileImgUrl: string;
   linkUrl: string;
+  customStyle?: CSSProperties;
 }
 
 interface FlexSlideProps {
@@ -41,7 +42,7 @@ export function FlexSlide({slideData, titleData}: FlexSlideProps): JSX.Element {
   };
 
   return (
-    <div className={`relative`} style={{marginBottom: '54px'}}>
+    <div className={`relative`} style={{marginBottom: '70px'}}>
       <TitleDiv
         subTitle={titleData.subTitle}
         mainTitle={titleData.mainTitle}
@@ -55,6 +56,7 @@ export function FlexSlide({slideData, titleData}: FlexSlideProps): JSX.Element {
           transform: `translateX(calc(-${currentIndex * 80}% - ${
             currentIndex * 8
           }px))`,
+          transition: 'transform 0.7s ease-in-out',
         }}
       >
         {slideData.map((item) => {
@@ -74,8 +76,11 @@ export function FlexSlide({slideData, titleData}: FlexSlideProps): JSX.Element {
               <img
                 src={item.mobileImgUrl}
                 alt="iKrusher"
-                className={`block md:hidden w-full rounded-xl`}
-                style={{boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'}}
+                className={`block md:hidden w-full rounded-xl object-cover`}
+                style={{
+                  boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+                  ...item.customStyle,
+                }}
               />
             </a>
           );

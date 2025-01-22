@@ -20,7 +20,12 @@ export default defineConfig({
   ],
   ssr: {
     optimizeDeps: {
-      include: ['typographic-base', 'antd', 'react-geocode'],
+      include: [
+        'typographic-base',
+        'antd',
+        'react-geocode',
+        '@u-wave/react-vimeo',
+      ],
     },
   },
   optimizeDeps: {
