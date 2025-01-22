@@ -51,11 +51,7 @@ export function Drawer({
 
         <div className="fixed inset-0">
           <div className="absolute inset-0">
-            <div
-              className={`fixed inset-y-0 flex w-full overflow-y-scroll ${
-                openFrom === 'right' ? 'right-0' : ''
-              }`}
-            >
+            <div className={`fixed inset-0 flex w-full right-0`}>
               <Transition.Child
                 as={Fragment}
                 enter="transform transition ease-in-out duration-600"
@@ -65,7 +61,7 @@ export function Drawer({
                 leaveFrom="translate-x-0"
                 leaveTo={offScreen[openFrom]}
               >
-                <Dialog.Panel className="w-full text-left align-middle transition-all transform h-screen-dynamic bg-contrast">
+                <Dialog.Panel className="overflow-y-scroll w-screen h-screen text-left align-middle transition-all transform bg-contrast">
                   <header
                     className={`z-40 bg-themeColor text-contrast sticky top-0 flex items-center px-4 h-nav md:px-8 ${
                       heading ? 'justify-between' : 'justify-end'

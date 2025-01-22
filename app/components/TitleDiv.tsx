@@ -19,7 +19,7 @@ export function TitleDiv({
   link,
 }: TitleDivProps): JSX.Element {
   return (
-    <Flex vertical align="start" gap="small" className={`mx-12 mt-6 mb-4`}>
+    <Flex vertical align="start" gap="small" className={`px-12 pt-6 pb-4`}>
       {subTitle && (
         <Text className={`text-greyColor text-base font-medium`}>
           {subTitle}
@@ -27,7 +27,7 @@ export function TitleDiv({
       )}
       <Title
         level={2}
-        className={`my-2 font-bold text-black leading-none`}
+        className={`py-2 font-bold text-black leading-none`}
         style={{margin: '0', fontWeight: '700', color: '#000', lineHeight: '1'}}
       >
         {mainTitle}
