@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-*, html, body {
+*, html, body, .ant-typography {
   font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+}
+
+html {
+  font-size: 16px;
 }
 
 /* Tokens */
@@ -325,6 +329,10 @@ ul.ant-menu-sub li.ant-menu-item {
   padding-left: 1rem !important;
 }
 
+.ant-carousel {
+  margin-bottom: 50px;
+}
+
 .ant-carousel .slick-dots li button {
   width: 10px;
   height: 10px;
@@ -348,21 +356,43 @@ ul.ant-menu-sub li.ant-menu-item {
   inset: 0;
 }
 
-.ant-carousel .slick-prev, 
-.ant-carousel .slick-next {
-  color: rgb(var(--color-theme));
-  width: 20px;
-  height: 20px;
+.ant-carousel .slick-prev,
+.ant-carousel .slick-next,
+.ant-carousel .slick-prev::after,
+.ant-carousel .slick-next::after {
+  width: 30px;
+  height: 30px;
+  transform: none;
+  border: none;
+  opacity: 1;
 }
 
-.ant-carousel .slick-prev::after, 
+.ant-carousel .slick-prev {
+  top: calc(100% + 10px);
+  right: 90px;
+  left: auto;
+}
+
+.ant-carousel .slick-next {
+  top: calc(100% + 10px);
+  right: 30px;
+  left: auto;
+}
+
+.ant-carousel .slick-prev::after {
+  content: url('/app/assets//arrow-left.svg');
+}
+
 .ant-carousel .slick-next::after {
-  width: 16px;
-  height: 16px;
+  content: url('/app/assets//arrow-right.svg');
 }
 
 @media (max-width: 767px) {
   .mobile-border {
     border-bottom: 2px solid #fff;
+  }
+
+  .ant-carousel .slick-dots {
+    display: none !important;
   }
 }

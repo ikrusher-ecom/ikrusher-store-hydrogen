@@ -1,6 +1,15 @@
 import {Carousel} from 'antd';
 
-const carouselData = [
+interface CarouselItem {
+  id: string;
+  imgUrl: string;
+  mobileImgUrl: string;
+  linkUrl: string;
+  btnText: string;
+  btnStyle: string;
+}
+
+const carouselData: CarouselItem[] = [
   {
     id: 'carousel-ikraft',
     imgUrl:
@@ -46,7 +55,7 @@ const carouselData = [
   },
 ];
 
-export function CarouselMain() {
+export function CarouselMain(): JSX.Element {
   return (
     <Carousel arrows autoplay speed={700} autoplaySpeed={7000}>
       {carouselData.map((item) => {
@@ -63,7 +72,7 @@ export function CarouselMain() {
               className={`block md:hidden`}
             />
             <a
-              className={`absolute bottom-7 inset-x-1/2 w-32 text-center font-semibold rounded-2xl py-1 leading-normal ${item.btnStyle}`}
+              className={`absolute bottom-5 inset-x-1/2 w-32 text-center font-semibold rounded-2xl py-1 leading-normal ${item.btnStyle}`}
               style={{transform: 'translateX(-50%)'}}
               href={item.linkUrl}
             >

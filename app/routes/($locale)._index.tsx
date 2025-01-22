@@ -8,6 +8,7 @@ import {Await, useLoaderData} from '@remix-run/react';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 import {CarouselMain} from '~/components/CarouselMain';
+import {FlexSlide} from '~/components/FlexSlide';
 import {Hero} from '~/components/Hero';
 import {FeaturedCollections} from '~/components/FeaturedCollections';
 import {ProductSwimlane} from '~/components/ProductSwimlane';
@@ -142,6 +143,51 @@ export const meta = ({matches}: MetaArgs<typeof loader>) => {
   return getSeoMeta(...matches.map((match) => (match.data as any).seo));
 };
 
+interface SlideItem {
+  id: string;
+  imgUrl: string;
+  mobileImgUrl: string;
+  linkUrl: string;
+}
+
+const categorySlide: SlideItem[] = [
+  {
+    id: 'slide-new-arrival',
+    imgUrl:
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
+    mobileImgUrl:
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
+    linkUrl: '/collections/new-arrivals',
+  },
+  {
+    id: 'slide-new-arrival-1',
+    imgUrl:
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
+    mobileImgUrl:
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
+    linkUrl: '/collections/new-arrivals',
+  },
+  {
+    id: 'slide-new-arrival-2',
+    imgUrl:
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
+    mobileImgUrl:
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
+    linkUrl: '/collections/new-arrivals',
+  },
+];
+
+const categoryTitle = {
+  subTitle: 'The Collection',
+  mainTitle: (
+    <span>
+      <span className="text-themeColor">Hardware</span> Designed For Your{' '}
+      <span className="text-themeColor">Taste</span>
+    </span>
+  ),
+  link: {href: '', text: 'View all products here'},
+};
+
 export default function Homepage() {
   const {
     primaryHero,
@@ -162,7 +208,9 @@ export default function Homepage() {
 
       <CarouselMain />
 
-      {featuredProducts && (
+      <FlexSlide slideData={categorySlide} titleData={categoryTitle} />
+
+      {/* {featuredProducts && (
         <Suspense>
           <Await resolve={featuredProducts}>
             {(response) => {
@@ -183,7 +231,7 @@ export default function Homepage() {
             }}
           </Await>
         </Suspense>
-      )}
+      )} */}
 
       {/* {secondaryHero && (
         <Suspense fallback={<Hero {...skeletons[1]} />}>
@@ -198,7 +246,7 @@ export default function Homepage() {
         </Suspense>
       )} */}
 
-      {featuredCollections && (
+      {/* {featuredCollections && (
         <Suspense>
           <Await resolve={featuredCollections}>
             {(response) => {
@@ -218,7 +266,7 @@ export default function Homepage() {
             }}
           </Await>
         </Suspense>
-      )}
+      )} */}
 
       {/* {tertiaryHero && (
         <Suspense fallback={<Hero {...skeletons[2]} />}>
