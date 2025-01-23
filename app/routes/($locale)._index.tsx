@@ -18,6 +18,8 @@ import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {getHeroPlaceholder} from '~/lib/placeholders';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
+import {ImageTicker} from '~/components/ImageTicker';
+import {ImageCard} from '~/components/ImageCard';
 
 export const headers = routeHeaders;
 
@@ -258,6 +260,50 @@ const iKraftSlide: SlideItem[] = [
   },
 ];
 
+const brandUrls = [
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos_c4_copy.png?v=1701387042',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos_c1.png?v=1701387032',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-13.png?v=1701387021',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-05.png?v=1701387009',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-11.png?v=1701386999',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-12.png?v=1701386991',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-20.png?v=1701386981',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-09.png?v=1701386970',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-17.png?v=1701386960',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-14.png?v=1701386950',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-19.png?v=1701386939',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-07.png?v=1701386930',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-10.png?v=1701386919',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-16.png?v=1701386909',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos_c2.png?v=1701386892',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-15.png?v=1701386880',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos_c3.png?v=1701386869',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-24.png?v=1700501836',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-08.png?v=1701386854',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-23.png?v=1700501837',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-18.png?v=1701386828',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-22.png?v=1701386781',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos_c4.png?v=1701386770',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-06.png?v=1701386758',
+];
+
+const customerCardData = {
+  imgUrl:
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/d717235ec883b591a5111dd68d69693b.png?v=1737590646',
+  title: (
+    <span>
+      Your <span className="text-themeColor">Satisfaction</span>,<br />
+      <span className="text-themeColor">Our</span> Priority
+    </span>
+  ),
+  description:
+    'We strive to exceed customer expectations and ensure satisfaction at iKrusher.',
+  button: {
+    link: '/pages/contact-us',
+    text: 'Contact Our Team',
+  },
+};
+
 export default function Homepage() {
   const {
     primaryHero,
@@ -290,6 +336,10 @@ export default function Homepage() {
       </div>
 
       <FlexSlide slideData={iKraftSlide} titleData={ikraftTitle} />
+
+      <ImageTicker imageUrls={brandUrls} />
+
+      <ImageCard imageCardData={customerCardData} />
 
       {/* {featuredProducts && (
         <Suspense>

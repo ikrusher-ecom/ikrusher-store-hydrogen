@@ -24,7 +24,7 @@ export default defineConfig({
         'typographic-base',
         'antd',
         'react-geocode',
-        '@u-wave/react-vimeo',
+        'react-infinite-ticker',
       ],
     },
   },
@@ -37,6 +37,7 @@ export default defineConfig({
       'react-use/esm/useScroll',
       'react-use/esm/useDebounce',
       'react-use/esm/useWindowScroll',
+      'react-infinite-ticker',
     ],
   },
   build: {

@@ -1,4 +1,4 @@
-import {Flex, Space, Typography} from 'antd';
+import {Flex, Typography} from 'antd';
 
 const {Text, Link, Paragraph, Title} = Typography;
 
@@ -32,7 +32,11 @@ export function TitleDiv({
       >
         {mainTitle}
       </Title>
-      {description && <Paragraph>{description}</Paragraph>}
+      {description && (
+        <Paragraph>
+          <p className={`my-0`}>{description}</p>
+        </Paragraph>
+      )}
       {link && (
         <Link href={link.href} underline>
           <span className={`text-themeColor text-base`}>{link.text}</span>

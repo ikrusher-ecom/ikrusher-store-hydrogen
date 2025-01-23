@@ -6,6 +6,10 @@
   font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
 }
 
+.ant-typography, .ant-typography p {
+  margin-bottom: 0 !important;
+}
+
 html {
   font-size: 16px;
 }
@@ -389,6 +393,64 @@ ul.ant-menu-sub li.ant-menu-item {
 
 .ant-carousel .slick-next::after {
   content: url('/app/assets//arrow-right.svg');
+}
+
+@keyframes ticker-kf {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    /* 10rem for each logo x 6 logos total = -60rem */
+    transform: translateX(calc(-120rem + 100vw));
+  }
+}
+
+@keyframes ticker-rev {
+  0% {
+    transform: translateX(calc(-120rem + 100vw));
+  }
+
+  100% {
+    /* 10rem for each logo x 6 logos total = -60rem */
+    transform: translateX(0);
+  }
+}
+
+.ticker-div {
+  animation: ticker-kf 10s linear infinite;
+}
+
+.ticker-div-rev {
+  animation: ticker-rev 10s linear infinite;
+}
+
+.ticker-div img, .ticker-div-rev img {
+  width: 10rem;
+  flex: none;
+  /* padding: 0 1rem 0 1rem; */
+  align-self: flex-start;
+  max-width: 100%;
+  height: auto;
+}
+
+.ant-card .ant-card-cover >* {
+  border-radius: 0;
+}
+
+.ant-card-cover {
+  width: 100%;
+  height: 100%;
+}
+
+.ant-card-body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 100%;
 }
 
 @media (max-width: 767px) {
