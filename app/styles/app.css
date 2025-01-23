@@ -395,12 +395,12 @@ ul.ant-menu-sub li.ant-menu-item {
   content: url('/app/assets//arrow-right.svg');
 }
 
-/* .ant-carousel .slick-slider,
+.ant-carousel .slick-slider,
 .ant-carousel .slick-slider .slick-track,
 .ant-carousel .slick-slider .slick-list {
-  touch-action: none;
-  -ms-touch-action: none;
-} */
+  touch-action: inherit;
+  -ms-touch-action: inherit;
+}
 
 @keyframes ticker-kf {
   0% {
