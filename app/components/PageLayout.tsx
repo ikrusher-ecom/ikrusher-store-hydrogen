@@ -62,7 +62,7 @@ export function PageLayout({children, layout}: LayoutProps) {
         <main
           role="main"
           id="mainContent"
-          className="flex-grow relative top-16 overflow-y-scroll"
+          className="flex-grow relative top-16 overflow-y-scroll overflow-x-hidden"
           style={{scrollBehavior: 'smooth'}}
         >
           {children}
