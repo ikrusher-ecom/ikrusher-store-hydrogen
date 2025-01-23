@@ -52,7 +52,7 @@ export function ImageCard({imageCardData}: ImageCardProps): JSX.Element {
           {imageCardData.title}
         </Title>
         <Paragraph>
-          <p className={`text-contrast font-light`}>
+          <p className={`text-contrast font-normal`}>
             {imageCardData.description}
           </p>
         </Paragraph>

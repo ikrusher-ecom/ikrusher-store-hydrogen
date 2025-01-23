@@ -14,7 +14,7 @@ import {routeHeaders} from '~/data/cache';
 
 import styles from '../styles/custom-font.css?url';
 
-const BLOG_HANDLE = 'journal';
+const BLOG_HANDLE = 'blog';
 
 export const headers = routeHeaders;
 

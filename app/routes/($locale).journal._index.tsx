@@ -14,7 +14,7 @@ import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
 import type {ArticleFragment} from 'storefrontapi.generated';
 
-const BLOG_HANDLE = 'Journal';
+const BLOG_HANDLE = 'blog';
 
 export const headers = routeHeaders;
 
