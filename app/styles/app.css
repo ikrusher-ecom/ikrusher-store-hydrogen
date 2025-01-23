@@ -395,6 +395,13 @@ ul.ant-menu-sub li.ant-menu-item {
   content: url('/app/assets//arrow-right.svg');
 }
 
+/* .ant-carousel .slick-slider,
+.ant-carousel .slick-slider .slick-track,
+.ant-carousel .slick-slider .slick-list {
+  touch-action: none;
+  -ms-touch-action: none;
+} */
+
 @keyframes ticker-kf {
   0% {
     transform: translateX(0);

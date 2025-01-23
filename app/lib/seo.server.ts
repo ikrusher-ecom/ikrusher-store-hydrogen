@@ -31,7 +31,8 @@ function root({
 }): SeoConfig {
   return {
     title: shop?.name,
-    titleTemplate: '%s | Hydrogen Demo Store',
+    titleTemplate:
+      'iKrusher | US Wholesale Vape Hardware & Custom OEM Manufacturing',
     description: truncate(shop?.description ?? ''),
     handle: '@shopify',
     url,
@@ -45,11 +46,11 @@ function root({
       name: shop.name,
       logo: shop.brand?.logo?.image?.url,
       sameAs: [
-        'https://twitter.com/shopify',
-        'https://facebook.com/shopify',
-        'https://instagram.com/shopify',
-        'https://youtube.com/shopify',
-        'https://tiktok.com/@shopify',
+        'https://twitter.com/ikrusher',
+        'https://facebook.com/ikrusher',
+        'https://instagram.com/ikrusher',
+        'https://youtube.com/ikrusher',
+        'https://tiktok.com/@ikrusher',
       ],
       url,
       potentialAction: {
@@ -64,8 +65,10 @@ function root({
 function home({url}: {url: Request['url']}): SeoConfig {
   return {
     title: 'Home',
-    titleTemplate: '%s | Hydrogen Demo Store',
-    description: 'The best place to buy snowboarding products',
+    titleTemplate:
+      'iKrusher | US Wholesale Vape Hardware & Custom OEM Manufacturing',
+    description:
+      '#1 US vape hardware manufacturer, iKrusher specializes in custom-designed AIO disposable vapes, 510 thread cartridges, and batteries to match your Live Resin, Live Rosin, and Distillate oils. With seven U.S. locations, we provide large-scale solutions for long-term partners.',
     url,
     robots: {
       noIndex: false,
@@ -258,7 +261,8 @@ function collection({
     description: truncate(
       collection?.seo?.description ?? collection?.description ?? '',
     ),
-    titleTemplate: '%s | Collection',
+    titleTemplate:
+      'iKrusher | US Wholesale Vape Hardware & Custom OEM Manufacturing',
     url,
     media: {
       type: 'image',
@@ -314,7 +318,8 @@ function listCollections({
 }): SeoConfig {
   return {
     title: 'Collections',
-    titleTemplate: '%s | Collections',
+    titleTemplate:
+      'iKrusher | US Wholesale Vape Hardware & Custom OEM Manufacturing',
     description: 'All hydrogen collections',
     url,
     jsonLd: collectionsJsonLd({collections, url}),
@@ -339,7 +344,8 @@ function article({
   return {
     title: article?.seo?.title ?? article?.title,
     description: truncate(article?.seo?.description ?? ''),
-    titleTemplate: '%s | Journal',
+    titleTemplate:
+      'iKrusher | US Wholesale Vape Hardware & Custom OEM Manufacturing',
     url,
     media: {
       type: 'image',
@@ -374,7 +380,8 @@ function blog({
   return {
     title: blog?.seo?.title,
     description: truncate(blog?.seo?.description || ''),
-    titleTemplate: '%s | Blog',
+    titleTemplate:
+      'iKrusher | US Wholesale Vape Hardware & Custom OEM Manufacturing',
     url,
     jsonLd: {
       '@context': 'https://schema.org',
@@ -396,7 +403,8 @@ function page({
   return {
     description: truncate(page?.seo?.description || ''),
     title: page?.seo?.title ?? page?.title,
-    titleTemplate: '%s | Page',
+    titleTemplate:
+      'iKrusher | US Wholesale Vape Hardware & Custom OEM Manufacturing',
     url,
     jsonLd: {
       '@context': 'https://schema.org',
@@ -416,7 +424,8 @@ function policy({
   return {
     description: truncate(policy?.body ?? ''),
     title: policy?.title,
-    titleTemplate: '%s | Policy',
+    titleTemplate:
+      'iKrusher | US Wholesale Vape Hardware & Custom OEM Manufacturing',
     url,
   };
 }
@@ -441,7 +450,8 @@ function policies({
     });
   return {
     title: 'Policies',
-    titleTemplate: '%s | Policies',
+    titleTemplate:
+      'iKrusher | US Wholesale Vape Hardware & Custom OEM Manufacturing',
     description: 'Hydroge store policies',
     jsonLd: [
       {
