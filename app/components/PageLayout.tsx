@@ -185,9 +185,9 @@ export function MenuDrawer({
             /> */}
           {/* </Form> */}
           <AccountLink className="relative flex items-center justify-center w-8 h-8" />
-          <a href="/pages/wishlist">
+          {/* <a href="/pages/wishlist">
             <img src={wishlistIcon} alt="iKrusher wishlist" />
-          </a>
+          </a> */}
         </>
       }
     >
