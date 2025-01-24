@@ -23,6 +23,8 @@ export default async function handleRequest(
       'https://www.google-analytics.com',
       'https://www.googletagmanager.com',
       'https://*.googleapis.com',
+      'https://f.vimeocdn.com',
+      'https://www.gstatic.com',
       ...(process.env.NODE_ENV !== 'production' ? ['http://localhost:*'] : []),
     ],
     connectSrc: [

@@ -11,6 +11,9 @@ import {CarouselMain} from '~/components/CarouselMain';
 import {FlexSlide} from '~/components/FlexSlide';
 import {VimeoVideoPlayer} from '~/components/VimeoVideoPlayer';
 import {TitleDiv} from '~/components/TitleDiv';
+import {ImageTicker} from '~/components/ImageTicker';
+import {ImageCard} from '~/components/ImageCard';
+import {BlogSlide} from '~/components/BlogSlide';
 import {Hero} from '~/components/Hero';
 import {FeaturedCollections} from '~/components/FeaturedCollections';
 import {ProductSwimlane} from '~/components/ProductSwimlane';
@@ -18,8 +21,7 @@ import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {getHeroPlaceholder} from '~/lib/placeholders';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
-import {ImageTicker} from '~/components/ImageTicker';
-import {ImageCard} from '~/components/ImageCard';
+import {PAGINATION_SIZE} from '~/lib/const';
 
 export const headers = routeHeaders;
 
@@ -86,7 +88,6 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
     })
     .catch((error) => {
       // Log query errors, but don't throw them so the page can still render
-      // eslint-disable-next-line no-console
       console.error(error);
       return null;
     });
@@ -101,7 +102,6 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
     })
     .catch((error) => {
       // Log query errors, but don't throw them so the page can still render
-      // eslint-disable-next-line no-console
       console.error(error);
       return null;
     });
@@ -115,7 +115,6 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
     })
     .catch((error) => {
       // Log query errors, but don't throw them so the page can still render
-      // eslint-disable-next-line no-console
       console.error(error);
       return null;
     });
@@ -130,7 +129,20 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
     })
     .catch((error) => {
       // Log query errors, but don't throw them so the page can still render
-      // eslint-disable-next-line no-console
+      console.error(error);
+      return null;
+    });
+
+  const blogData = context.storefront
+    .query(BLOGS_QUERY, {
+      variables: {
+        blogHandle: 'blog',
+        pageBy: PAGINATION_SIZE,
+        language,
+      },
+    })
+    .catch((error) => {
+      // Log query errors, but don't throw them so the page can still render
       console.error(error);
       return null;
     });
@@ -140,12 +152,9 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
     secondaryHero,
     featuredCollections,
     tertiaryHero,
+    blogData,
   };
 }
-
-export const meta = ({matches}: MetaArgs<typeof loader>) => {
-  return getSeoMeta(...matches.map((match) => (match.data as any).seo));
-};
 
 interface SlideItem {
   id: string;
@@ -311,6 +320,7 @@ export default function Homepage() {
     tertiaryHero,
     featuredCollections,
     featuredProducts,
+    blogData,
   } = useLoaderData<typeof loader>();
 
   // TODO: skeletons vs placeholders
@@ -340,6 +350,28 @@ export default function Homepage() {
       <ImageTicker imageUrls={brandUrls} />
 
       <ImageCard imageCardData={customerCardData} />
+
+      {blogData && (
+        <Suspense>
+          <Await resolve={blogData}>
+            {(response) => {
+              if (!response || !response.blog || !response.blog.articles) {
+                return <></>;
+              }
+              return (
+                <BlogSlide
+                  headingData={{
+                    heading: 'Chasing the Cloud',
+                    subTitle: 'Stories & Insights',
+                    link: {href: '/journal', text: 'View all article'},
+                  }}
+                  articleData={response.blog.articles.edges}
+                />
+              );
+            }}
+          </Await>
+        </Suspense>
+      )}
 
       {/* {featuredProducts && (
         <Suspense>
@@ -466,6 +498,48 @@ const COLLECTION_HERO_QUERY = `#graphql
     }
   }
   ${COLLECTION_CONTENT_FRAGMENT}
+` as const;
+
+const BLOGS_QUERY = `#graphql
+query Blog(
+  $language: LanguageCode
+  $blogHandle: String!
+  $pageBy: Int!
+  $cursor: String
+) @inContext(language: $language) {
+  blog(handle: $blogHandle) {
+    title
+    seo {
+      title
+      description
+    }
+    articles(first: $pageBy, after: $cursor) {
+      edges {
+        node {
+          ...Article
+        }
+      }
+    }
+  }
+}
+
+fragment Article on Article {
+  author: authorV2 {
+    name
+  }
+  contentHtml
+  handle
+  id
+  image {
+    id
+    altText
+    url
+    width
+    height
+  }
+  publishedAt
+  title
+}
 ` as const;
 
 // @see: https://shopify.dev/api/storefront/current/queries/products

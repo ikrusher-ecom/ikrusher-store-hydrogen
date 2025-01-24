@@ -14,7 +14,7 @@ import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
 import type {ArticleFragment} from 'storefrontapi.generated';
 
-const BLOG_HANDLE = 'blog';
+export const BLOG_HANDLE = 'blog';
 
 export const headers = routeHeaders;
 
@@ -78,7 +78,7 @@ export default function Journals() {
   );
 }
 
-function ArticleCard({
+export function ArticleCard({
   blogHandle,
   article,
   loading,
@@ -109,7 +109,7 @@ function ArticleCard({
   );
 }
 
-const BLOGS_QUERY = `#graphql
+export const BLOGS_QUERY = `#graphql
 query Blog(
   $language: LanguageCode
   $blogHandle: String!
