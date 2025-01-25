@@ -31,6 +31,7 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
     null,
   );
   const [touchEnd, setTouchEnd] = useState<{x: number; y: number} | null>(null);
+  const [isHorizontalSwipe, setIsHorizontalSwipe] = useState(false);
 
   // Minimum swipe distance (in px) to trigger slide change
   const minSwipeDistance = 50;
@@ -51,6 +52,7 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
 
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
+    setIsHorizontalSwipe(false);
     setTouchStart({
       x: e.targetTouches[0].clientX,
       y: e.targetTouches[0].clientY,
@@ -58,14 +60,32 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
   };
 
   const onTouchMove = (e: React.TouchEvent) => {
+    if (!touchStart) return;
+
+    const currentX = e.targetTouches[0].clientX;
+    const currentY = e.targetTouches[0].clientY;
+
+    const xDistance = touchStart.x - currentX;
+    const yDistance = touchStart.y - currentY;
+
+    // Calculate the angle of the swipe
+    const angle = Math.abs((Math.atan2(yDistance, xDistance) * 180) / Math.PI);
+
+    // Determine if this is a horizontal swipe
+    const isHorizontal = angle < maxSwipeAngle || angle > 180 - maxSwipeAngle;
+
+    if (isHorizontal && Math.abs(xDistance) > minSwipeDistance) {
+      setIsHorizontalSwipe(true);
+    }
+
     setTouchEnd({
-      x: e.targetTouches[0].clientX,
-      y: e.targetTouches[0].clientY,
+      x: currentX,
+      y: currentY,
     });
   };
 
   const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
+    if (!touchStart || !touchEnd || !isHorizontalSwipe) return;
 
     const xDistance = touchStart.x - touchEnd.x;
     const yDistance = touchStart.y - touchEnd.y;
@@ -73,7 +93,7 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
     // Calculate the angle of the swipe
     const angle = Math.abs((Math.atan2(yDistance, xDistance) * 180) / Math.PI);
 
-    // Only process horizontal swipes (angle less than maxSwipeAngle from horizontal)
+    // Only process horizontal swipes
     if (angle < maxSwipeAngle || angle > 180 - maxSwipeAngle) {
       const isLeftSwipe = xDistance > minSwipeDistance;
       const isRightSwipe = xDistance < -minSwipeDistance;
@@ -84,6 +104,9 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
         handlePrev();
       }
     }
+
+    // Reset the horizontal swipe flag
+    setIsHorizontalSwipe(false);
   };
 
   return (
