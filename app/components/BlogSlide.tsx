@@ -27,6 +27,15 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
   }
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState<{x: number; y: number} | null>(
+    null,
+  );
+  const [touchEnd, setTouchEnd] = useState<{x: number; y: number} | null>(null);
+
+  // Minimum swipe distance (in px) to trigger slide change
+  const minSwipeDistance = 50;
+  // Maximum angle in degrees to consider a horizontal swipe
+  const maxSwipeAngle = 30;
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
@@ -40,6 +49,43 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
     );
   };
 
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY,
+    });
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY,
+    });
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const xDistance = touchStart.x - touchEnd.x;
+    const yDistance = touchStart.y - touchEnd.y;
+
+    // Calculate the angle of the swipe
+    const angle = Math.abs((Math.atan2(yDistance, xDistance) * 180) / Math.PI);
+
+    // Only process horizontal swipes (angle less than maxSwipeAngle from horizontal)
+    if (angle < maxSwipeAngle || angle > 180 - maxSwipeAngle) {
+      const isLeftSwipe = xDistance > minSwipeDistance;
+      const isRightSwipe = xDistance < -minSwipeDistance;
+
+      if (isLeftSwipe) {
+        handleNext();
+      } else if (isRightSwipe) {
+        handlePrev();
+      }
+    }
+  };
+
   return (
     <div className={`relative`} style={{marginBottom: '70px'}}>
       <TitleDiv
@@ -49,13 +95,16 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
       />
       <Flex
         gap="middle"
-        className={`ml-7`}
+        className={`py-1 pl-1 pr-3 flex-slide ml-7`}
         style={{
           transform: `translateX(calc(-${currentIndex * 80}% - ${
-            currentIndex * 8
+            currentIndex * 0
           }px))`,
           transition: 'transform 0.7s ease-in-out',
         }}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
       >
         {articleData.map((item) => {
           return (
@@ -76,7 +125,7 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
                   style={{aspectRatio: '35/25'}}
                 />
               </a>
-              <div>
+              <div className={`-mb-4`}>
                 {/* <span></span> */}
                 <span className={`text-sm`}>
                   {new Intl.DateTimeFormat(`en-US`, {

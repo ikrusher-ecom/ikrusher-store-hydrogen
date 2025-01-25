@@ -44,7 +44,8 @@ export async function loader({
     },
   });
 
-  const shouldGetRecommendations = !searchTerm || products?.nodes?.length === 0;
+  // const shouldGetRecommendations = !searchTerm || products?.nodes?.length === 0;
+  const shouldGetRecommendations = false;
 
   const seo = seoPayload.collection({
     url: request.url,

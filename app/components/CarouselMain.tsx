@@ -57,7 +57,13 @@ const carouselData: CarouselItem[] = [
 
 export function CarouselMain(): JSX.Element {
   return (
-    <Carousel arrows autoplay speed={700} autoplaySpeed={7000}>
+    <Carousel
+      arrows
+      autoplay
+      speed={700}
+      autoplaySpeed={7000}
+      touchMove={false}
+    >
       {carouselData.map((item) => {
         return (
           <div key={item.id} className={`m-0 relative`}>
@@ -72,7 +78,7 @@ export function CarouselMain(): JSX.Element {
               className={`block md:hidden`}
             />
             <a
-              className={`absolute bottom-5 inset-x-1/2 w-32 text-center font-semibold rounded-2xl py-1 leading-normal ${item.btnStyle}`}
+              className={`absolute bottom-7 inset-x-1/2 w-32 text-center font-semibold rounded-2xl py-1 leading-normal ${item.btnStyle}`}
               style={{transform: 'translateX(-50%)'}}
               href={item.linkUrl}
             >
