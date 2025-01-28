@@ -348,6 +348,10 @@ ul.ant-menu-sub li.ant-menu-item {
   padding-left: 1rem !important;
 }
 
+.ant-menu.ant-menu-sub.ant-menu-inline .ant-menu-item.ant-menu-item-only-child {
+  padding-left: 2rem !important;
+}
+
 .ant-carousel {
   margin-bottom: 50px;
 }
@@ -498,6 +502,12 @@ ul.ant-menu-sub li.ant-menu-item {
 .ant-btn-variant-outlined:not(:disabled):not(.ant-btn-disabled):hover, 
 .ant-btn-variant-dashed:not(:disabled):not(.ant-btn-disabled):hover {
   color: rgb(var(--color-theme));
+}
+
+.ant-modal .ant-modal-content {
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 @media (max-width: 767px) {

@@ -51,11 +51,11 @@ export function PageLayout({children, layout}: LayoutProps) {
   return (
     <>
       <div className="flex flex-col">
-        {/* <div className="">
+        <div className="">
           <a href="#mainContent" className="sr-only">
             Skip to content
           </a>
-        </div> */}
+        </div>
         {headerMenu && (
           <Header title={layout?.shop.name || 'iKrusher'} menu={headerMenu} />
         )}
