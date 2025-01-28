@@ -46,12 +46,12 @@ export function Drawer({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0" />
+          <div className="fixed inset-0 w-screen min-h-screen" />
         </Transition.Child>
 
-        <div className="fixed inset-0">
+        <div className="fixed inset-0 w-screen min-h-screen">
           <div className="absolute inset-0">
-            <div className={`fixed inset-0 flex w-full h-screen right-0`}>
+            <div className={`fixed inset-0 flex w-screen h-screen right-0`}>
               <Transition.Child
                 as={Fragment}
                 enter="transform transition ease-in-out duration-600"

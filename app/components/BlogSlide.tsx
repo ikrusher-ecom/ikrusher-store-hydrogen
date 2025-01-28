@@ -116,62 +116,64 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
         mainTitle={headingData.heading || 'Default Title'}
         link={{href: '/journal', text: 'View all articles'}}
       />
-      <Flex
-        gap="middle"
-        className={`py-1 pl-1 pr-3 flex-slide ml-7`}
-        style={{
-          transform: `translateX(calc(-${currentIndex * 80}% - ${
-            currentIndex * 0
-          }px))`,
-          transition: 'transform 0.7s ease-in-out',
-        }}
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
-      >
-        {articleData.map((item) => {
-          return (
-            <div
-              key={item.node.id}
-              className={`m-0 relative flex-none w-4/5`}
-              style={{flexBasis: '80%', flexShrink: 0}}
-            >
-              <a
-                href={`/journal/${item.node.handle}`}
-                className={`mb-2 block`}
-                style={{aspectRatio: '35/25'}}
+      <div className={`overflow-hidden`}>
+        <Flex
+          gap="middle"
+          className={`py-1 pl-1 pr-3 flex-slide ml-7`}
+          style={{
+            transform: `translateX(calc(-${currentIndex * 80}% - ${
+              currentIndex * 0
+            }px))`,
+            transition: 'transform 0.7s ease-in-out',
+          }}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
+          {articleData.map((item) => {
+            return (
+              <div
+                key={item.node.id}
+                className={`m-0 relative flex-none w-4/5`}
+                style={{flexBasis: '80%', flexShrink: 0}}
               >
-                <img
-                  src={item.node.image.url}
-                  alt={item.node.image.altText}
-                  className={`block md:hidden w-full rounded-xl object-cover`}
+                <a
+                  href={`/journal/${item.node.handle}`}
+                  className={`mb-2 block`}
                   style={{aspectRatio: '35/25'}}
+                >
+                  <img
+                    src={item.node.image.url}
+                    alt={item.node.image.altText}
+                    className={`block md:hidden w-full rounded-xl object-cover`}
+                    style={{aspectRatio: '35/25'}}
+                  />
+                </a>
+                <div className={`-mb-4`}>
+                  {/* <span></span> */}
+                  <span className={`text-sm`}>
+                    {new Intl.DateTimeFormat(`en-US`, {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    }).format(new Date(item.node.publishedAt!))}
+                  </span>
+                </div>
+                <TitleDiv
+                  customClass={`pt-0 pb-0 pl-0 pr-0`}
+                  titleColor={'theme'}
+                  mainTitle={item.node.title}
+                  descriptionHtml={item.node.contentHtml}
+                  link={{
+                    href: `/blog/${item.node.handle}`,
+                    text: 'Learn more...',
+                  }}
                 />
-              </a>
-              <div className={`-mb-4`}>
-                {/* <span></span> */}
-                <span className={`text-sm`}>
-                  {new Intl.DateTimeFormat(`en-US`, {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  }).format(new Date(item.node.publishedAt!))}
-                </span>
               </div>
-              <TitleDiv
-                customClass={`pt-0 pb-0 pl-0 pr-0`}
-                titleColor={'theme'}
-                mainTitle={item.node.title}
-                descriptionHtml={item.node.contentHtml}
-                link={{
-                  href: `/blog/${item.node.handle}`,
-                  text: 'Learn more...',
-                }}
-              />
-            </div>
-          );
-        })}
-      </Flex>
+            );
+          })}
+        </Flex>
+      </div>
       <button
         onClick={handlePrev}
         className="absolute"

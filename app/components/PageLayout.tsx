@@ -50,20 +50,19 @@ export function PageLayout({children, layout}: LayoutProps) {
   const {headerMenu, footerMenu} = layout || {};
   return (
     <>
-      <div className="flex flex-col min-h-screen">
-        <div className="">
+      <div className="flex flex-col">
+        {/* <div className="">
           <a href="#mainContent" className="sr-only">
             Skip to content
           </a>
-        </div>
-        {headerMenu && layout?.shop.name && (
-          <Header title={layout.shop.name} menu={headerMenu} />
+        </div> */}
+        {headerMenu && (
+          <Header title={layout?.shop.name || 'iKrusher'} menu={headerMenu} />
         )}
         <main
           role="main"
           id="mainContent"
-          className="flex-grow relative top-16 overflow-y-scroll overflow-x-hidden"
-          style={{scrollBehavior: 'smooth'}}
+          className="flex-grow relative top-16 w-screen"
         >
           {children}
         </main>
@@ -239,7 +238,7 @@ function MobileHeader({
   return (
     <header
       role="banner"
-      className={`bg-themeColor text-contrast flex lg:hidden items-center h-nav fixed backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8`}
+      className={`bg-themeColor text-contrast flex lg:hidden items-center h-nav fixed backdrop-blur-lg z-40 top-0 justify-between w-screen leading-none gap-4 px-4 md:px-8`}
     >
       <div className="flex items-center justify-start w-full gap-4">
         <Link className="flex items-center flex-grow w-full h-full" to="/">

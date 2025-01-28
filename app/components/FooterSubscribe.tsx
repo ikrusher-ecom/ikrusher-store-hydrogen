@@ -1,10 +1,14 @@
-import * as React from 'react';
 import {useFetcher} from '@remix-run/react';
+import {useRef} from 'react';
 
 import type {action} from '~/routes/klaviyo.submit';
 
+import {NewsLetterForm} from './NewsletterForm';
+
 export default function FooterSubscribe() {
-  const fetcher = useFetcher<typeof action>();
+  // const fetcher = useFetcher<typeof action>();
+
+  const formRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className={`p-[0px_20px_20px] flex flex-col w-full mobile-border`}>
@@ -12,7 +16,7 @@ export default function FooterSubscribe() {
         Subscribe here
       </h4>
       <p>for iKrusher latest news</p>
-      <fetcher.Form
+      {/* <fetcher.Form
         method="post"
         action="/klaviyo/submit"
         className={`w-full mt-2`}
@@ -32,7 +36,12 @@ export default function FooterSubscribe() {
         >
           {fetcher.state === 'idle' ? 'Subscribe' : 'Signing Up...'}
         </button>
-      </fetcher.Form>
+      </fetcher.Form> */}
+      <NewsLetterForm
+        ref={formRef}
+        placeholder="Your email address"
+        buttonText="Subscribe"
+      />
     </div>
   );
 }

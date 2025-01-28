@@ -315,11 +315,11 @@ const customerCardData = {
 
 export default function Homepage() {
   const {
-    primaryHero,
-    secondaryHero,
-    tertiaryHero,
-    featuredCollections,
-    featuredProducts,
+    // primaryHero,
+    // secondaryHero,
+    // tertiaryHero,
+    // featuredCollections,
+    // featuredProducts,
     blogData,
   } = useLoaderData<typeof loader>();
 

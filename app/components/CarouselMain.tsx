@@ -62,7 +62,7 @@ export function CarouselMain(): JSX.Element {
       autoplay
       speed={700}
       autoplaySpeed={7000}
-      touchMove={false}
+      // touchMove={false}
     >
       {carouselData.map((item) => {
         return (

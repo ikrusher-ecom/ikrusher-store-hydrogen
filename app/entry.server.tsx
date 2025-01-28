@@ -33,6 +33,8 @@ export default async function handleRequest(
       'https://*.shopify.com',
       'https://*.myshopify.com',
       'https://cdn.shopify.com',
+      'https://f.vimeocdn.com',
+      'https://www.gstatic.com',
       'wss://conversely-moved-aardvark.ngrok-free.app:*',
       ...(process.env.NODE_ENV !== 'production' ? ['http://localhost:*'] : []),
     ],
@@ -42,6 +44,7 @@ export default async function handleRequest(
       'https://*.myshopify.com',
       'https://cdn.shopify.com',
       'https://player.vimeo.com',
+      'https://www.gstatic.com',
       ...(process.env.NODE_ENV !== 'production' ? ['http://localhost:*'] : []),
     ],
     imgSrc: [
@@ -50,6 +53,7 @@ export default async function handleRequest(
       'https://*.myshopify.com',
       'https://cdn.shopify.com',
       'https://i.vimeocdn.com',
+      'https://f.vimeocdn.com',
       ...(process.env.NODE_ENV !== 'production' ? ['http://localhost:*'] : []),
     ],
   });

@@ -20,11 +20,14 @@
 
 html {
   font-size: 16px;
+  /* overflow-x: hidden; */
+  /* width: 100vw; */
+  /* overflow-y: scroll; */
 }
 
-html, body {
+/* body {
   overflow-x: hidden;
-}
+} */
 
 /* Tokens */
 :root {
@@ -406,9 +409,24 @@ ul.ant-menu-sub li.ant-menu-item {
 .ant-carousel .slick-slider,
 .ant-carousel .slick-slider .slick-track,
 .ant-carousel .slick-slider .slick-list {
-  touch-action: inherit;
-  -ms-touch-action: inherit;
+  touch-action: pan-y pinch-zoom;
+  -ms-touch-action: pan-y pinch-zoom;
+  height: auto !important;
 }
+
+/* .ant-carousel .slick-slide {
+  height: auto !important;
+}
+
+.ant-carousel .slick-slide > div {
+  height: auto !important;
+}
+
+.ant-carousel .slick-slide img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+} */
 
 @keyframes ticker-kf {
   0% {
@@ -475,6 +493,11 @@ ul.ant-menu-sub li.ant-menu-item {
 .flex-slide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.ant-btn-variant-outlined:not(:disabled):not(.ant-btn-disabled):hover, 
+.ant-btn-variant-dashed:not(:disabled):not(.ant-btn-disabled):hover {
+  color: rgb(var(--color-theme));
 }
 
 @media (max-width: 767px) {
