@@ -251,13 +251,11 @@ export default function FooterLocations() {
   };
 
   return (
-    <div
-      className={`flex flex-col w-full p-[10px_20px_20px] gap-3 mobile-border`}
-    >
+    <div className={`flex flex-col w-full pt-4 px-5 pb-8 gap-5 mobile-border`}>
       <h4 className={`font-semibold text-[22px] m-0`}>
         iKrusher Location Near Me
       </h4>
-      <div className={`flex flex-col gap-3`}>{renderLocationDetails()}</div>
+      <div className={`flex flex-col gap-5`}>{renderLocationDetails()}</div>
       <p
         className={`font-medium text-[16px] leading-[1.75] flex flex-row items-center gap-2.5`}
       >

@@ -149,7 +149,7 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
                     style={{aspectRatio: '35/25'}}
                   />
                 </a>
-                <div className={`-mb-4`}>
+                <div className={`block`}>
                   {/* <span></span> */}
                   <span className={`text-sm`}>
                     {new Intl.DateTimeFormat(`en-US`, {
@@ -160,7 +160,7 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
                   </span>
                 </div>
                 <TitleDiv
-                  customClass={`pt-0 pb-0 pl-0 pr-0`}
+                  customClass={`blogTitle`}
                   titleColor={'theme'}
                   mainTitle={item.node.title}
                   descriptionHtml={item.node.contentHtml}
@@ -177,14 +177,14 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
       <button
         onClick={handlePrev}
         className="absolute"
-        style={{right: '90px', top: 'calc(100% + 14px)'}}
+        style={{right: '90px', top: 'calc(100% + 20px)'}}
       >
         <img src={arrowLeftIcon} alt="iKrusher" />
       </button>
       <button
         onClick={handleNext}
         className="absolute"
-        style={{right: '30px', top: 'calc(100% + 14px)'}}
+        style={{right: '30px', top: 'calc(100% + 20px)'}}
       >
         <img src={arrowRightIcon} alt="iKrusher" />
       </button>

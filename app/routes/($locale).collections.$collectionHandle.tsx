@@ -19,6 +19,7 @@ import {
   getSeoMeta,
 } from '@shopify/hydrogen';
 import invariant from 'tiny-invariant';
+import {Typography} from 'antd';
 
 import {PageHeader, Section, Text} from '~/components/Text';
 import {Grid} from '~/components/Grid';
@@ -31,6 +32,11 @@ import {seoPayload} from '~/lib/seo.server';
 import {FILTER_URL_PREFIX} from '~/components/SortFilter';
 import {getImageLoadingPriority} from '~/lib/const';
 import {parseAsCurrency} from '~/lib/utils';
+import {HeroBanner} from '~/components/HeroBanner';
+import {TitleDiv} from '~/components/TitleDiv';
+import {ProductSlide} from '~/components/ProductSlide';
+
+const {Title} = Typography;
 
 export const headers = routeHeaders;
 
@@ -147,9 +153,27 @@ export default function Collection() {
 
   const {ref, inView} = useInView();
 
+  interface ProductItem {
+    name: string;
+    image: string;
+    subTitle: string;
+    link: string;
+  }
+
+  const productSlideItems: ProductItem[] = collection.products.nodes.map(
+    (product) => ({
+      name: product.title.split(' | ')[0],
+      image: product.variants.nodes[0].image?.url,
+      subTitle: product.title.split(' | ')[1],
+      link: `/products/${product.handle}`,
+    }),
+  );
+
+  console.log(productSlideItems);
+
   return (
     <>
-      <PageHeader heading={collection.title}>
+      {/* <PageHeader heading={collection.title}>
         {collection?.description && (
           <div className="flex items-baseline justify-between w-full">
             <div>
@@ -159,7 +183,33 @@ export default function Collection() {
             </div>
           </div>
         )}
-      </PageHeader>
+      </PageHeader> */}
+
+      {/* All in one */}
+      {collection.handle === 'disposable-vapes' && (
+        <HeroBanner
+          handle={collection.handle}
+          title={
+            <Title
+              level={1}
+              className={`text-contrast`}
+              style={{color: 'rgb(var(--color-contrast))'}}
+            >
+              <span className={`text-themeColor`}>All-in-One</span> Hardware
+            </Title>
+          }
+          description={`Premium all-in-one disposable vape hardware for your business needs.`}
+          image={'https://placehold.co/425x525/343434/f5f5f5'}
+        />
+      )}
+      {collection.handle === 'disposable-vapes' && (
+        <ProductSlide
+          productItems={productSlideItems}
+          subTitle="The Fresh Line-Up"
+          mainTitle="New All-in-On Vape Hardware"
+        />
+      )}
+
       <Section>
         <SortFilter
           filters={collection.products.filters as Filter[]}

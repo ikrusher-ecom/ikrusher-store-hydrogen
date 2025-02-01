@@ -1,5 +1,6 @@
 import {
   json,
+  redirect,
   type MetaArgs,
   type LinksFunction,
   type LoaderFunctionArgs,

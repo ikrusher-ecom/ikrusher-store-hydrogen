@@ -29,7 +29,7 @@ export function TitleDiv({
       vertical
       align="start"
       gap="small"
-      className={`px-7 pt-6 pb-4 ${customClass}`}
+      className={`px-7 pt-0 pb-8 ${customClass}`}
     >
       {subTitle && (
         <Text className={`text-greyColor text-base font-medium`}>
@@ -38,7 +38,7 @@ export function TitleDiv({
       )}
       <Title
         level={2}
-        className={`py-2 font-bold leading-none ${
+        className={`pt-1 pb-2 font-bold leading-none ${
           titleColor === 'theme' ? 'text-themeColor' : 'text-black'
         }`}
         style={{
@@ -60,7 +60,7 @@ export function TitleDiv({
       )}
       {link && (
         <Link href={link.href} underline>
-          <span className={`text-themeColor text-base`}>{link.text}</span>
+          <span className={`text-themeColor text-base block pt-2`}>{link.text}</span>
         </Link>
       )}
     </Flex>

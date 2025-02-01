@@ -1,32 +1,30 @@
-import {CSSProperties, useState} from 'react';
-import {Flex} from 'antd';
+import {useState} from 'react';
+import {Flex, Typography, Image} from 'antd';
 
 import {TitleDiv} from '~/components/TitleDiv';
 import arrowLeftIcon from '~/assets/arrow-left.svg';
 import arrowRightIcon from '~/assets/arrow-right.svg';
 
-interface SlideItem {
-  id: string;
-  imgUrl: string;
-  mobileImgUrl: string;
-  linkUrl: string;
-  customStyle?: CSSProperties;
+const {Text, Link, Paragraph, Title} = Typography;
+
+interface ProductItem {
+  name: string;
+  image: string;
+  subTitle: string;
+  link: string;
 }
 
-interface FlexSlideProps {
-  slideData: SlideItem[];
-  titleData: {
-    subTitle?: string;
-    mainTitle: string | JSX.Element;
-    description?: string;
-    link?: {
-      href: string;
-      text: string;
-    };
-  };
+interface ProductSlideProps {
+  productItems: ProductItem[];
+  subTitle: string;
+  mainTitle: string;
 }
 
-export function FlexSlide({slideData, titleData}: FlexSlideProps): JSX.Element {
+export function ProductSlide({
+  productItems,
+  subTitle,
+  mainTitle,
+}: ProductSlideProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<{x: number; y: number} | null>(
     null,
@@ -41,13 +39,13 @@ export function FlexSlide({slideData, titleData}: FlexSlideProps): JSX.Element {
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? slideData.length - 1 : prevIndex - 1,
+      prevIndex === 0 ? productItems.length - 1 : prevIndex - 1,
     );
   };
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === slideData.length - 1 ? 0 : prevIndex + 1,
+      prevIndex === productItems.length - 1 ? 0 : prevIndex + 1,
     );
   };
 
@@ -111,13 +109,8 @@ export function FlexSlide({slideData, titleData}: FlexSlideProps): JSX.Element {
   };
 
   return (
-    <div className={`relative mb-20`}>
-      <TitleDiv
-        subTitle={titleData.subTitle}
-        mainTitle={titleData.mainTitle}
-        description={titleData.description}
-        link={titleData.link}
-      />
+    <div className={`relative`} style={{marginBottom: '70px'}}>
+      <TitleDiv subTitle={subTitle} mainTitle={mainTitle} />
       <div className={`overflow-hidden`}>
         <Flex
           gap="middle"
@@ -132,45 +125,34 @@ export function FlexSlide({slideData, titleData}: FlexSlideProps): JSX.Element {
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
         >
-          {slideData.map((item) => {
-            return (
-              <a
-                href={item.linkUrl}
-                key={item.id}
-                className={`m-0 relative flex-none w-4/5`}
-                style={{flexBasis: '80%', flexShrink: 0}}
-              >
-                <img
-                  src={item.imgUrl}
-                  alt="iKrusher"
-                  className={`hidden md:block w-full rounded-xl`}
-                  style={{boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'}}
-                />
-                <img
-                  src={item.mobileImgUrl}
-                  alt="iKrusher"
-                  className={`block md:hidden w-full rounded-xl object-cover`}
-                  style={{
-                    boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
-                    ...item.customStyle,
-                  }}
-                />
-              </a>
-            );
-          })}
+          {productItems.map((item) => (
+            <Flex
+              vertical
+              key={item.name}
+              className={`m-0 relative flex-none w-4/5 h-full object-cover object-center`}
+              style={{flexBasis: '80%', flexShrink: 0}}
+            >
+              <Image src={item.image} alt={item.name} />
+              <Flex vertical className={`absolute left-0 right-0 text-center`}>
+                <Title level={4}>{item.name}</Title>
+                <Paragraph>{item.subTitle}</Paragraph>
+                <Link href={item.link}>View Product</Link>
+              </Flex>
+            </Flex>
+          ))}
         </Flex>
       </div>
       <button
         onClick={handlePrev}
         className="absolute"
-        style={{right: '90px', top: 'calc(100% + 20px)'}}
+        style={{right: '90px', top: 'calc(100% + 14px)'}}
       >
         <img src={arrowLeftIcon} alt="iKrusher" />
       </button>
       <button
         onClick={handleNext}
         className="absolute"
-        style={{right: '30px', top: 'calc(100% + 20px)'}}
+        style={{right: '30px', top: 'calc(100% + 14px)'}}
       >
         <img src={arrowRightIcon} alt="iKrusher" />
       </button>

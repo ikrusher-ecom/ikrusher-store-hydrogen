@@ -37,7 +37,7 @@ export function ImageCard({imageCardData}: ImageCardProps): JSX.Element {
         vertical
         align="center"
         gap="small"
-        className={`w-full h-full justify-center text-center text-contrast`}
+        className={`w-full h-full justify-end text-center text-contrast`}
       >
         <Title
           level={2}
@@ -52,13 +52,13 @@ export function ImageCard({imageCardData}: ImageCardProps): JSX.Element {
           {imageCardData.title}
         </Title>
         <Paragraph>
-          <p className={`text-contrast font-normal`}>
+          <p className={`text-contrast font-normal px-6`}>
             {imageCardData.description}
           </p>
         </Paragraph>
         <a
           href={imageCardData.button.link}
-          className={`bg-themeColor text-contrast border-0 rounded-3xl py-2 px-4 font-semibold mt-3`}
+          className={`bg-yellowColor text-black border-0 rounded-3xl py-2 px-4 font-semibold my-8`}
         >
           {imageCardData.button.text}
         </a>

@@ -14,6 +14,7 @@ import {TitleDiv} from '~/components/TitleDiv';
 import {ImageTicker} from '~/components/ImageTicker';
 import {ImageCard} from '~/components/ImageCard';
 import {BlogSlide} from '~/components/BlogSlide';
+import {CertTicker} from '~/components/CertTicker';
 import {Hero} from '~/components/Hero';
 import {FeaturedCollections} from '~/components/FeaturedCollections';
 import {ProductSwimlane} from '~/components/ProductSwimlane';
@@ -22,7 +23,6 @@ import {getHeroPlaceholder} from '~/lib/placeholders';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
 import {PAGINATION_SIZE} from '~/lib/const';
-
 export const headers = routeHeaders;
 
 export async function loader(args: LoaderFunctionArgs) {
@@ -296,6 +296,14 @@ const brandUrls = [
   'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-06.png?v=1701386758',
 ];
 
+const certUrls = [
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/003300473a276301eaf1e933b35f9f7a.png?v=1738366876',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/1e6eda6e4572a7a351d30c6447d3515a.png?v=1738366876',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/5792742ae739f5bc57a23aafaa7736b5.png?v=1738366876',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/99e9c0d8cdde239eba105d8819c20bf9.png?v=1738366876',
+  'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/34967d9bbabf4cfff94427e52ac97161.png?v=1738366876',
+];
+
 const customerCardData = {
   imgUrl:
     'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/d717235ec883b591a5111dd68d69693b.png?v=1737590646',
@@ -338,39 +346,57 @@ export default function Homepage() {
 
       <FlexSlide slideData={categorySlide} titleData={categoryTitle} />
 
-      <div className={`mb-4`}>
+      <div className={`mb-20`}>
+        <TitleDiv
+          mainTitle={
+            <span>
+              <span className="text-themeColor">Quality</span> &{' '}
+              <span className="text-themeColor">Safety</span>
+            </span>
+          }
+          subTitle="Certifications"
+          description="Ensuring all products are certified for quality, safety, and compliance. Our commitment to excellence guarantees reliable and high-performance solutions for our customers."
+        />
+        <CertTicker imageUrls={certUrls} />
+      </div>
+
+      <FlexSlide slideData={iKraftSlide} titleData={ikraftTitle} />
+
+      <div className={`mb-20`}>
         <TitleDiv {...automationTitle} />
         <div className={`px-7`}>
           <VimeoVideoPlayer className={`rounded-2xl`} videoId="910983760" />
         </div>
       </div>
 
-      <FlexSlide slideData={iKraftSlide} titleData={ikraftTitle} />
-
       <ImageTicker imageUrls={brandUrls} />
 
-      <ImageCard imageCardData={customerCardData} />
+      <div className={`mb-20`}>
+        <ImageCard imageCardData={customerCardData} />
+      </div>
 
       {blogData && (
-        <Suspense>
-          <Await resolve={blogData}>
-            {(response) => {
-              if (!response || !response.blog || !response.blog.articles) {
-                return <></>;
-              }
-              return (
-                <BlogSlide
-                  headingData={{
-                    heading: 'Chasing the Cloud',
-                    subTitle: 'Stories & Insights',
-                    link: {href: '/journal', text: 'View all article'},
-                  }}
-                  articleData={response.blog.articles.edges}
-                />
-              );
-            }}
-          </Await>
-        </Suspense>
+        <div className={`mb-20`}>
+          <Suspense>
+            <Await resolve={blogData}>
+              {(response) => {
+                if (!response || !response.blog || !response.blog.articles) {
+                  return <></>;
+                }
+                return (
+                  <BlogSlide
+                    headingData={{
+                      heading: 'Chasing the Cloud',
+                      subTitle: 'Stories & Insights',
+                      link: {href: '/journal', text: 'View all article'},
+                    }}
+                    articleData={response.blog.articles.edges}
+                  />
+                );
+              }}
+            </Await>
+          </Suspense>
+        </div>
       )}
 
       {/* {featuredProducts && (

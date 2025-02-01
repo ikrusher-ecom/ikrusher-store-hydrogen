@@ -54,6 +54,7 @@ export default async function handleRequest(
       'https://cdn.shopify.com',
       'https://i.vimeocdn.com',
       'https://f.vimeocdn.com',
+      'https://placehold.co',
       ...(process.env.NODE_ENV !== 'production' ? ['http://localhost:*'] : []),
     ],
   });

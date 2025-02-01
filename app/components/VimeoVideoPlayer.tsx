@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Button, Modal, Card, Avatar} from 'antd';
 
 import playButtonIcon from '~/assets/play-button.svg';
