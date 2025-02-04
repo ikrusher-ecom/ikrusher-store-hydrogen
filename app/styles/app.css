@@ -8,14 +8,21 @@
 
 .ant-typography, .ant-typography p {
   margin-bottom: 0 !important;
+  font-size: 16px;
 }
 
-.ant-typography a {
+.ant-typography a, a.ant-typography {
   color: rgb(var(--color-theme));
+  text-decoration: underline;
 }
 
 .ant-typography u {
   text-decoration-color: rgb(var(--color-theme));
+}
+
+h4.ant-typography {
+  font-size: 24px;
+  font-weight: 700;
 }
 
 html {
@@ -38,6 +45,8 @@ html::-webkit-scrollbar {
 
 /* Tokens */
 :root {
+  --color-lightGrey: 245 245 245;
+  --color-blue: 0 225 255;
   --color-yellow: 225 255 104;
   --color-theme: 62 177 200;
   --color-grey: 159 159 159;
@@ -529,7 +538,7 @@ ul.ant-menu-sub li.ant-menu-item {
   scrollbar-width: none;
 }
 
-.ant-btn-variant-outlined:not(:disabled):not(.ant-btn-disabled):hover, 
+.ant-btn-variant-outlined:not(:disabled):not(.ant-btn-disabled):hover,
 .ant-btn-variant-dashed:not(:disabled):not(.ant-btn-disabled):hover {
   color: rgb(var(--color-theme));
 }
@@ -540,8 +549,9 @@ ul.ant-menu-sub li.ant-menu-item {
   box-shadow: none;
 }
 
-.ant-image {
+.ant-image, .ant-image .ant-image-img {
   width: 100%;
+  height: 100%;
 }
 
 .blogTitle {

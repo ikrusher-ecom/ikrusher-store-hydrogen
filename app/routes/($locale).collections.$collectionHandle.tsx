@@ -42,7 +42,7 @@ export const headers = routeHeaders;
 
 export async function loader({params, request, context}: LoaderFunctionArgs) {
   const paginationVariables = getPaginationVariables(request, {
-    pageBy: 8,
+    pageBy: 50,
   });
   const {collectionHandle} = params;
   const locale = context.storefront.i18n;
@@ -168,7 +168,7 @@ export default function Collection() {
       link: `/products/${product.handle}`,
     }),
   );
-  console.log(collection.products.nodes);
+  // console.log(collection.products.nodes);
 
   return (
     <>
@@ -186,26 +186,37 @@ export default function Collection() {
 
       {/* All in one */}
       {collection.handle === 'disposable-vapes' && (
-        <HeroBanner
-          handle={collection.handle}
-          title={
-            <Title
-              level={1}
-              className={`text-contrast`}
-              style={{color: 'rgb(var(--color-contrast))'}}
-            >
-              <span className={`text-themeColor`}>All-in-One</span> Hardware
-            </Title>
-          }
-          description={`Premium all-in-one disposable vape hardware for your business needs.`}
-          image={'https://placehold.co/425x525/343434/f5f5f5'}
-        />
+        <div className={`mb-20`}>
+          <HeroBanner
+            handle={collection.handle}
+            title={
+              <Title
+                level={1}
+                className={`text-contrast`}
+                style={{color: 'rgb(var(--color-contrast))'}}
+              >
+                <span className={`text-blueColor`}>All-in-One</span>
+                <br /> Hardware
+              </Title>
+            }
+            description={`Premium all-in-one disposable vape hardware for your business needs.`}
+            image={
+              'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/fba26fbd3740796227522c4f7007912b.png?v=1738696050'
+            }
+          />
+        </div>
       )}
       {collection.handle === 'disposable-vapes' && (
         <ProductSlide
           productItems={productSlideItems}
           subTitle="The Fresh Line-Up"
-          mainTitle="New All-in-On Vape Hardware"
+          mainTitle={
+            <span>
+              New All-in-One
+              <br />
+              Vape Hardware
+            </span>
+          }
         />
       )}
 

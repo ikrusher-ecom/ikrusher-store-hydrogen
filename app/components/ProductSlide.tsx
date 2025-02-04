@@ -109,12 +109,12 @@ export function ProductSlide({
   };
 
   return (
-    <div className={`relative mb-20 pt-8`}>
+    <div className={`relative mb-20`}>
       <TitleDiv subTitle={subTitle} mainTitle={mainTitle} />
       <div className={`overflow-hidden`}>
         <Flex
           gap="middle"
-          className={`py-1 pl-1 pr-3 flex-slide ml-7`}
+          className={`py-2 pl-2 pr-4 flex-slide ml-7`}
           style={{
             transform: `translateX(calc(-${currentIndex * 80}% - ${
               currentIndex * 0
@@ -129,14 +129,29 @@ export function ProductSlide({
             <Flex
               vertical
               key={item.name}
-              className={`m-0 relative flex-none w-4/5 h-full object-cover object-center`}
-              style={{flexBasis: '80%', flexShrink: 0}}
+              className={`m-0 relative flex-none w-4/5 h-full object-cover object-center rounded-2xl bg-lightGreyColor`}
+              style={{
+                flexBasis: '80%',
+                flexShrink: 0,
+                aspectRatio: '3/4',
+              }}
             >
-              <Image src={item.image} alt={item.name} />
-              <Flex vertical className={`absolute left-0 right-0 text-center`}>
-                <Title level={4}>{item.name}</Title>
-                <Paragraph>{item.subTitle}</Paragraph>
-                <Link href={item.link}>View Product</Link>
+              <Image
+                preview={false}
+                src={item.image}
+                alt={item.name}
+                className={`w-full h-full object-cover object-center rounded-2xl`}
+                style={{boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'}}
+              />
+              <Flex
+                vertical
+                className={`absolute left-0 right-0 text-center h-full w-full flex flex-col justify-between py-9 px-2`}
+              >
+                <Flex vertical className={`gap-y-1`}>
+                  <Title level={4}>{item.name}</Title>
+                  <Paragraph>{item.subTitle}</Paragraph>
+                </Flex>
+                <Link href={item.link}>View here</Link>
               </Flex>
             </Flex>
           ))}

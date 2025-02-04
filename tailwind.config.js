@@ -14,6 +14,8 @@ export default {
         themeColor: 'rgb(var(--color-theme) / <alpha-value>)',
         greyColor: 'rgb(var(--color-grey) / <alpha-value>)',
         yellowColor: 'rgb(var(--color-yellow) / <alpha-value>)',
+        blueColor: 'rgb(var(--color-blue) / <alpha-value>)',
+        lightGreyColor: 'rgb(var(--color-lightGrey) / <alpha-value>)',
       },
       screens: {
         sm: '640px',

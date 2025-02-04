@@ -119,7 +119,7 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
       <div className={`overflow-hidden`}>
         <Flex
           gap="middle"
-          className={`py-1 pl-1 pr-3 flex-slide ml-7`}
+          className={`py-2 pl-2 pr-4 flex-slide ml-7`}
           style={{
             transform: `translateX(calc(-${currentIndex * 80}% - ${
               currentIndex * 0
