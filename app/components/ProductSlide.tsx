@@ -109,7 +109,7 @@ export function ProductSlide({
   };
 
   return (
-    <div className={`relative`} style={{marginBottom: '70px'}}>
+    <div className={`relative mb-20 pt-8`}>
       <TitleDiv subTitle={subTitle} mainTitle={mainTitle} />
       <div className={`overflow-hidden`}>
         <Flex

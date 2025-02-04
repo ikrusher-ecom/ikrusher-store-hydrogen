@@ -211,7 +211,7 @@ const categoryTitle = {
       <span className="text-themeColor">Taste</span>
     </span>
   ),
-  link: {href: '/collections/all-products', text: 'View all products here'},
+  link: {href: '/collections/all-products', text: 'View all products'},
 };
 
 const automationTitle = {
@@ -388,7 +388,7 @@ export default function Homepage() {
                     headingData={{
                       heading: 'Chasing the Cloud',
                       subTitle: 'Stories & Insights',
-                      link: {href: '/journal', text: 'View all article'},
+                      link: {href: '/journal', text: 'View all articles'},
                     }}
                     articleData={response.blog.articles.edges}
                   />

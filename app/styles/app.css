@@ -23,6 +23,13 @@ html {
   /* overflow-x: hidden; */
   /* width: 100vw; */
   /* overflow-y: scroll; */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+  -webkit-appearance: none;
 }
 
 /* body {
@@ -465,11 +472,11 @@ ul.ant-menu-sub li.ant-menu-item {
 }
 
 .ticker-div {
-  animation: ticker-kf 10s linear infinite;
+  animation: ticker-kf 20s linear infinite;
 }
 
 .ticker-div-rev {
-  animation: ticker-rev 10s linear infinite;
+  animation: ticker-rev 20s linear infinite;
 }
 
 .ticker-div-cert {

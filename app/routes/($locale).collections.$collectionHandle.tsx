@@ -168,8 +168,7 @@ export default function Collection() {
       link: `/products/${product.handle}`,
     }),
   );
-
-  console.log(productSlideItems);
+  console.log(collection.products.nodes);
 
   return (
     <>
