@@ -37,6 +37,7 @@ import {TitleDiv} from '~/components/TitleDiv';
 import {ProductSlide} from '~/components/ProductSlide';
 import {ProductFilterSlide} from '~/components/ProductFilterSlide';
 import {FlexSlide} from '~/components/FlexSlide';
+import {TechSlide} from '~/components/TechSlide';
 
 const {Title} = Typography;
 
@@ -173,12 +174,18 @@ export default function Collection() {
     }),
   );
 
-  interface SlideItem {
+  interface TechContentItem {
+    title: string;
+    description: string;
+    image: string;
+  }
+
+  interface TechSlideItem {
     id: string;
     imgUrl: string;
-    mobileImgUrl: string;
-    linkUrl: string;
-    customStyle?: CSSProperties;
+    mainTitle: string;
+    subTitle: string;
+    content: TechContentItem[];
   }
 
   const aioTitle = {
@@ -191,30 +198,79 @@ export default function Collection() {
     ),
   };
 
-  const aioSlide: SlideItem[] = [
+  const aioSlide: TechSlideItem[] = [
     {
-      id: 'slide-custom-vape',
+      id: 'tech-ikonic-arc',
       imgUrl:
-        'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/9d274bc771c116b25572123c09c93080.png?v=1737583844',
-      mobileImgUrl:
-        'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/9d274bc771c116b25572123c09c93080.png?v=1737583844',
-      linkUrl: '/pages/custom-vape',
-      customStyle: {
-        aspectRatio: '3/4',
-        backgroundColor: '#F5F5F5',
-      },
+        'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/VATRA_1.194_2.png?v=1738790488',
+      mainTitle: 'iKonic Arc',
+      subTitle: 'Smooth. Powerful. Reliable.',
+      content: [
+        {
+          title: 'Ceramic Core',
+          description:
+            'Unlock the full potential of your vape with ceramic core technology. Crafted for precision and purity, ceramic cores provide consistent heat, preserve authentic flavors.',
+          image:
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/8d6f3e0d4192fa5cb8c460e4c6d0e294.jpg?v=1738794134',
+        },
+        {
+          title: 'Felt Fabric Material',
+          description:
+            'The felt acts as an efficient wick, ensuring that your concentrate is thoroughly absorbed and vaporized.',
+          image:
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/80e8dd22528f2c63283b986817aee1a9.jpg?v=1738794134',
+        },
+        {
+          title: 'Heating Element',
+          description:
+            'Engineered for superior flavor, even heat distribution, and long-lasting durability, our ceramic technology minimizes dry hits, reduces.',
+          image:
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/8d6f3e0d4192fa5cb8c460e4c6d0e294_1.jpg?v=1738794134',
+        },
+      ],
     },
     {
-      id: 'slide-custom-packaging',
+      id: 'tech-ikonic-flux',
       imgUrl:
-        'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/ed9dc586a74ff944ecab799ee3bc8b56.png?v=1737583844',
-      mobileImgUrl:
-        'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/ed9dc586a74ff944ecab799ee3bc8b56.png?v=1737583844',
-      linkUrl: '/pages/custom-packaging',
-      customStyle: {
-        aspectRatio: '3/4',
-        backgroundColor: '#F5F5F5',
-      },
+        'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/7898a189a2f8701fb5b925f29206e691.png?v=1738790488',
+      mainTitle: 'iKonic Flux',
+      subTitle: 'Precision, Power, Perfection.',
+      content: [
+        {
+          title: 'Ceramic Angular Design',
+          description:
+            'With its angular, robust design, this offers enhanced stability and durability, making it perfect for daily use.',
+          image:
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/8d6f3e0d4192fa5cb8c460e4c6d0e294.jpg?v=1738794134',
+        },
+        {
+          title: 'Superior Flavor Quality',
+          description:
+            'Experience pure, untainted vapor with a postless design that reduces metal contact, ensuring your cannabis.',
+          image:
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/80e8dd22528f2c63283b986817aee1a9.jpg?v=1738794134',
+        },
+        {
+          title: 'Zero Contact',
+          description: `The concentrates aren't in direct contact with metal posts compare to traditional designs, this reduces the risk of a metallic taste.`,
+          image:
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/8d6f3e0d4192fa5cb8c460e4c6d0e294_1.jpg?v=1738794134',
+        },
+        {
+          title: 'Consistent Heating Distribution',
+          description:
+            'iKonic Flux prevents hot spots and ensuring that your concentrates are fully vaporized.',
+          image:
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/8d6f3e0d4192fa5cb8c460e4c6d0e294.jpg?v=1738794134',
+        },
+        {
+          title: 'Efficient Airflow & Vapor Production',
+          description:
+            'Allows for smoother, more direct airflow, resulting in larger, more consistent clouds of vapor. Say goodbye to harsh hits and hello to seamless, enjoyable draws with every session.',
+          image:
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/8d6f3e0d4192fa5cb8c460e4c6d0e294_1.jpg?v=1738794134',
+        },
+      ],
     },
   ];
 
@@ -276,7 +332,7 @@ export default function Collection() {
               </span>
             }
           />
-          <FlexSlide slideData={aioSlide} titleData={aioTitle} />
+          <TechSlide slideData={aioSlide} titleData={aioTitle} />
         </>
       )}
 

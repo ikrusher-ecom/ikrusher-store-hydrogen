@@ -54,7 +54,7 @@ export function TitleDiv({
       </Title>
       {description && <Paragraph>{description}</Paragraph>}
       {descriptionHtml && (
-        <Paragraph className={`h-16 overflow-hidden`}>
+        <Paragraph className={`overflow-hidden`} style={{height: '4.5rem'}}>
           <div dangerouslySetInnerHTML={{__html: descriptionHtml}}></div>
         </Paragraph>
       )}

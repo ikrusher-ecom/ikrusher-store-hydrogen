@@ -564,6 +564,20 @@ ul.ant-menu-sub li.ant-menu-item {
   padding: 16px 0 0 0;
 }
 
+.techSlideModal.ant-modal .ant-modal-close {
+  top: -20px;
+}
+
+.techSlideModal.ant-modal .ant-modal-close-x {
+  font-size: 28px;
+  border-color: #000;
+  color: #000;
+}
+
+.ant-modal-root .ant-modal-mask {
+  background-color: rgba(255, 255, 255, 0.32);
+}
+
 @media (max-width: 767px) {
   .mobile-border {
     border-bottom: 2px solid #fff;
