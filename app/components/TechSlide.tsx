@@ -161,6 +161,7 @@ export function TechSlide({slideData, titleData}: TechSlideProps): JSX.Element {
                   flexBasis: '80%',
                   flexShrink: 0,
                   aspectRatio: '3/4',
+                  boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
                 }}
               >
                 <Flex

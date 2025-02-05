@@ -135,6 +135,7 @@ export function ProductSlide({
                 flexBasis: '80%',
                 flexShrink: 0,
                 aspectRatio: '3/4',
+                boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
               }}
             >
               <Image
@@ -142,7 +143,6 @@ export function ProductSlide({
                 src={item.image}
                 alt={item.name}
                 className={`w-full h-full object-cover object-center rounded-2xl`}
-                style={{boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'}}
               />
               <Flex
                 vertical
