@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {CSSProperties, useEffect} from 'react';
 import {
   json,
   type MetaArgs,
@@ -36,6 +36,7 @@ import {HeroBanner} from '~/components/HeroBanner';
 import {TitleDiv} from '~/components/TitleDiv';
 import {ProductSlide} from '~/components/ProductSlide';
 import {ProductFilterSlide} from '~/components/ProductFilterSlide';
+import {FlexSlide} from '~/components/FlexSlide';
 
 const {Title} = Typography;
 
@@ -159,6 +160,7 @@ export default function Collection() {
     image: string;
     subTitle: string;
     link: string;
+    compatibility: string[];
   }
 
   const productSlideItems: ProductItem[] = collection.products.nodes.map(
@@ -167,9 +169,54 @@ export default function Collection() {
       image: product.variants.nodes[0].image?.url ?? '',
       subTitle: product.title.split(' | ')[1],
       link: `/products/${product.handle}`,
-      compatibility: JSON.parse(product.compatibility[0].value),
+      compatibility: JSON.parse(product.compatibility[0].value as string),
     }),
   );
+
+  interface SlideItem {
+    id: string;
+    imgUrl: string;
+    mobileImgUrl: string;
+    linkUrl: string;
+    customStyle?: CSSProperties;
+  }
+
+  const aioTitle = {
+    subTitle: 'Technology',
+    mainTitle: (
+      <span>
+        Cutting-Edge <br />
+        Vaping Technology
+      </span>
+    ),
+  };
+
+  const aioSlide: SlideItem[] = [
+    {
+      id: 'slide-custom-vape',
+      imgUrl:
+        'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/9d274bc771c116b25572123c09c93080.png?v=1737583844',
+      mobileImgUrl:
+        'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/9d274bc771c116b25572123c09c93080.png?v=1737583844',
+      linkUrl: '/pages/custom-vape',
+      customStyle: {
+        aspectRatio: '3/4',
+        backgroundColor: '#F5F5F5',
+      },
+    },
+    {
+      id: 'slide-custom-packaging',
+      imgUrl:
+        'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/ed9dc586a74ff944ecab799ee3bc8b56.png?v=1737583844',
+      mobileImgUrl:
+        'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/ed9dc586a74ff944ecab799ee3bc8b56.png?v=1737583844',
+      linkUrl: '/pages/custom-packaging',
+      customStyle: {
+        aspectRatio: '3/4',
+        backgroundColor: '#F5F5F5',
+      },
+    },
+  ];
 
   return (
     <>
@@ -187,28 +234,26 @@ export default function Collection() {
 
       {/* All in one */}
       {collection.handle === 'disposable-vapes' && (
-        <div className={`mb-20`}>
-          <HeroBanner
-            handle={collection.handle}
-            title={
-              <Title
-                level={1}
-                className={`text-contrast`}
-                style={{color: 'rgb(var(--color-contrast))'}}
-              >
-                <span className={`text-blueColor`}>All-in-One</span>
-                <br /> Hardware
-              </Title>
-            }
-            description={`Premium all-in-one disposable vape hardware for your business needs.`}
-            image={
-              'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/fba26fbd3740796227522c4f7007912b.png?v=1738696050'
-            }
-          />
-        </div>
-      )}
-      {collection.handle === 'disposable-vapes' && (
         <>
+          <div className={`mb-20`}>
+            <HeroBanner
+              handle={collection.handle}
+              title={
+                <Title
+                  level={1}
+                  className={`text-contrast`}
+                  style={{color: 'rgb(var(--color-contrast))'}}
+                >
+                  <span className={`text-blueColor`}>All-in-One</span>
+                  <br /> Hardware
+                </Title>
+              }
+              description={`Premium all-in-one disposable vape hardware for your business needs.`}
+              image={
+                'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/fba26fbd3740796227522c4f7007912b.png?v=1738696050'
+              }
+            />
+          </div>
           <ProductSlide
             productItems={productSlideItems}
             subTitle="The Fresh Line-Up"
@@ -231,6 +276,7 @@ export default function Collection() {
               </span>
             }
           />
+          <FlexSlide slideData={aioSlide} titleData={aioTitle} />
         </>
       )}
 

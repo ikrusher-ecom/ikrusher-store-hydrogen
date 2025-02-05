@@ -146,7 +146,7 @@ export function ProductFilterSlide({
                 setFilterIcon(item);
                 setCurrentIndex(0);
               }}
-              className={`rounded-2xl font-semibold py-4 px-4 border-2 ${
+              className={`rounded-2xl font-semibold py-4 px-3 border-2 ${
                 filterIcon === item
                   ? 'text-themeColor border-themeColor selectedBtn'
                   : 'text-midGreyColor border-midGreyColor'

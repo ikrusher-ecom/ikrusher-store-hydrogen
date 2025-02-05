@@ -185,6 +185,23 @@ export default function FooterLocations() {
           </p>
         </>
       ),
+      texas: (
+        <>
+          <p>9818 Monroe Dr, Dallas, TX 75220</p>
+          <p
+            className={`font-medium text-[16px] leading-[1.75] flex flex-row items-center gap-2.5`}
+          >
+            <img
+              src={iphoneIcon}
+              className={`px-0.5 flex flex-row items-center justify-center object-contain h-5`}
+              alt="iKrusher icon"
+            />
+            <a className={`no-underline text-contrast`} href="tel:+14695641668">
+              (469) 564-1668
+            </a>
+          </p>
+        </>
+      ),
     };
 
     if (state === 'California' && Number(postalCode) <= 93200)
@@ -207,19 +224,23 @@ export default function FooterLocations() {
       state == 'Hawaii' ||
       state == 'Nevada' ||
       state == 'New Mexico' ||
-      state == 'Texas' ||
       state == 'Utah'
     )
       return locationMap.arizona;
     if (
+      state == 'Texas' ||
+      state == 'Louisiana' ||
+      state == 'Oklahoma' ||
       state == 'Arkansas' ||
+      state == 'Missouri'
+    )
+      return locationMap.texas;
+    if (
       state == 'Colorado' ||
       state == 'Iowa' ||
       state == 'Kansas' ||
-      state == 'Missouri' ||
       state == 'Nebraska' ||
       state == 'North Dakota' ||
-      state == 'Oklahoma' ||
       state == 'South Dakota' ||
       state == 'Wyoming'
     )
@@ -230,7 +251,6 @@ export default function FooterLocations() {
       state == 'Illinois' ||
       state == 'Indiana' ||
       state == 'Kentucky' ||
-      state == 'Louisiana' ||
       state == 'Michigan' ||
       state == 'Minnesota' ||
       state == 'Mississippi' ||
