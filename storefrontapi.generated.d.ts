@@ -60,7 +60,7 @@ export type MediaFragment =
 
 export type ProductCardFragment = Pick<
   StorefrontAPI.Product,
-  'id' | 'title' | 'publishedAt' | 'handle' | 'vendor'
+  'id' | 'title' | 'publishedAt' | 'handle' | 'vendor' | 'compatibility'
 > & {
   variants: {
     nodes: Array<
@@ -666,7 +666,7 @@ export type CollectionDetailsQuery = {
         nodes: Array<
           Pick<
             StorefrontAPI.Product,
-            'id' | 'title' | 'publishedAt' | 'handle' | 'vendor'
+            'id' | 'title' | 'publishedAt' | 'handle' | 'vendor' | 'compatibility'
           > & {
             variants: {
               nodes: Array<

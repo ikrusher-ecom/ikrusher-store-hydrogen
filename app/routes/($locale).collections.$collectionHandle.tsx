@@ -35,6 +35,7 @@ import {parseAsCurrency} from '~/lib/utils';
 import {HeroBanner} from '~/components/HeroBanner';
 import {TitleDiv} from '~/components/TitleDiv';
 import {ProductSlide} from '~/components/ProductSlide';
+import {ProductFilterSlide} from '~/components/ProductFilterSlide';
 
 const {Title} = Typography;
 
@@ -163,12 +164,12 @@ export default function Collection() {
   const productSlideItems: ProductItem[] = collection.products.nodes.map(
     (product) => ({
       name: product.title.split(' | ')[0],
-      image: product.variants.nodes[0].image?.url,
+      image: product.variants.nodes[0].image?.url ?? '',
       subTitle: product.title.split(' | ')[1],
       link: `/products/${product.handle}`,
+      compatibility: JSON.parse(product.compatibility[0].value),
     }),
   );
-  // console.log(collection.products.nodes);
 
   return (
     <>
@@ -207,20 +208,33 @@ export default function Collection() {
         </div>
       )}
       {collection.handle === 'disposable-vapes' && (
-        <ProductSlide
-          productItems={productSlideItems}
-          subTitle="The Fresh Line-Up"
-          mainTitle={
-            <span>
-              New All-in-One
-              <br />
-              Vape Hardware
-            </span>
-          }
-        />
+        <>
+          <ProductSlide
+            productItems={productSlideItems}
+            subTitle="The Fresh Line-Up"
+            mainTitle={
+              <span>
+                New All-in-One
+                <br />
+                Vape Hardware
+              </span>
+            }
+          />
+          <ProductFilterSlide
+            productItems={productSlideItems}
+            subTitle="Collection"
+            mainTitle={
+              <span>
+                AIO Designed For
+                <br />
+                Your Taste
+              </span>
+            }
+          />
+        </>
       )}
 
-      <Section>
+      {/* <Section>
         <SortFilter
           filters={collection.products.filters as Filter[]}
           appliedFilters={appliedFilters}
@@ -263,7 +277,7 @@ export default function Collection() {
             )}
           </Pagination>
         </SortFilter>
-      </Section>
+      </Section> */}
       <Analytics.CollectionView
         data={{
           collection: {

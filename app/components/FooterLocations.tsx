@@ -77,7 +77,9 @@ export default function FooterLocations() {
               className={`px-0.5 flex flex-row items-center justify-center object-contain h-5`}
               alt="iKrusher icon"
             />
-            <a href="tel:+16262563449">(626) 256-3449</a>
+            <a className={`no-underline text-contrast`} href="tel:+16262563449">
+              (626) 256-3449
+            </a>
           </p>
         </>
       ),
@@ -92,7 +94,9 @@ export default function FooterLocations() {
               className={`px-0.5 flex flex-row items-center justify-center object-contain h-5`}
               alt="iKrusher icon"
             />
-            <a href="tel:+14159360663">(415) 936-0663</a>
+            <a className={`no-underline text-contrast`} href="tel:+14159360663">
+              (415) 936-0663
+            </a>
           </p>
         </>
       ),
@@ -107,7 +111,9 @@ export default function FooterLocations() {
               className={`px-0.5 flex flex-row items-center justify-center object-contain h-5`}
               alt="iKrusher icon"
             />
-            <a href="tel:+12069443115">(206) 944-3115</a>
+            <a className={`no-underline text-contrast`} href="tel:+12069443115">
+              (206) 944-3115
+            </a>
           </p>
         </>
       ),
@@ -122,7 +128,9 @@ export default function FooterLocations() {
               className={`px-0.5 flex flex-row items-center justify-center object-contain h-5`}
               alt="iKrusher icon"
             />
-            <a href="tel:+16026753255">(602) 675-3255</a>
+            <a className={`no-underline text-contrast`} href="tel:+16026753255">
+              (602) 675-3255
+            </a>
           </p>
         </>
       ),
@@ -137,7 +145,9 @@ export default function FooterLocations() {
               className={`px-0.5 flex flex-row items-center justify-center object-contain h-5`}
               alt="iKrusher icon"
             />
-            <a href="tel:+17205191348">(720) 519-1348</a>
+            <a className={`no-underline text-contrast`} href="tel:+17205191348">
+              (720) 519-1348
+            </a>
           </p>
         </>
       ),
@@ -152,7 +162,9 @@ export default function FooterLocations() {
               className={`px-0.5 flex flex-row items-center justify-center object-contain h-5`}
               alt="iKrusher icon"
             />
-            <a href="tel:+13137658008">(313) 765-8008</a>
+            <a className={`no-underline text-contrast`} href="tel:+13137658008">
+              (313) 765-8008
+            </a>
           </p>
         </>
       ),
@@ -167,7 +179,9 @@ export default function FooterLocations() {
               className={`px-0.5 flex flex-row items-center justify-center object-contain h-5`}
               alt="iKrusher icon"
             />
-            <a href="tel:+19083328676">(908) 332-8676</a>
+            <a className={`no-underline text-contrast`} href="tel:+19083328676">
+              (908) 332-8676
+            </a>
           </p>
         </>
       ),
@@ -264,7 +278,12 @@ export default function FooterLocations() {
           src={emailIcon}
           alt="iKrusher icon"
         />
-        <a href="mailto:inquiry@ikrusher.com">inquiry@ikrusher.com</a>
+        <a
+          className={`no-underline text-contrast`}
+          href="mailto:inquiry@ikrusher.com"
+        >
+          inquiry@ikrusher.com
+        </a>
       </p>
     </div>
   );

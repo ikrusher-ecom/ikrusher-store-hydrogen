@@ -16,6 +16,7 @@ export default {
         yellowColor: 'rgb(var(--color-yellow) / <alpha-value>)',
         blueColor: 'rgb(var(--color-blue) / <alpha-value>)',
         lightGreyColor: 'rgb(var(--color-lightGrey) / <alpha-value>)',
+        midGreyColor: 'rgb(var(--color-midGrey) / <alpha-value>)',
       },
       screens: {
         sm: '640px',

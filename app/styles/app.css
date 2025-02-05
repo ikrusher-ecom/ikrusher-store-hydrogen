@@ -11,7 +11,7 @@
   font-size: 16px;
 }
 
-.ant-typography a, a.ant-typography {
+.ant-typography a, a.ant-typography, a, a:hover, a:active, a:focus {
   color: rgb(var(--color-theme));
   text-decoration: underline;
 }
@@ -25,8 +25,13 @@ h4.ant-typography {
   font-weight: 700;
 }
 
+.selectedBtn {
+  border: 2px solid rgb(var(--color-theme)) !important;
+}
+
 html {
   font-size: 16px;
+
   /* overflow-x: hidden; */
   /* width: 100vw; */
   /* overflow-y: scroll; */
@@ -45,6 +50,7 @@ html::-webkit-scrollbar {
 
 /* Tokens */
 :root {
+  --color-midGrey: 224 224 224;
   --color-lightGrey: 245 245 245;
   --color-blue: 0 225 255;
   --color-yellow: 225 255 104;
@@ -116,6 +122,12 @@ shop-pay-button {
   width: 100%;
   height: 3rem;
   display: table;
+}
+
+.ant-btn:not(:disabled):focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  transition: none !important;
 }
 
 .ant-carousel .slick-slide img.block {
@@ -337,12 +349,6 @@ i.ant-menu-submenu-arrow {
   width: auto;
   flex-direction: row;
   justify-content: flex-start;
-}
-
-ul.ant-menu-sub li.ant-menu-item .ant-menu-title-content a {
-  font-size: 18px;
-  color: rgb(var(--color-grey));
-  font-weight: 500;
 }
 
 ul.ant-menu-sub li.ant-menu-item {

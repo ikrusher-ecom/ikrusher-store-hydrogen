@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Flex, Typography, Image} from 'antd';
+import {Flex, Typography, Image, Button} from 'antd';
 
 import {TitleDiv} from '~/components/TitleDiv';
 import arrowLeftIcon from '~/assets/arrow-left.svg';
@@ -21,7 +21,7 @@ interface ProductSlideProps {
   mainTitle: string;
 }
 
-export function ProductSlide({
+export function ProductFilterSlide({
   productItems,
   subTitle,
   mainTitle,
@@ -40,13 +40,22 @@ export function ProductSlide({
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? productItems.length - 1 : prevIndex - 1,
+      prevIndex === 0
+        ? productItems.filter((item) =>
+            item.compatibility?.includes(filterIcon),
+          ).length - 1
+        : prevIndex - 1,
     );
   };
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === productItems.length - 1 ? 0 : prevIndex + 1,
+      prevIndex ===
+      productItems.filter((item) => item.compatibility?.includes(filterIcon))
+        .length -
+        1
+        ? 0
+        : prevIndex + 1,
     );
   };
 
@@ -109,9 +118,45 @@ export function ProductSlide({
     setIsHorizontalSwipe(false);
   };
 
+  const allFilterValues: string[] = productItems
+    .map((item) => item.compatibility)
+    .flat()
+    .sort()
+    .filter((item) => item !== undefined) as string[];
+
+  const [filterIcon, setFilterIcon] = useState<string>(allFilterValues[0]);
+
+  const filterData = [...new Set(allFilterValues)];
+
   return (
     <div className={`relative mb-20`}>
       <TitleDiv subTitle={subTitle} mainTitle={mainTitle} />
+      <div className={`overflow-hidden`}>
+        <Flex
+          gap="small"
+          className={`px-7 pb-8 overflow-x-auto`}
+          style={{
+            scrollbarWidth: 'none',
+          }}
+        >
+          {filterData.map((item) => (
+            <Button
+              key={item}
+              onClick={() => {
+                setFilterIcon(item);
+                setCurrentIndex(0);
+              }}
+              className={`rounded-2xl font-semibold py-4 px-4 border-2 ${
+                filterIcon === item
+                  ? 'text-themeColor border-themeColor selectedBtn'
+                  : 'text-midGreyColor border-midGreyColor'
+              }`}
+            >
+              {item}
+            </Button>
+          ))}
+        </Flex>
+      </div>
       <div className={`overflow-hidden`}>
         <Flex
           gap="middle"
@@ -126,36 +171,38 @@ export function ProductSlide({
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
         >
-          {productItems.map((item) => (
-            <Flex
-              vertical
-              key={item.name}
-              className={`m-0 relative flex-none w-4/5 h-full object-cover object-center rounded-2xl bg-lightGreyColor`}
-              style={{
-                flexBasis: '80%',
-                flexShrink: 0,
-                aspectRatio: '3/4',
-              }}
-            >
-              <Image
-                preview={false}
-                src={item.image}
-                alt={item.name}
-                className={`w-full h-full object-cover object-center rounded-2xl`}
-                style={{boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'}}
-              />
+          {productItems
+            .filter((item) => item.compatibility?.includes(filterIcon))
+            .map((item) => (
               <Flex
                 vertical
-                className={`absolute left-0 right-0 text-center h-full w-full flex flex-col justify-between py-9 px-2`}
+                key={item.name}
+                className={`m-0 relative flex-none w-4/5 h-full object-cover object-center rounded-2xl bg-lightGreyColor`}
+                style={{
+                  flexBasis: '80%',
+                  flexShrink: 0,
+                  aspectRatio: '3/4',
+                }}
               >
-                <Flex vertical className={`gap-y-1`}>
-                  <Title level={4}>{item.name}</Title>
-                  <Paragraph>{item.subTitle}</Paragraph>
+                <Image
+                  preview={false}
+                  src={item.image}
+                  alt={item.name}
+                  className={`w-full h-full object-cover object-center rounded-2xl`}
+                  style={{boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'}}
+                />
+                <Flex
+                  vertical
+                  className={`absolute left-0 right-0 text-center h-full w-full flex flex-col justify-between py-9 px-2`}
+                >
+                  <Flex vertical className={`gap-y-1`}>
+                    <Title level={4}>{item.name}</Title>
+                    <Paragraph>{item.subTitle}</Paragraph>
+                  </Flex>
+                  <Link href={item.link}>View product</Link>
                 </Flex>
-                <Link href={item.link}>View here</Link>
               </Flex>
-            </Flex>
-          ))}
+            ))}
         </Flex>
       </div>
       <button

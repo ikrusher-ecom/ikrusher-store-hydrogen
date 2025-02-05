@@ -483,7 +483,7 @@ function FooterLink({item}: {item: ChildEnhancedMenuItem}) {
         href={item.to}
         target={item.target}
         rel="noopener noreferrer"
-        className={`text-greyColor`}
+        className={`text-greyColor no-underline`}
       >
         {item.title}
       </a>
@@ -495,7 +495,7 @@ function FooterLink({item}: {item: ChildEnhancedMenuItem}) {
       to={item.to}
       target={item.target}
       prefetch="intent"
-      className={`text-greyColor`}
+      className={`text-greyColor no-underline`}
     >
       {item.title}
     </Link>

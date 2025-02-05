@@ -44,6 +44,13 @@ export const PRODUCT_CARD_FRAGMENT = `#graphql
     publishedAt
     handle
     vendor
+    compatibility: metafields(identifiers: [
+      { namespace: "c_f", key: "compatability" }
+    ]) {
+      key
+      namespace
+      value
+    }
     variants(first: 1) {
       nodes {
         id

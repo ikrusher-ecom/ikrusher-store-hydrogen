@@ -4,7 +4,7 @@ import {Menu} from 'antd';
 interface MenuItem {
   id: string;
   title: string;
-  url?: string;
+  to?: string;
   items: MenuItem[];
 }
 
@@ -16,25 +16,25 @@ const FALLBACK_HEADER_MENU: MenuItem[] = [
   {
     id: 'gid://shopify/MenuItem/461609500728',
     title: 'Products',
-    url: '/collections/all-products',
+    to: '/collections/all-products',
     items: [],
   },
   {
     id: 'gid://shopify/MenuItem/461609533496',
     title: 'Blogs',
-    url: '/blogs/blog',
+    to: '/blogs/blog',
     items: [],
   },
   {
     id: 'gid://shopify/MenuItem/461609566264',
     title: 'Policy',
-    url: '/policies',
+    to: '/policies',
     items: [],
   },
   {
     id: 'gid://shopify/MenuItem/461609599032',
     title: 'About',
-    url: '/pages/about-us',
+    to: '/pages/about-us',
     items: [],
   },
 ];
@@ -42,7 +42,7 @@ const FALLBACK_HEADER_MENU: MenuItem[] = [
 export default function HeaderNestedMenu({menuProp}: NestedMenuListProps) {
   const items = (menuProp?.length ? menuProp : FALLBACK_HEADER_MENU)
     .map((item) => {
-      if (!item.url) return null;
+      if (!item.to) return null;
 
       const result =
         item.items.length > 0
@@ -50,19 +50,27 @@ export default function HeaderNestedMenu({menuProp}: NestedMenuListProps) {
               key: item.id,
               label: (
                 <a
-                  className={`font-semibold text-2xl flex flex-row`}
-                  href={item.url}
+                  className={`font-semibold text-2xl flex flex-row text-black no-underline`}
+                  href={item.to}
                 >
                   {item.title}
                 </a>
               ),
               children: item.items
                 .map((subItem) => {
-                  if (!subItem.url) return null;
+                  if (!subItem.to) return null;
 
                   return {
                     key: subItem.id,
-                    label: <a href={subItem.url}>{subItem.title}</a>,
+                    label: (
+                      <a
+                        className={`no-underline text-greyColor font-medium text-lg`}
+                        href={subItem.to}
+                        style={{color: 'rgb(var(--color-grey))'}}
+                      >
+                        {subItem.title}
+                      </a>
+                    ),
                   };
                 })
                 .filter(Boolean),
@@ -70,7 +78,10 @@ export default function HeaderNestedMenu({menuProp}: NestedMenuListProps) {
           : {
               key: item.id,
               label: (
-                <a className={`font-semibold text-2xl`} href={item.url}>
+                <a
+                  className={`font-semibold text-2xl text-black no-underline`}
+                  href={item.to}
+                >
                   {item.title}
                 </a>
               ),
