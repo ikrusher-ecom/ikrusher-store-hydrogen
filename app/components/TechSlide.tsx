@@ -203,7 +203,7 @@ export function TechSlide({slideData, titleData}: TechSlideProps): JSX.Element {
                         {titleData.subTitle}
                       </Text>
                       <Title
-                        level={3}
+                        level={2}
                         className={`mt-3`}
                         style={{marginTop: '12px'}}
                       >
