@@ -5,7 +5,7 @@ const {Text, Link, Paragraph, Title} = Typography;
 interface TitleDivProps {
   subTitle?: string;
   mainTitle: string | JSX.Element;
-  description?: string;
+  description?: string | JSX.Element;
   descriptionHtml?: string;
   link?: {
     href: string;
