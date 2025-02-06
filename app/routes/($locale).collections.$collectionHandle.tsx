@@ -38,6 +38,8 @@ import {ProductSlide} from '~/components/ProductSlide';
 import {ProductFilterSlide} from '~/components/ProductFilterSlide';
 import {FlexSlide} from '~/components/FlexSlide';
 import {TechSlide} from '~/components/TechSlide';
+import {ProductComparison} from '~/components/ProductComparison';
+import {productSpecs} from '~/data/products';
 
 const {Title} = Typography;
 
@@ -161,7 +163,7 @@ export default function Collection() {
     image: string;
     subTitle: string;
     link: string;
-    compatibility: string[];
+    compatibility?: string[];
   }
 
   const productSlideItems: ProductItem[] = collection.products.nodes.map(
@@ -170,7 +172,7 @@ export default function Collection() {
       image: product.variants.nodes[0].image?.url ?? '',
       subTitle: product.title.split(' | ')[1],
       link: `/products/${product.handle}`,
-      compatibility: JSON.parse(product.compatibility[0].value as string),
+      compatibility: JSON.parse(product.compatibility[0]?.value as string),
     }),
   );
 
@@ -274,6 +276,26 @@ export default function Collection() {
     },
   ];
 
+  interface ProductComparisonItem {
+    id: string;
+    name: string;
+    image: string;
+    specs: SpecItem[];
+  }
+
+  interface SpecItem {
+    title: string;
+    value: string;
+  }
+
+  const productComparisonItems: ProductComparisonItem[] =
+    collection.products.nodes.map((product) => ({
+      id: product.id,
+      name: product.title.split(' | ')[0],
+      image: product.variants.nodes[0].image?.url ?? '',
+      specs: productSpecs.find((spec) => spec.id === product.id),
+    }));
+
   return (
     <>
       {/* <PageHeader heading={collection.title}>
@@ -333,6 +355,20 @@ export default function Collection() {
             }
           />
           <TechSlide slideData={aioSlide} titleData={aioTitle} />
+          <ProductComparison
+            productItems={productComparisonItems}
+            titleData={{
+              subTitle: 'Comparison Chart',
+              mainTitle: 'Find Your Perfect AIO Device',
+              description: (
+                <span>
+                  For any assistance, speak with
+                  <br />
+                  <a href="/contact">our specialist</a>.
+                </span>
+              ),
+            }}
+          />
         </>
       )}
 

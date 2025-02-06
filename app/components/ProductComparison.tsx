@@ -5,7 +5,7 @@ import {TitleDiv} from './TitleDiv';
 
 const {Text, Link, Paragraph, Title} = Typography;
 
-interface ProductItem {
+interface ProductComparisonItem {
   id: string;
   name: string;
   image: string;
@@ -18,7 +18,7 @@ interface SpecItem {
 }
 
 interface ProductComparisonProps {
-  productItems: ProductItem[];
+  productItems: ProductComparisonItem[];
   titleData: {
     subTitle: string;
     mainTitle: string | JSX.Element;
@@ -39,7 +39,7 @@ export function ProductComparison({
     <Flex vertical>
       <TitleDiv {...titleData} />
       <Flex>
-        <Flex>
+        <Flex vertical>
           <Select
             options={productItems
               .filter((item) => item.id !== selectedProductRight?.id)
@@ -55,7 +55,7 @@ export function ProductComparison({
             }}
             defaultValue={selectedProductLeft?.id}
           />
-          <Flex>
+          <Flex vertical>
             <img
               src={selectedProductLeft?.image}
               alt={selectedProductLeft?.name}
@@ -63,7 +63,7 @@ export function ProductComparison({
             <Title level={5}>{selectedProductLeft?.name}</Title>
           </Flex>
         </Flex>
-        <Flex>
+        <Flex vertical>
           <Select
             options={productItems
               .filter((item) => item.id !== selectedProductLeft?.id)
@@ -79,7 +79,7 @@ export function ProductComparison({
             }}
             defaultValue={selectedProductRight?.id}
           />
-          <Flex>
+          <Flex vertical>
             <img
               src={selectedProductRight?.image}
               alt={selectedProductRight?.name}

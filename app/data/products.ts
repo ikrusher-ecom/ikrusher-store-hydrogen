@@ -1,4 +1,4 @@
-export const products = [
+export const productSpecs = [
   {
     name: 'Avaz Pro',
     id: 'gid://shopify/Product/7353368936495',
