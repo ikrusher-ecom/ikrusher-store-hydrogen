@@ -578,6 +578,19 @@ ul.ant-menu-sub li.ant-menu-item {
   background-color: rgba(255, 255, 255, 0.32);
 }
 
+.faqAccordion .ant-collapse-header .ant-collapse-header-text {
+  font-weight: 600;
+}
+
+.faqAccordion .ant-collapse-content.ant-collapse-content-active .ant-collapse-content-box {
+  padding-top: 0;
+}
+
+.faqAccordion .ant-collapse-content.ant-collapse-content-active .ant-collapse-content-box p {
+  border-top: 1px solid #E0E0E0;
+  padding-top: 16px;
+}
+
 @media (max-width: 767px) {
   .mobile-border {
     border-bottom: 2px solid #fff;

@@ -1,7 +1,8 @@
 import {useState} from 'react';
-import {Flex, Select, Typography} from 'antd';
+import {ConfigProvider, Flex, Select, Typography} from 'antd';
 
-import {TitleDiv} from './TitleDiv';
+import {TitleDiv} from '~/components/TitleDiv';
+import whiteArrow from '~/assets/white-arrow.svg';
 
 const {Text, Link, Paragraph, Title} = Typography;
 
@@ -9,12 +10,26 @@ interface ProductComparisonItem {
   id: string;
   name: string;
   image: string;
-  specs: SpecItem[];
+  specs: SpecItem;
 }
 
 interface SpecItem {
-  title: string;
-  value: string;
+  id: string;
+  name: string;
+  type: string;
+  batteryCapacity?: string;
+  oilTypes?: string;
+  centerPost?: string;
+  activation?: string;
+  omniCompatibility?: string;
+  maxFillVolume?: string;
+  mouthpiece?: string;
+  outputVoltage?: string;
+  resistance?: string;
+  heatingElement?: string;
+  aperture?: string;
+  tankMaterial?: string;
+  chargePort?: string;
 }
 
 interface ProductComparisonProps {
@@ -31,60 +46,146 @@ export function ProductComparison({
   titleData,
 }: ProductComparisonProps) {
   const [selectedProductLeft, setSelectedProductLeft] =
-    useState<ProductItem | null>(productItems[0]);
+    useState<ProductComparisonItem | null>(productItems[0]);
   const [selectedProductRight, setSelectedProductRight] =
-    useState<ProductItem | null>(productItems[1]);
+    useState<ProductComparisonItem | null>(productItems[1]);
 
   return (
-    <Flex vertical>
-      <TitleDiv {...titleData} />
-      <Flex>
-        <Flex vertical>
-          <Select
-            options={productItems
-              .filter((item) => item.id !== selectedProductRight?.id)
-              .map((item) => ({
-                label: item.name,
-                value: item.id,
-              }))}
-            onChange={(value) => {
-              const product = productItems.find((item) => item.id === value);
-              if (product) {
-                setSelectedProductLeft(product);
-              }
+    <Flex vertical className={`comparisonContainer mb-20`}>
+      <TitleDiv {...titleData} customClass={`bg-lightGreyColor pt-12`} />
+      <Flex className={`px-7 pb-12 bg-lightGreyColor gap-x-12`}>
+        <Flex vertical className={`w-1/2`}>
+          <ConfigProvider
+            theme={{
+              token: {
+                colorText: 'rgb(var(--color-contrast))',
+                colorBgBase: 'rgb(var(--color-primary))',
+                colorTextPlaceholder: 'rgb(var(--color-contrast))',
+                borderRadius: 12,
+              },
+              components: {
+                Select: {
+                  activeBorderColor: 'rgb(var(--color-theme))',
+                  activeOutlineColor: 'rgb(var(--color-contrast))',
+                  hoverBorderColor: 'rgb(var(--color-theme))',
+                  optionSelectedColor: 'rgb(var(--color-contrast))',
+                  optionSelectedBg: 'rgba(62, 177, 200, 0.3)',
+                  optionActiveBg: 'rgb(var(--color-primary))',
+                  selectorBg: 'rgb(var(--color-primary))',
+                },
+              },
             }}
-            defaultValue={selectedProductLeft?.id}
-          />
-          <Flex vertical>
-            <img
-              src={selectedProductLeft?.image}
-              alt={selectedProductLeft?.name}
+          >
+            <Select
+              options={productItems
+                .filter((item) => item.id !== selectedProductRight?.id)
+                .map((item) => ({
+                  label: item.name,
+                  value: item.id,
+                }))}
+              onChange={(value) => {
+                const product = productItems.find((item) => item.id === value);
+                if (product) {
+                  setSelectedProductLeft(product);
+                }
+              }}
+              defaultValue={selectedProductLeft?.id}
+              suffixIcon={<img src={whiteArrow} alt="iKrusher" />}
             />
-            <Title level={5}>{selectedProductLeft?.name}</Title>
+          </ConfigProvider>
+          <Flex
+            vertical
+            className={`items-center justify-center text-center gap-y-12 mt-16`}
+          >
+            <Flex vertical className={`gap-y-6`}>
+              <img
+                src={selectedProductLeft?.image}
+                alt={selectedProductLeft?.name}
+              />
+              <Title level={5}>{selectedProductLeft?.name}</Title>
+            </Flex>
+            {selectedProductLeft &&
+              Object.entries(selectedProductLeft.specs).map(([key, value]) => (
+                <Flex vertical key={key}>
+                  {/* {key === 'type' && <Text>{value}</Text>} */}
+                  {key === 'batteryCapacity' && (
+                    <Flex vertical className={`items-center`}>
+                      <Flex className={`items-end gap-x-1`}>
+                        <Text
+                          strong
+                          style={{fontSize: '32px', lineHeight: '32px'}}
+                        >
+                          {value.split(' ')[0]}
+                        </Text>
+                        <Text strong>{value.split(' ')[1]}</Text>
+                      </Flex>
+                      <Text>Battery Capacity</Text>
+                    </Flex>
+                  )}
+                  {key === 'heatingElement' && <Text>{value}</Text>}
+                  {key === 'centerPost' && <Text>{value}</Text>}
+                  {key === 'maxFillVolume' && <Text>{value}</Text>}
+                  {key === 'activation' && <Text>{value}</Text>}
+                  {key === 'outputVoltage' && <Text>{value}</Text>}
+                  {key === 'resistance' && <Text>{value}</Text>}
+                  {key === 'aperture' && <Text>{value}</Text>}
+                  {key === 'tankMaterial' && <Text>{value}</Text>}
+                  {key === 'chargePort' && <Text>{value}</Text>}
+                  {key === 'mouthpiece' && <Text>{value}</Text>}
+                </Flex>
+              ))}
           </Flex>
         </Flex>
-        <Flex vertical>
-          <Select
-            options={productItems
-              .filter((item) => item.id !== selectedProductLeft?.id)
-              .map((item) => ({
-                label: item.name,
-                value: item.id,
-              }))}
-            onChange={(value) => {
-              const product = productItems.find((item) => item.id === value);
-              if (product) {
-                setSelectedProductRight(product);
-              }
+        <Flex vertical className={`w-1/2`}>
+          <ConfigProvider
+            theme={{
+              token: {
+                colorText: 'rgb(var(--color-contrast))',
+                colorBgBase: 'rgb(var(--color-primary))',
+                colorTextPlaceholder: 'rgb(var(--color-contrast))',
+                borderRadius: 12,
+              },
+              components: {
+                Select: {
+                  activeBorderColor: 'rgb(var(--color-theme))',
+                  activeOutlineColor: 'rgb(var(--color-contrast))',
+                  hoverBorderColor: 'rgb(var(--color-theme))',
+                  optionSelectedColor: 'rgb(var(--color-contrast))',
+                  optionSelectedBg: 'rgba(62, 177, 200, 0.3)',
+                  optionActiveBg: 'rgb(var(--color-primary))',
+                  selectorBg: 'rgb(var(--color-primary))',
+                },
+              },
             }}
-            defaultValue={selectedProductRight?.id}
-          />
-          <Flex vertical>
-            <img
-              src={selectedProductRight?.image}
-              alt={selectedProductRight?.name}
+          >
+            <Select
+              options={productItems
+                .filter((item) => item.id !== selectedProductLeft?.id)
+                .map((item) => ({
+                  label: item.name,
+                  value: item.id,
+                }))}
+              onChange={(value) => {
+                const product = productItems.find((item) => item.id === value);
+                if (product) {
+                  setSelectedProductRight(product);
+                }
+              }}
+              defaultValue={selectedProductRight?.id}
+              suffixIcon={<img src={whiteArrow} alt="iKrusher" />}
             />
-            <Title level={5}>{selectedProductRight?.name}</Title>
+          </ConfigProvider>
+          <Flex
+            vertical
+            className={`items-center justify-center text-center gap-y-12 mt-16`}
+          >
+            <Flex vertical className={`gap-y-6`}>
+              <img
+                src={selectedProductRight?.image}
+                alt={selectedProductRight?.name}
+              />
+              <Title level={5}>{selectedProductRight?.name}</Title>
+            </Flex>
           </Flex>
         </Flex>
       </Flex>

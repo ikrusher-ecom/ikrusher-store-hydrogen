@@ -1,10 +1,11 @@
-import {CSSProperties, useEffect} from 'react';
+import {CSSProperties, useEffect, Suspense} from 'react';
 import {
   json,
   type MetaArgs,
   type LoaderFunctionArgs,
+  defer,
 } from '@shopify/remix-oxygen';
-import {useLoaderData, useNavigate} from '@remix-run/react';
+import {useLoaderData, useNavigate, Await} from '@remix-run/react';
 import {useInView} from 'react-intersection-observer';
 import type {
   Filter,
@@ -30,7 +31,7 @@ import {PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {routeHeaders} from '~/data/cache';
 import {seoPayload} from '~/lib/seo.server';
 import {FILTER_URL_PREFIX} from '~/components/SortFilter';
-import {getImageLoadingPriority} from '~/lib/const';
+import {getImageLoadingPriority, PAGINATION_SIZE} from '~/lib/const';
 import {parseAsCurrency} from '~/lib/utils';
 import {HeroBanner} from '~/components/HeroBanner';
 import {TitleDiv} from '~/components/TitleDiv';
@@ -40,6 +41,9 @@ import {FlexSlide} from '~/components/FlexSlide';
 import {TechSlide} from '~/components/TechSlide';
 import {ProductComparison} from '~/components/ProductComparison';
 import {productSpecs} from '~/data/products';
+import {ImageTicker} from '~/components/ImageTicker';
+import {BlogSlide} from '~/components/BlogSlide';
+import { FaqAccordion } from '~/components/FaqAccordion';
 
 const {Title} = Typography;
 
@@ -140,11 +144,25 @@ export async function loader({params, request, context}: LoaderFunctionArgs) {
     })
     .filter((filter): filter is NonNullable<typeof filter> => filter !== null);
 
-  return json({
+  const blogData = context.storefront
+    .query(BLOGS_QUERY, {
+      variables: {
+        blogHandle: 'blog',
+        pageBy: PAGINATION_SIZE,
+        language: context.storefront.i18n.language,
+      },
+    })
+    .catch((error) => {
+      console.error(error);
+      return null;
+    });
+
+  return defer({
     collection,
     appliedFilters,
     collections: flattenConnection(collections),
     seo,
+    blogData,
   });
 }
 
@@ -153,8 +171,10 @@ export const meta = ({matches}: MetaArgs<typeof loader>) => {
 };
 
 export default function Collection() {
-  const {collection, collections, appliedFilters} =
+  const {collection, collections, appliedFilters, blogData} =
     useLoaderData<typeof loader>();
+
+  console.log('blogData', blogData);
 
   const {ref, inView} = useInView();
 
@@ -280,12 +300,24 @@ export default function Collection() {
     id: string;
     name: string;
     image: string;
-    specs: SpecItem[];
+    specs: SpecItem;
   }
 
   interface SpecItem {
-    title: string;
-    value: string;
+    name: string;
+    id: string;
+    type: string;
+    heatingElement?: string;
+    centerPost?: string;
+    maxFillVolume?: string;
+    activation?: string;
+    batteryCapacity?: string;
+    outputVoltage?: string;
+    resistance?: string;
+    aperture?: string;
+    tankMaterial?: string;
+    chargePort?: string;
+    mouthpiece?: string;
   }
 
   const productComparisonItems: ProductComparisonItem[] =
@@ -295,6 +327,33 @@ export default function Collection() {
       image: product.variants.nodes[0].image?.url ?? '',
       specs: productSpecs.find((spec) => spec.id === product.id),
     }));
+
+  const brandUrls = [
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos_c4_copy.png?v=1701387042',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos_c1.png?v=1701387032',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-13.png?v=1701387021',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-05.png?v=1701387009',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-11.png?v=1701386999',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-12.png?v=1701386991',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-20.png?v=1701386981',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-09.png?v=1701386970',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-17.png?v=1701386960',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-14.png?v=1701386950',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-19.png?v=1701386939',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-07.png?v=1701386930',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-10.png?v=1701386919',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-16.png?v=1701386909',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos_c2.png?v=1701386892',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-15.png?v=1701386880',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos_c3.png?v=1701386869',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-24.png?v=1700501836',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-08.png?v=1701386854',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-23.png?v=1700501837',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-18.png?v=1701386828',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-22.png?v=1701386781',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos_c4.png?v=1701386770',
+    'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Client_logos-06.png?v=1701386758',
+  ];
 
   return (
     <>
@@ -361,15 +420,46 @@ export default function Collection() {
               subTitle: 'Comparison Chart',
               mainTitle: 'Find Your Perfect AIO Device',
               description: (
-                <span>
+                <span className={`text-greyColor`}>
                   For any assistance, speak with
                   <br />
-                  <a href="/contact">our specialist</a>.
+                  <a className={`text-themeColor`} href="/contact">
+                    our specialist
+                  </a>
+                  .
                 </span>
               ),
             }}
           />
         </>
+      )}
+
+      <ImageTicker imageUrls={brandUrls} />
+
+      <FaqAccordion />
+
+      {blogData && (
+        <div className={`mb-28`}>
+          <Suspense>
+            <Await resolve={blogData}>
+              {(response) => {
+                if (!response || !response.blog || !response.blog.articles) {
+                  return <></>;
+                }
+                return (
+                  <BlogSlide
+                    headingData={{
+                      heading: 'Chasing the Cloud',
+                      subTitle: 'Stories & Insights',
+                      link: {href: '/journal', text: 'View all articles'},
+                    }}
+                    articleData={response.blog.articles.edges}
+                  />
+                );
+              }}
+            </Await>
+          </Suspense>
+        </div>
       )}
 
       {/* <Section>
@@ -536,6 +626,48 @@ const COLLECTION_QUERY = `#graphql
     }
   }
   ${PRODUCT_CARD_FRAGMENT}
+` as const;
+
+const BLOGS_QUERY = `#graphql
+query Blog(
+  $language: LanguageCode
+  $blogHandle: String!
+  $pageBy: Int!
+  $cursor: String
+) @inContext(language: $language) {
+  blog(handle: $blogHandle) {
+    title
+    seo {
+      title
+      description
+    }
+    articles(first: $pageBy, after: $cursor) {
+      edges {
+        node {
+          ...Article
+        }
+      }
+    }
+  }
+}
+
+fragment Article on Article {
+  author: authorV2 {
+    name
+  }
+  contentHtml
+  handle
+  id
+  image {
+    id
+    altText
+    url
+    width
+    height
+  }
+  publishedAt
+  title
+}
 ` as const;
 
 function getSortValuesFromParam(sortParam: SortParam | null): {

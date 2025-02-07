@@ -13,6 +13,7 @@ interface TitleDivProps {
   };
   customClass?: string;
   titleColor?: string;
+  titleLevel?: number;
 }
 
 export function TitleDiv({
@@ -23,6 +24,7 @@ export function TitleDiv({
   link,
   customClass,
   titleColor,
+  titleLevel,
 }: TitleDivProps): JSX.Element {
   return (
     <Flex
@@ -37,10 +39,10 @@ export function TitleDiv({
         </Text>
       )}
       <Title
-        level={2}
-        className={`pt-1 pb-2 font-bold leading-none ${
-          titleColor === 'theme' ? 'text-themeColor' : 'text-black'
-        }`}
+        level={titleLevel || 2}
+        className={`pb-2 font-bold leading-none ${
+          titleLevel === 3 ? 'pt-0' : 'pt-1'
+        } ${titleColor === 'theme' ? 'text-themeColor' : 'text-black'}`}
         style={{
           margin: '0',
           fontWeight: '700',
@@ -60,7 +62,9 @@ export function TitleDiv({
       )}
       {link && (
         <Link href={link.href} underline>
-          <span className={`text-themeColor text-base block pt-2`}>{link.text}</span>
+          <span className={`text-themeColor text-base block pt-2`}>
+            {link.text}
+          </span>
         </Link>
       )}
     </Flex>

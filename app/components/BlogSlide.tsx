@@ -110,7 +110,7 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
   };
 
   return (
-    <div className={`relative`} style={{marginBottom: '70px'}}>
+    <div className={`relative`}>
       <TitleDiv
         subTitle={headingData.subTitle}
         mainTitle={headingData.heading || 'Default Title'}
@@ -139,7 +139,7 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
               >
                 <a
                   href={`/journal/${item.node.handle}`}
-                  className={`mb-2 block`}
+                  className={`mb-4 block`}
                   style={{aspectRatio: '35/25'}}
                 >
                   <img
@@ -149,16 +149,16 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
                     style={{aspectRatio: '35/25'}}
                   />
                 </a>
-                <div className={`block`}>
+                <Flex className={`justify-end px-2`}>
                   {/* <span></span> */}
                   <span className={`text-sm`}>
                     {new Intl.DateTimeFormat(`en-US`, {
                       year: 'numeric',
-                      month: 'long',
+                      month: 'short',
                       day: 'numeric',
                     }).format(new Date(item.node.publishedAt!))}
                   </span>
-                </div>
+                </Flex>
                 <TitleDiv
                   customClass={`blogTitle`}
                   titleColor={'theme'}
@@ -168,6 +168,7 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
                     href: `/blog/${item.node.handle}`,
                     text: 'Learn more...',
                   }}
+                  titleLevel={3}
                 />
               </div>
             );
