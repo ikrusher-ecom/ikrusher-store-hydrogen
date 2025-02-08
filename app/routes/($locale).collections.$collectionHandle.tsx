@@ -174,8 +174,6 @@ export default function Collection() {
   const {collection, collections, appliedFilters, blogData} =
     useLoaderData<typeof loader>();
 
-  console.log('blogData', blogData);
-
   const {ref, inView} = useInView();
 
   interface ProductItem {

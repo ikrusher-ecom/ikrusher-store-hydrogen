@@ -46,9 +46,9 @@ export function ProductComparison({
   titleData,
 }: ProductComparisonProps) {
   const [selectedProductLeft, setSelectedProductLeft] =
-    useState<ProductComparisonItem | null>(productItems[0]);
+    useState<ProductComparisonItem | null>(null);
   const [selectedProductRight, setSelectedProductRight] =
-    useState<ProductComparisonItem | null>(productItems[1]);
+    useState<ProductComparisonItem | null>(null);
 
   return (
     <Flex vertical className={`comparisonContainer mb-20`}>
@@ -77,6 +77,9 @@ export function ProductComparison({
             }}
           >
             <Select
+              placeholder="Select Product"
+              placement="bottomLeft"
+              listHeight={160}
               options={productItems
                 .filter((item) => item.id !== selectedProductRight?.id)
                 .map((item) => ({
@@ -89,13 +92,16 @@ export function ProductComparison({
                   setSelectedProductLeft(product);
                 }
               }}
-              defaultValue={selectedProductLeft?.id}
+              //   defaultValue={selectedProductLeft?.id}
               suffixIcon={<img src={whiteArrow} alt="iKrusher" />}
+              getPopupContainer={(triggerNode) => triggerNode.parentElement}
             />
           </ConfigProvider>
           <Flex
             vertical
-            className={`items-center justify-center text-center gap-y-12 mt-16`}
+            className={`items-center justify-center text-center gap-y-12 ${
+              (selectedProductLeft || selectedProductLeft) && 'mt-16'
+            }`}
           >
             <Flex vertical className={`gap-y-6`}>
               <img
@@ -159,6 +165,9 @@ export function ProductComparison({
             }}
           >
             <Select
+              placeholder="Select Product"
+              placement="bottomLeft"
+              listHeight={160}
               options={productItems
                 .filter((item) => item.id !== selectedProductLeft?.id)
                 .map((item) => ({
@@ -171,13 +180,16 @@ export function ProductComparison({
                   setSelectedProductRight(product);
                 }
               }}
-              defaultValue={selectedProductRight?.id}
+              //   defaultValue={selectedProductRight?.id}
               suffixIcon={<img src={whiteArrow} alt="iKrusher" />}
+              getPopupContainer={(triggerNode) => triggerNode.parentElement}
             />
           </ConfigProvider>
           <Flex
             vertical
-            className={`items-center justify-center text-center gap-y-12 mt-16`}
+            className={`items-center justify-center text-center gap-y-12 ${
+              (selectedProductLeft || selectedProductRight) && 'mt-16'
+            }`}
           >
             <Flex vertical className={`gap-y-6`}>
               <img
