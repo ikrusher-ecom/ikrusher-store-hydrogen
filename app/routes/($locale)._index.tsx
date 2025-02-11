@@ -207,8 +207,8 @@ const categoryTitle = {
   subTitle: 'The Collection',
   mainTitle: (
     <span>
-      <span className="text-themeColor">Hardware</span> Designed For Your{' '}
-      <span className="text-themeColor">Taste</span>
+      <span className="text-themeColor">Hardware</span> Designed
+      <br /> For Your <span className="text-themeColor">Taste</span>
     </span>
   ),
   link: {href: '/collections/all-products', text: 'View all products'},
@@ -340,7 +340,7 @@ export default function Homepage() {
         <Hero {...primaryHero} height="full" top loading="eager" />
       )} */}
 
-      <div className={`mb-4`}>
+      <div className={`mb-4 relative`}>
         <CarouselMain />
       </div>
 

@@ -16,6 +16,8 @@ import FooterSocialPayment from '~/components/FooterSocialPayment';
 import FooterSubscribe from '~/components/FooterSubscribe';
 import FooterLocations from '~/components/FooterLocations';
 import HeaderNestedMenu from '~/components/HeaderNestedMenu';
+import HeaderDesktopMenu from '~/components/HeaderDesktopMenu';
+import {Button} from '~/components/Button';
 import {
   IconMenu,
   IconCaret,
@@ -50,7 +52,7 @@ export function PageLayout({children, layout}: LayoutProps) {
   const {headerMenu, footerMenu} = layout || {};
   return (
     <>
-      <div className="flex flex-col">
+      <div className="relative flex flex-col">
         <div className="">
           <a href="#mainContent" className="sr-only">
             Skip to content
@@ -62,7 +64,7 @@ export function PageLayout({children, layout}: LayoutProps) {
         <main
           role="main"
           id="mainContent"
-          className="flex-grow relative top-16 w-screen"
+          className={`flex-grow relative w-screen top-16 md:top-0`}
         >
           {children}
         </main>
@@ -238,7 +240,7 @@ function MobileHeader({
   return (
     <header
       role="banner"
-      className={`bg-themeColor text-contrast flex lg:hidden items-center h-nav fixed backdrop-blur-lg z-40 top-0 justify-between w-screen leading-none gap-4 px-4 md:px-8`}
+      className={`bg-themeColor text-contrast flex md:hidden items-center h-nav fixed backdrop-blur-lg z-40 top-0 justify-between w-screen leading-none gap-4 px-4 md:px-8`}
     >
       <div className="flex items-center justify-start w-full gap-4">
         <Link className="flex items-center flex-grow w-full h-full" to="/">
@@ -301,37 +303,56 @@ function DesktopHeader({
 }) {
   const params = useParams();
   const {y} = useWindowScroll();
+
   return (
     <header
       role="banner"
-      className={`bg-themeColor text-contrast hidden h-nav lg:flex items-center sticky transition duration-300 backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-8`}
+      className={`absolute top-20 inset-x-14 h-24 rounded-full desktopHeaderNav bg-themeColor text-contrast hidden md:flex items-center transition duration-300 backdrop-blur-lg z-40 justify-evenly 2xl:justify-between leading-none 2xl:gap-8 2xl:px-20 2xl:py-7`}
+      style={{width: 'calc(100% - 112px)'}}
     >
-      <div className="flex gap-12">
-        <Link className="font-bold" to="/" prefetch="intent">
-          <img src={logoIcon} alt="iKrusher icon" />
+      <div className="flex gap-12 2xl:gap-20 justify-center items-center">
+        <Link
+          className="font-bold flex flex-col justify-center items-center no-underline hover:no-underline h-full"
+          to="/"
+          prefetch="intent"
+          style={{width: '100px'}}
+        >
+          <img src={logoIcon} alt="iKrusher icon" className={`w-full h-auto`} />
           <Heading className={`text-transparent w-0 h-0`} as="h1">
             {title}
           </Heading>
         </Link>
         <nav className="flex gap-8">
-          {/* Top level menu items */}
-          {(menu?.items || []).map((item) => (
+          <HeaderDesktopMenu
+            menuProp={(menu?.items || []) as unknown as MenuItem[]}
+          />
+          {/* {(menu?.items || []).map((item) => (
             <Link
               key={item.id}
               to={item.to}
               target={item.target}
               prefetch="intent"
               className={({isActive}) =>
-                isActive ? 'pb-1 border-b -mb-px' : 'pb-1'
+                isActive
+                  ? 'pb-1 border-b -mb-px text-contrast no-underline'
+                  : 'pb-1 text-contrast no-underline'
               }
             >
               {item.title}
             </Link>
-          ))}
+          ))} */}
         </nav>
       </div>
-      <div className="flex items-center gap-1">
-        <Form
+      <div>
+        <Button
+          to="/pages/contact"
+          className={`bg-yellowColor font-semibold text-black no-underline hover:no-underline hover:bg-black hover:text-yellowColor py-4 px-6 rounded-3xl text-semibold border-none w-44`}
+        >
+          Request a Quote
+        </Button>
+      </div>
+      <div className="flex items-center gap-2">
+        {/* <Form
           method="get"
           action={params.locale ? `/${params.locale}/search` : '/search'}
           className="flex items-center gap-2"
@@ -344,18 +365,18 @@ function DesktopHeader({
             }
             type="search"
             variant="minisearch"
-            placeholder="Search"
+            placeholder=""
             name="q"
-          />
-          <button
-            type="submit"
-            className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
-          >
-            <IconSearch />
-          </button>
-        </Form>
+          /> */}
+        <button
+          type="submit"
+          className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
+        >
+          <IconSearch />
+        </button>
+        {/* </Form> */}
         <AccountLink className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5" />
-        <CartCount isHome={isHome} openCart={openCart} />
+        {/* <CartCount isHome={isHome} openCart={openCart} /> */}
       </div>
     </header>
   );

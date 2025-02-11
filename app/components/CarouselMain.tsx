@@ -5,6 +5,7 @@ interface CarouselItem {
   imgUrl: string;
   mobileImgUrl: string;
   linkUrl: string;
+  dotText: string;
   btnText: string;
   btnStyle: string;
 }
@@ -17,6 +18,7 @@ const carouselData: CarouselItem[] = [
     mobileImgUrl:
       'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/ikraft_december2025.png?v=1736990112',
     linkUrl: '/pages/custom-vapes',
+    dotText: 'iKraft',
     btnText: 'Get Started',
     btnStyle:
       'text-black bg-contrast hover:text-contrast hover:bg-black md:text-contrast md:bg-black hover:md:text-black hover:md:bg-contrast',
@@ -28,6 +30,7 @@ const carouselData: CarouselItem[] = [
     mobileImgUrl:
       'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Image_1_e7d1ae53-a3a7-4d02-a4ee-060fc3817ab9.jpg?v=1736560038',
     linkUrl: '/pages/omni',
+    dotText: 'OMNI Connect',
     btnText: 'Learn More',
     btnStyle: 'text-black bg-yellowColor hover:text-yellowColor hover:bg-black',
   },
@@ -38,6 +41,7 @@ const carouselData: CarouselItem[] = [
     mobileImgUrl:
       'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Vatra_v4.jpg?v=1737055062',
     linkUrl: '/products/vatra-pro',
+    dotText: 'Vatra',
     btnText: 'Shop Now',
     btnStyle:
       'text-contrast bg-themeColor hover:text-themeColor hover:bg-contrast',
@@ -49,6 +53,7 @@ const carouselData: CarouselItem[] = [
     mobileImgUrl:
       'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Image_2_ecab42ca-4a3d-45de-a126-499878581e72.jpg?v=1736560040',
     linkUrl: '/pages/locations',
+    dotText: 'Customer Care',
     btnText: 'Contact Us',
     btnStyle:
       'text-contrast bg-themeColor hover:text-themeColor hover:bg-contrast',
@@ -63,14 +68,21 @@ export function CarouselMain(): JSX.Element {
       speed={700}
       autoplaySpeed={7000}
       // touchMove={false}
+      className={`mainCarousel`}
+      customPaging={(i) => <button key={i}>{carouselData[i].dotText}</button>}
     >
       {carouselData.map((item) => {
         return (
-          <div key={item.id} className={`m-0 relative`}>
+          <div
+            key={item.id}
+            className={`m-0 relative`}
+            data-index={item.dotText}
+          >
             <img
               src={item.imgUrl}
               alt="iKrusher"
-              className={`hidden md:block`}
+              className={`hidden md:block object-cover`}
+              style={{aspectRatio: '1920/1120'}}
             />
             <img
               src={item.mobileImgUrl}
@@ -78,8 +90,7 @@ export function CarouselMain(): JSX.Element {
               className={`block md:hidden`}
             />
             <a
-              className={`absolute bottom-7 inset-x-1/2 w-32 text-center font-semibold rounded-2xl py-1 leading-normal ${item.btnStyle}`}
-              style={{transform: 'translateX(-50%)'}}
+              className={`absolute bottom-7 inset-x-1/2 -translate-x-1/2 w-32 text-center font-semibold rounded-2xl py-1 leading-normal ${item.btnStyle} no-underline hover:no-underline md:bottom-40 md:left-44 md:transform-none`}
               href={item.linkUrl}
             >
               {item.btnText}
