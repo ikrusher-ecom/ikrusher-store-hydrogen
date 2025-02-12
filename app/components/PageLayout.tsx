@@ -3,6 +3,7 @@ import useWindowScroll from 'react-use/esm/useWindowScroll';
 import {Disclosure} from '@headlessui/react';
 import {Suspense, useEffect, useMemo, useState} from 'react';
 import {CartForm} from '@shopify/hydrogen';
+import {Breadcrumb, Layout as AntdLayout, Menu as AntdMenu, theme} from 'antd';
 
 import {type LayoutQuery} from 'storefrontapi.generated';
 import {Text, Heading, Section} from '~/components/Text';
@@ -40,6 +41,8 @@ import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 import type {RootLoader} from '~/root';
 
+const {Header: AntdHeader, Content, Footer: AntdFooter} = AntdLayout;
+
 type LayoutProps = {
   children: React.ReactNode;
   layout?: LayoutQuery & {
@@ -51,7 +54,7 @@ type LayoutProps = {
 export function PageLayout({children, layout}: LayoutProps) {
   const {headerMenu, footerMenu} = layout || {};
   return (
-    <>
+    <AntdLayout>
       <div className="relative flex flex-col">
         <div className="">
           <a href="#mainContent" className="sr-only">
@@ -59,12 +62,25 @@ export function PageLayout({children, layout}: LayoutProps) {
           </a>
         </div>
         {headerMenu && (
-          <Header title={layout?.shop.name || 'iKrusher'} menu={headerMenu} />
+          <AntdHeader
+            style={{
+              position: 'sticky',
+              top: 0,
+              zIndex: 50,
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              padding: '0',
+              height: '0',
+            }}
+          >
+            <Header title={layout?.shop.name || 'iKrusher'} menu={headerMenu} />
+          </AntdHeader>
         )}
         <main
           role="main"
           id="mainContent"
-          className={`flex-grow relative w-screen top-16 md:top-0`}
+          className={`flex-grow relative w-screen top-0`}
         >
           {children}
           <div
@@ -78,7 +94,7 @@ export function PageLayout({children, layout}: LayoutProps) {
         </main>
       </div>
       {footerMenu && <Footer menu={footerMenu} />}
-    </>
+    </AntdLayout>
   );
 }
 
@@ -248,10 +264,10 @@ function MobileHeader({
   return (
     <header
       role="banner"
-      className={`bg-themeColor text-contrast flex md:hidden items-center h-nav fixed backdrop-blur-lg z-40 top-0 justify-between w-screen leading-none gap-4 px-4 md:px-8`}
+      className={`fixed bg-themeColor text-contrast flex xl:hidden items-center h-nav backdrop-blur-lg z-40 top-0 left-0 justify-between w-screen leading-none gap-4 px-4 xl:px-8`}
     >
-      <div className="flex items-center justify-start w-full gap-4">
-        <Link className="flex items-center flex-grow w-full h-full" to="/">
+      <div className="flex items-center justify-between w-full gap-4">
+        <Link className="flex items-center h-full" to="/">
           <img src={logoIcon} alt="iKrusher icon" />
           <Heading className={`text-transparent w-0`} as="h1">
             {title}
@@ -315,7 +331,7 @@ function DesktopHeader({
   return (
     <header
       role="banner"
-      className={`absolute top-20 inset-x-14 rounded-full desktopHeaderNav bg-themeColor text-contrast hidden md:flex items-center transition duration-300 backdrop-blur-lg z-40 justify-between leading-none px-12 py-4 2xl:gap-8 2xl:px-20 2xl:py-7`}
+      className={`relative top-20 inset-x-14 rounded-full desktopHeaderNav bg-themeColor text-contrast hidden xl:flex items-center transition duration-300 backdrop-blur-lg z-40 justify-between leading-none px-12 py-4 2xl:gap-8 2xl:px-20 2xl:py-7`}
       style={{width: 'calc(100% - 112px)'}}
     >
       <div className="flex gap-12 2xl:gap-20 justify-center items-center">
@@ -489,19 +505,35 @@ function Footer({menu}: {menu?: EnhancedMenu}) {
     : 0;
 
   return (
-    <Section
-      divider={isHome ? 'none' : 'top'}
-      as="footer"
-      role="contentinfo"
-      className={`grid min-h-[25rem] items-start grid-flow-row w-full gap-5 px-0 py-8 md:gap-8 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-${itemsCount}
-        bg-primary text-contrast overflow-hidden relative top-16`}
-    >
-      <FooterLocations />
-      <FooterMenu menu={menu} />
-      <FooterSubscribe />
-      <FooterSocialPayment />
-      {/* <CountrySelector /> */}
-    </Section>
+    <>
+      <Section
+        divider={isHome ? 'none' : 'top'}
+        as="footer"
+        role="contentinfo"
+        className={`p-0 gap-0 bg-primary text-contrast`}
+        style={{padding: '0', gap: '0'}}
+      >
+        <div
+          className={`border-none mx-auto grid min-h-[25rem] items-start grid-flow-row w-full px-0 pt-16 pb-0 grid-cols-1 lg:grid-cols-5 bg-primary text-contrast overflow-hidden relative max-w-screen-xl`}
+          style={{
+            paddingLeft: '0',
+            paddingRight: '0',
+            gridTemplateColumns: '28% 18% 18% 18% 18%',
+          }}
+        >
+          <FooterLocations />
+          <FooterMenu menu={menu} />
+          <div className={`lg:hidden block`}>
+            <FooterSubscribe />
+            <FooterSocialPayment />
+          </div>
+          {/* <CountrySelector /> */}
+        </div>
+        <div className={`bg-primary text-contrast z-10 py-8 -mt-1`}>
+          <FooterSocialPayment />
+        </div>
+      </Section>
+    </>
   );
 }
 
@@ -544,7 +576,7 @@ function FooterMenu({menu}: {menu?: EnhancedMenu}) {
           <Disclosure>
             {({open}) => (
               <>
-                <Disclosure.Button className="text-left md:cursor-default">
+                <Disclosure.Button className="text-left lg:cursor-default">
                   <Heading
                     className="flex justify-between font-semibold text-[22px] m-0 items-center"
                     size="lead"
@@ -552,7 +584,7 @@ function FooterMenu({menu}: {menu?: EnhancedMenu}) {
                   >
                     {item.title}
                     {item?.items?.length > 0 && (
-                      <span className="md:hidden">
+                      <span className="lg:hidden">
                         {/* <IconCaret direction={open ? 'up' : 'down'} /> */}
                         {open ? (
                           <img src={arrowOpenedIcon} alt="iKrusher icon" />
@@ -566,7 +598,7 @@ function FooterMenu({menu}: {menu?: EnhancedMenu}) {
                 {item?.items?.length > 0 ? (
                   <div
                     className={`${
-                      open ? `h-fit` : `max-h-0 md:max-h-fit`
+                      open ? `h-fit` : `max-h-0 lg:max-h-fit`
                     } overflow-hidden transition-all duration-300`}
                   >
                     <Suspense data-comment="This suspense fixes a hydration bug in Disclosure.Panel with static prop">

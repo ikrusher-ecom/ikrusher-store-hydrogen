@@ -55,12 +55,12 @@ export default function HeaderDesktopMenu({menuProp}: DesktopHeaderMenuProps) {
               key: item.id,
               label: (
                 <Text
-                  className={`font-semibold text-xl flex flex-row text-contrast no-underline hover:no-underline 2xl:px-4 active:text-contrast`}
+                  className={`headerMenuText font-semibold flex flex-row text-contrast no-underline hover:no-underline 2xl:px-4 active:text-contrast`}
                   // href={item.to}
                   style={{
                     textDecoration: 'none',
                     color: '#fff',
-                    fontSize: '1.25rem',
+                    fontSize: '1rem',
                   }}
                 >
                   {item.title}
@@ -74,9 +74,9 @@ export default function HeaderDesktopMenu({menuProp}: DesktopHeaderMenuProps) {
                     key: subItem.id,
                     label: (
                       <a
-                        className={`no-underline text-black font-semibold text-lg hover:no-underline`}
+                        className={`headerMenuSubmenu no-underline text-black font-semibold text-lg 2xl:text-xl hover:no-underline hover:text-themeColor`}
                         href={subItem.to}
-                        style={{color: '#000', textDecoration: 'none'}}
+                        style={{textDecoration: 'none'}}
                       >
                         {subItem.title}
                       </a>
@@ -84,12 +84,13 @@ export default function HeaderDesktopMenu({menuProp}: DesktopHeaderMenuProps) {
                   };
                 })
                 .filter(Boolean),
+              popupClassName: item.title.toLowerCase().split(' ').join('-'),
             }
           : {
               key: item.id,
               label: (
                 <a
-                  className={`font-semibold text-xl text-contrast no-underline hover:no-underline 2xl:px-4 active:text-contrast`}
+                  className={`headerMenuText font-semibold 2xl:text-xl text-base text-contrast no-underline hover:no-underline 2xl:px-4 active:text-contrast`}
                   href={item.to}
                   style={{color: '#fff', textDecoration: 'none'}}
                 >
@@ -120,9 +121,9 @@ export default function HeaderDesktopMenu({menuProp}: DesktopHeaderMenuProps) {
   };
 
   return (
-    <Flex className={`gap-x-2 2xl:gap-x-4`}>
+    <Flex className={`gap-x-0 2xl:gap-x-4`}>
       <Menu
-        triggerSubMenuAction="hover"
+        // triggerSubMenuAction="hover"
         onClick={onClick}
         onOpenChange={onHover}
         selectedKeys={[current]}

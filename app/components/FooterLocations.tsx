@@ -5,6 +5,11 @@ import {setKey, setLanguage, fromLatLng} from 'react-geocode';
 
 import iphoneIcon from '~/assets/iphone.svg';
 import emailIcon from '~/assets/email.svg';
+import FooterSubscribe from '~/components/FooterSubscribe';
+import instagramIcon from '~/assets/instagram.svg';
+import facebookIcon from '~/assets/facebook.svg';
+import youtubeIcon from '~/assets/youtube.svg';
+import linkedinIcon from '~/assets/linkedin.svg';
 
 setKey('AIzaSyAXPdYeizLvhCpF48KBT7TGjnhNgC05Iio');
 setLanguage('en');
@@ -285,7 +290,9 @@ export default function FooterLocations() {
   };
 
   return (
-    <div className={`flex flex-col w-full pt-4 px-5 pb-8 gap-5 mobile-border`}>
+    <div
+      className={`flex flex-col pt-4 px-5 pb-8 lg:pt-0 gap-5 mobile-border footerLocations`}
+    >
       <h4 className={`font-semibold text-[22px] m-0`}>
         iKrusher Location Near Me
       </h4>
@@ -305,6 +312,15 @@ export default function FooterLocations() {
           inquiry@ikrusher.com
         </a>
       </p>
+      <div className={`lg:block hidden mt-10`}>
+        <FooterSubscribe />
+        <div className={`flex gap-x-4`}>
+          <img alt="iKrusher icon" src={instagramIcon} />
+          <img alt="iKrusher icon" src={facebookIcon} />
+          <img alt="iKrusher icon" src={youtubeIcon} />
+          <img alt="iKrusher icon" src={linkedinIcon} />
+        </div>
+      </div>
     </div>
   );
 }

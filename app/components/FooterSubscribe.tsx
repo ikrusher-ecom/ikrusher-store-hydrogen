@@ -6,7 +6,9 @@ export default function FooterSubscribe() {
   const formRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className={`p-[0px_20px_20px] flex flex-col w-full mobile-border`}>
+    <div
+      className={`p-[0px_20px_20px] flex flex-col w-full mobile-border lg:p-0`}
+    >
       <h4 className={`font-semibold text-[22px] m-0 leading-none`}>
         Subscribe here
       </h4>
