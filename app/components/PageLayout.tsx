@@ -1,7 +1,7 @@
 import {useParams, Form, Await, useRouteLoaderData} from '@remix-run/react';
 import useWindowScroll from 'react-use/esm/useWindowScroll';
 import {Disclosure} from '@headlessui/react';
-import {Suspense, useEffect, useMemo} from 'react';
+import {Suspense, useEffect, useMemo, useState} from 'react';
 import {CartForm} from '@shopify/hydrogen';
 
 import {type LayoutQuery} from 'storefrontapi.generated';
@@ -67,6 +67,14 @@ export function PageLayout({children, layout}: LayoutProps) {
           className={`flex-grow relative w-screen top-16 md:top-0`}
         >
           {children}
+          <div
+            className={`w-screen h-full absolute top-0 left-0 z-20 hidden`}
+            id={`menuPopupBg`}
+            style={{
+              background: 'rgba(255, 255, 255, 0.3)',
+              backdropFilter: 'blur(6px)',
+            }}
+          ></div>
         </main>
       </div>
       {footerMenu && <Footer menu={footerMenu} />}
@@ -307,7 +315,7 @@ function DesktopHeader({
   return (
     <header
       role="banner"
-      className={`absolute top-20 inset-x-14 h-24 rounded-full desktopHeaderNav bg-themeColor text-contrast hidden md:flex items-center transition duration-300 backdrop-blur-lg z-40 justify-evenly 2xl:justify-between leading-none 2xl:gap-8 2xl:px-20 2xl:py-7`}
+      className={`absolute top-20 inset-x-14 rounded-full desktopHeaderNav bg-themeColor text-contrast hidden md:flex items-center transition duration-300 backdrop-blur-lg z-40 justify-between leading-none px-12 py-4 2xl:gap-8 2xl:px-20 2xl:py-7`}
       style={{width: 'calc(100% - 112px)'}}
     >
       <div className="flex gap-12 2xl:gap-20 justify-center items-center">

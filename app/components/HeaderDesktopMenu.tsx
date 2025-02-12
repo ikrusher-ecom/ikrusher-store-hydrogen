@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
-import {Dropdown, Flex, Menu} from 'antd';
+import {Dropdown, Flex, Menu, Typography} from 'antd';
 import type {DropdownProps, MenuProps} from 'antd';
+
+import DropdownMenu from '~/components/DropdownMenu';
+
+const {Text} = Typography;
 
 interface MenuItem {
   id: string;
@@ -50,13 +54,17 @@ export default function HeaderDesktopMenu({menuProp}: DesktopHeaderMenuProps) {
           ? {
               key: item.id,
               label: (
-                <a
-                  className={`font-semibold text-xl flex flex-row text-contrast no-underline hover:no-underline 2xl:px-4`}
-                  href={item.to}
-                  style={{textDecoration: 'none'}}
+                <Text
+                  className={`font-semibold text-xl flex flex-row text-contrast no-underline hover:no-underline 2xl:px-4 active:text-contrast`}
+                  // href={item.to}
+                  style={{
+                    textDecoration: 'none',
+                    color: '#fff',
+                    fontSize: '1.25rem',
+                  }}
                 >
                   {item.title}
-                </a>
+                </Text>
               ),
               children: item.items
                 .map((subItem) => {
@@ -66,9 +74,9 @@ export default function HeaderDesktopMenu({menuProp}: DesktopHeaderMenuProps) {
                     key: subItem.id,
                     label: (
                       <a
-                        className={`no-underline text-contrast font-medium text-lg hover:no-underline`}
+                        className={`no-underline text-black font-semibold text-lg hover:no-underline`}
                         href={subItem.to}
-                        style={{color: 'rgb(var(--color-grey))'}}
+                        style={{color: '#000', textDecoration: 'none'}}
                       >
                         {subItem.title}
                       </a>
@@ -81,7 +89,7 @@ export default function HeaderDesktopMenu({menuProp}: DesktopHeaderMenuProps) {
               key: item.id,
               label: (
                 <a
-                  className={`font-semibold text-xl text-contrast no-underline hover:no-underline 2xl:px-4`}
+                  className={`font-semibold text-xl text-contrast no-underline hover:no-underline 2xl:px-4 active:text-contrast`}
                   href={item.to}
                   style={{color: '#fff', textDecoration: 'none'}}
                 >
@@ -94,43 +102,34 @@ export default function HeaderDesktopMenu({menuProp}: DesktopHeaderMenuProps) {
     })
     .filter(Boolean);
 
+  const [current, setCurrent] = useState('');
+
+  const onClick: MenuProps['onClick'] = (e) => {
+    // console.log('click ', e);
+    setCurrent(e.key);
+  };
+
+  const onHover: MenuProps['onOpenChange'] = (openKeys) => {
+    // console.log(openKeys.length);
+    // console.log(document.getElementById('menuPopupBg').style.display);
+    // if (openKeys.length == 0) {
+    //   document.getElementById('menuPopupBg').style.display = 'hidden';
+    // } else {
+    //   document.getElementById('menuPopupBg').style.display = 'block';
+    // }
+  };
+
   return (
-    <Flex>
-      {items.map((item, i) => {
-        console.log('items', items);
-        const menuItems: MenuProps['items'] | null =
-          item.children !== undefined
-            ? item.children?.map((submenu) => {
-                return {
-                  label: submenu.label,
-                  key: submenu.key,
-                };
-              })
-            : null;
-        console.log('menuItems', i, menuItems);
-        return menuItems == null ? (
-          <div key={item.key}>{item.label}</div>
-        ) : (
-          <Dropdown
-            key={item.key}
-            menu={{
-              menuItems,
-              onClick: () => console.log(menuItems),
-              selectable: true,
-            }}
-            // dropdownRender={(menu) => {
-            //   return (
-            //     <div>
-            //       {menu.label}
-            //       <Flex>product placement</Flex>
-            //     </div>
-            //   );
-            // }}
-          >
-            {item.label}
-          </Dropdown>
-        );
-      })}
+    <Flex className={`gap-x-2 2xl:gap-x-4`}>
+      <Menu
+        triggerSubMenuAction="hover"
+        onClick={onClick}
+        onOpenChange={onHover}
+        selectedKeys={[current]}
+        mode="horizontal"
+        items={items}
+        className={`bg-transparent border-none desktopDropdownMenu`}
+      />
     </Flex>
   );
 }
