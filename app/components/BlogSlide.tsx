@@ -115,8 +115,9 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
         subTitle={headingData.subTitle}
         mainTitle={headingData.heading || 'Default Title'}
         link={{href: '/journal', text: 'View all articles'}}
+        customClass={`lg:text-center lg:items-center lg:max-w-screen-md lg:mx-auto`}
       />
-      <div className={`overflow-hidden`}>
+      <div className={`overflow-hidden lg:hidden`}>
         <Flex
           gap="middle"
           className={`py-2 pl-1 pr-4 flex-slide ml-7`}
@@ -145,7 +146,7 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
                   <img
                     src={item.node.image.url}
                     alt={item.node.image.altText}
-                    className={`block md:hidden w-full rounded-xl object-cover`}
+                    className={`block w-full rounded-xl object-cover`}
                     style={{aspectRatio: '35/25'}}
                   />
                 </a>
@@ -177,18 +178,60 @@ export function BlogSlide({headingData, articleData}: BlogSlideProps) {
       </div>
       <button
         onClick={handlePrev}
-        className="absolute"
+        className={`absolute lg:hidden`}
         style={{right: '90px', top: 'calc(100% + 20px)'}}
       >
         <img src={arrowLeftIcon} alt="iKrusher" />
       </button>
       <button
         onClick={handleNext}
-        className="absolute"
+        className={`absolute lg:hidden`}
         style={{right: '30px', top: 'calc(100% + 20px)'}}
       >
         <img src={arrowRightIcon} alt="iKrusher" />
       </button>
+      <Flex className={`hidden lg:flex w-full max-w-screen-2xl mx-auto`}>
+        {articleData.slice(0, 4).map((item) => (
+          <div
+            key={item.node.id}
+            className={`m-0 relative flex-none w-1/4 px-2`}
+          >
+            <a
+              href={`/journal/${item.node.handle}`}
+              className={`mb-4 block`}
+              style={{aspectRatio: '35/25'}}
+            >
+              <img
+                src={item.node.image.url}
+                alt={item.node.image.altText}
+                className={`block w-full rounded-xl object-cover`}
+                style={{aspectRatio: '35/25'}}
+              />
+            </a>
+            <Flex className={`justify-end px-2`}>
+              {/* <span></span> */}
+              <span className={`text-sm`}>
+                {new Intl.DateTimeFormat(`en-US`, {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                }).format(new Date(item.node.publishedAt!))}
+              </span>
+            </Flex>
+            <TitleDiv
+              customClass={`blogTitle`}
+              titleColor={'theme'}
+              mainTitle={item.node.title}
+              descriptionHtml={item.node.contentHtml}
+              link={{
+                href: `/blog/${item.node.handle}`,
+                text: 'Learn more...',
+              }}
+              titleLevel={3}
+            />
+          </div>
+        ))}
+      </Flex>
     </div>
   );
 }

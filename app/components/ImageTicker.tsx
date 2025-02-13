@@ -18,7 +18,7 @@ export function ImageTicker({imageUrls}: ImageTickerProps) {
   //   }
 
   return (
-    <div className={`overflow-hidden w-full mb-20`}>
+    <div className={`overflow-hidden w-full mb-20 lg:mb-40`}>
       <div className={`ticker-div flex -mx-4`}>
         {imageUrls.length > 0 &&
           imageUrls

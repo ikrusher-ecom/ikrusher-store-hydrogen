@@ -1,9 +1,11 @@
 import {CSSProperties, useState} from 'react';
-import {Flex} from 'antd';
+import {Flex, Row, Col, Carousel, Typography} from 'antd';
 
 import {TitleDiv} from '~/components/TitleDiv';
 import arrowLeftIcon from '~/assets/arrow-left.svg';
 import arrowRightIcon from '~/assets/arrow-right.svg';
+
+const {Text, Link, Paragraph, Title} = Typography;
 
 interface SlideItem {
   id: string;
@@ -111,14 +113,17 @@ export function FlexSlide({slideData, titleData}: FlexSlideProps): JSX.Element {
   };
 
   return (
-    <div className={`relative mb-20`}>
+    <div className={`relative mb-20 lg:mb-40`}>
       <TitleDiv
         subTitle={titleData.subTitle}
         mainTitle={titleData.mainTitle}
         description={titleData.description}
         link={titleData.link}
+        customClass={`${
+          titleData.subTitle?.toLowerCase() || ''
+        }SlidesTitle lg:text-center lg:items-center lg:max-w-screen-md lg:mx-auto`}
       />
-      <div className={`overflow-hidden`}>
+      <div className={`overflow-hidden lg:hidden block`}>
         <Flex
           gap="middle"
           className={`py-2 pl-1 pr-4 flex-slide ml-7`}
@@ -143,13 +148,13 @@ export function FlexSlide({slideData, titleData}: FlexSlideProps): JSX.Element {
                 <img
                   src={item.imgUrl}
                   alt="iKrusher"
-                  className={`hidden md:block w-full rounded-xl`}
+                  className={`hidden lg:block w-full rounded-xl`}
                   style={{boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'}}
                 />
                 <img
                   src={item.mobileImgUrl}
                   alt="iKrusher"
-                  className={`block md:hidden w-full rounded-xl object-cover`}
+                  className={`block lg:hidden w-full rounded-xl object-cover`}
                   style={{
                     boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
                     ...item.customStyle,
@@ -162,18 +167,113 @@ export function FlexSlide({slideData, titleData}: FlexSlideProps): JSX.Element {
       </div>
       <button
         onClick={handlePrev}
-        className="absolute"
+        className={`absolute lg:hidden`}
         style={{right: '90px', top: 'calc(100% + 20px)'}}
       >
         <img src={arrowLeftIcon} alt="iKrusher" />
       </button>
       <button
         onClick={handleNext}
-        className="absolute"
+        className={`absolute lg:hidden`}
         style={{right: '30px', top: 'calc(100% + 20px)'}}
       >
         <img src={arrowRightIcon} alt="iKrusher" />
       </button>
+      {titleData.subTitle === 'The Collection' && (
+        <div className={`lg:block hidden max-w-screen-lg mx-auto`}>
+          <Row gutter={[16, 16]}>
+            {slideData.map((item) => {
+              return (
+                <Col
+                  className="gutter-row flex items-center"
+                  span={8}
+                  key={item.id}
+                >
+                  <img
+                    src={item.imgUrl}
+                    alt="iKrusher"
+                    className={`hidden md:block w-full rounded-xl`}
+                    style={{boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'}}
+                  />
+                </Col>
+              );
+            })}
+          </Row>
+        </div>
+      )}
+      {titleData.subTitle === 'iKraft' && (
+        <div
+          className={`hidden w-full max-w-screen-lg mx-auto lg:flex ikraftDesktopSection`}
+        >
+          <Carousel
+            autoplay
+            speed={700}
+            autoplaySpeed={7000}
+            // touchMove={false}
+          >
+            {slideData.map((item) => (
+              <div key={item.id}>
+                <img
+                  src={item.imgUrl}
+                  alt="iKrusher"
+                  className={`w-full rounded-xl`}
+                  style={{aspectRatio: '546/433'}}
+                />
+              </div>
+            ))}
+          </Carousel>
+          {/* <TitleDiv
+            subTitle={titleData.subTitle}
+            mainTitle={titleData.mainTitle}
+            description={titleData.description}
+            link={titleData.link}
+            customClass={`lg:text-left lg:items-left lg:max-w-screen-sm lg:mx-auto ikraftDesktopTitle`}
+          /> */}
+          <div className={`h-full`} style={{aspectRatio: '546/433'}}>
+            <div
+              className={`pl-16 flex flex-col justify-center h-full gap-y-8`}
+            >
+              {titleData.subTitle && (
+                <Text className={`text-greyColor text-base font-medium`}>
+                  {titleData.subTitle}
+                </Text>
+              )}
+              <Title
+                level={2}
+                className={`pb-2 font-bold leading-none pt-1`}
+                style={{
+                  margin: '0',
+                  fontWeight: '700',
+                  lineHeight: '1',
+                  color: '#000',
+                }}
+              >
+                {titleData.mainTitle}
+              </Title>
+              {titleData.description && (
+                <Paragraph>{titleData.description}</Paragraph>
+              )}
+              {titleData.link && (
+                <Link href={titleData.link.href} underline>
+                  <span className={`text-themeColor text-base block pt-2`}>
+                    {titleData.link.text}
+                  </span>
+                </Link>
+              )}
+              <div className={`flex flex-col gap-y-2`}>
+                <Text>
+                  <Link href={'/pages/custom-vapes'}>Click here</Link> for
+                  custom vape
+                </Text>
+                <Text>
+                  <Link href={'/pages/custom-packaging'}>Click here</Link> for
+                  custom packaging
+                </Text>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

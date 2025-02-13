@@ -201,6 +201,42 @@ const categorySlide: SlideItem[] = [
       objectPosition: 'center 20%',
     },
   },
+  {
+    id: 'slide-new-arrival-1',
+    imgUrl:
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/65d9e7062985a229dc68aa85d4186d6e.png?v=1737583944',
+    mobileImgUrl:
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/65d9e7062985a229dc68aa85d4186d6e.png?v=1737583944',
+    linkUrl: '/collections/new-arrivals',
+    customStyle: {
+      aspectRatio: '3/4',
+      objectPosition: 'center 20%',
+    },
+  },
+  {
+    id: 'slide-new-arrival-2',
+    imgUrl:
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
+    mobileImgUrl:
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
+    linkUrl: '/collections/new-arrivals',
+    customStyle: {
+      aspectRatio: '3/4',
+      objectPosition: 'center 20%',
+    },
+  },
+  {
+    id: 'slide-new-arrival-1',
+    imgUrl:
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/65d9e7062985a229dc68aa85d4186d6e.png?v=1737583944',
+    mobileImgUrl:
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/65d9e7062985a229dc68aa85d4186d6e.png?v=1737583944',
+    linkUrl: '/collections/new-arrivals',
+    customStyle: {
+      aspectRatio: '3/4',
+      objectPosition: 'center 20%',
+    },
+  },
 ];
 
 const categoryTitle = {
@@ -240,7 +276,7 @@ const ikraftTitle = {
     </span>
   ),
   description:
-    'With a proven track record of delivering high-quality vape hardware iKrusher has sold hundreds',
+    'With a proven track record of delivering high-quality vape hardware iKrusher has sold hundreds of millions of units, earning the trust of thousands of satisfied business customers.',
 };
 
 const iKraftSlide: SlideItem[] = [
@@ -309,7 +345,9 @@ const customerCardData = {
     'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/d717235ec883b591a5111dd68d69693b.png?v=1737590646',
   title: (
     <span>
-      Your <span className="text-themeColor">Satisfaction</span>,<br />
+      Your
+      <br className={`hidden lg:block`} />{' '}
+      <span className="text-themeColor">Satisfaction</span>,<br />
       <span className="text-themeColor">Our</span> Priority
     </span>
   ),
@@ -317,7 +355,7 @@ const customerCardData = {
     'We strive to exceed customer expectations and ensure satisfaction at iKrusher.',
   button: {
     link: '/pages/contact-us',
-    text: 'Contact Our Team',
+    text: 'Request a Quote',
   },
 };
 
@@ -346,7 +384,7 @@ export default function Homepage() {
 
       <FlexSlide slideData={categorySlide} titleData={categoryTitle} />
 
-      <div className={`mb-20`}>
+      <div className={`mb-20 lg:mb-40`}>
         <TitleDiv
           mainTitle={
             <span>
@@ -356,14 +394,20 @@ export default function Homepage() {
           }
           subTitle="Certifications"
           description="Ensuring all products are certified for quality, safety, and compliance. Our commitment to excellence guarantees reliable and high-performance solutions for our customers."
+          customClass={`lg:text-center lg:items-center lg:max-w-screen-md lg:mx-auto`}
         />
         <CertTicker imageUrls={certUrls} />
       </div>
 
       <FlexSlide slideData={iKraftSlide} titleData={ikraftTitle} />
 
-      <div className={`mb-20`}>
-        <TitleDiv {...automationTitle} />
+      <div
+        className={`mb-20 lg:mb-40 lg:flex lg:w-full lg:max-w-screen-lg lg:mx-auto`}
+      >
+        <TitleDiv
+          {...automationTitle}
+          customClass={`lg:max-w-screen-md lg:mx-auto lg:pr-16 lg:flex lg:flex-col lg:justify-center lg:h-full lg:gap-y-8`}
+        />
         <div className={`px-7`}>
           <VimeoVideoPlayer className={`rounded-2xl`} videoId="910983760" />
         </div>
@@ -371,12 +415,12 @@ export default function Homepage() {
 
       <ImageTicker imageUrls={brandUrls} />
 
-      <div className={`mb-20`}>
+      <div className={`mb-20 lg:mb-40`}>
         <ImageCard imageCardData={customerCardData} />
       </div>
 
       {blogData && (
-        <div className={`mb-20`}>
+        <div className={`mb-20 lg:mb-40`}>
           <Suspense>
             <Await resolve={blogData}>
               {(response) => {

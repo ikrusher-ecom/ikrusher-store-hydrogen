@@ -501,7 +501,7 @@ ul.ant-menu-sub li.ant-menu-item {
   height: auto;
 }
 
-.ticker-div-cert img {
+.certTicker img {
   width: 5rem;
   flex: none;
   /* padding: 0 1rem 0 1rem; */
@@ -795,5 +795,22 @@ li.ant-menu-item::after {
   .headerMenuText {
     font-size: 1.25rem !important;
     line-height: 1.75rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .ikraftSlidesTitle {
+    display: none;
+  }
+
+  .ikraftDesktopSection > div {
+    width: 50%;
+    display: inline-block;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .ikraftDesktopTitle {
+    padding-right: 0;
   }
 }
