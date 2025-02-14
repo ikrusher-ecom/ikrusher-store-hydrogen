@@ -44,7 +44,7 @@ const carouselData: CarouselItem[] = [
     imgUrl:
       'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Postless_76429c09-2efc-42b6-885d-cab42686e0d0.png?v=1739496010',
     mobileImgUrl:
-      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Image_1_e7d1ae53-a3a7-4d02-a4ee-060fc3817ab9.jpg?v=1736560038',
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/890add065964db5a0d65cefe7a77bf5b.jpg?v=1739496123',
     linkUrl: '/pages/ikraft',
     dotText: 'Postless',
     btnText: 'View all products',
@@ -89,7 +89,7 @@ const carouselData: CarouselItem[] = [
     imgUrl:
       'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Postless_76429c09-2efc-42b6-885d-cab42686e0d0.png?v=1739496010',
     mobileImgUrl:
-      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Image_1_e7d1ae53-a3a7-4d02-a4ee-060fc3817ab9.jpg?v=1736560038',
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/890add065964db5a0d65cefe7a77bf5b.jpg?v=1739496123',
     linkUrl: '/pages/ikraft',
     dotText: 'Postless',
     btnText: 'View all products',
@@ -157,7 +157,7 @@ export function CarouselMain(): JSX.Element {
               className={`block md:hidden`}
             />
             <div
-              className={`flex flex-col absolute top-1/2 gap-y-4 heroDesktopText items-start`}
+              className={`flex flex-col absolute lg:top-1/2 bottom-8 top-auto lg:bottom-auto gap-y-4 heroDesktopText lg:items-start lg:text-left items-center text-center px-8 lg:px-0`}
             >
               {item.mainTitle && <Title level={2}>{item.mainTitle}</Title>}
               {item.subTitle && <Paragraph>{item.subTitle}</Paragraph>}
