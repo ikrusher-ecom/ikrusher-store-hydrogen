@@ -137,11 +137,11 @@ export function FlexSlide({slideData, titleData}: FlexSlideProps): JSX.Element {
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
         >
-          {slideData.map((item) => {
+          {slideData.map((item, i) => {
             return (
               <a
                 href={item.linkUrl}
-                key={item.id}
+                key={`mobile-${item.id}-${i}`}
                 className={`m-0 relative flex-none w-4/5`}
                 style={{flexBasis: '80%', flexShrink: 0}}
               >
@@ -182,12 +182,12 @@ export function FlexSlide({slideData, titleData}: FlexSlideProps): JSX.Element {
       {titleData.subTitle === 'The Collection' && (
         <div className={`lg:block hidden max-w-screen-lg mx-auto`}>
           <Row gutter={[16, 16]}>
-            {slideData.map((item) => {
+            {slideData.map((item, i) => {
               return (
                 <Col
                   className="gutter-row flex items-center"
                   span={8}
-                  key={item.id}
+                  key={`desktop-${item.id}-${i}`}
                 >
                   <img
                     src={item.imgUrl}
@@ -211,8 +211,8 @@ export function FlexSlide({slideData, titleData}: FlexSlideProps): JSX.Element {
             autoplaySpeed={7000}
             // touchMove={false}
           >
-            {slideData.map((item) => (
-              <div key={item.id}>
+            {slideData.map((item, i) => (
+              <div key={`desktop-${item.id}-${i}`}>
                 <img
                   src={item.imgUrl}
                   alt="iKrusher"

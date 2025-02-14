@@ -42,12 +42,14 @@ export function ProductSlide({
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? productItems.length - 1 : prevIndex - 1,
     );
+    console.log(currentIndex);
   };
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === productItems.length - 1 ? 0 : prevIndex + 1,
     );
+    console.log(currentIndex);
   };
 
   const onTouchStart = (e: React.TouchEvent) => {
@@ -110,9 +112,11 @@ export function ProductSlide({
   };
 
   return (
-    <div className={`relative mb-20`}>
+    <div
+      className={`relative mb-20 lg:mb-40 lg:max-w-screen-2xl lg:ml-auto lg:mr-0`}
+    >
       <TitleDiv subTitle={subTitle} mainTitle={mainTitle} />
-      <div className={`overflow-hidden`}>
+      <div className={`overflow-hidden lg:hidden block`}>
         <Flex
           gap="middle"
           className={`py-2 pl-1 pr-4 flex-slide ml-7`}
@@ -158,16 +162,61 @@ export function ProductSlide({
           ))}
         </Flex>
       </div>
+      <div className={`overflow-hidden hidden lg:block`}>
+        <Flex
+          gap="middle"
+          className={`py-2 pl-1 pr-4 flex-slide ml-7`}
+          style={{
+            transform: `translateX(calc(-${currentIndex * 25}% - ${
+              currentIndex * 0
+            }rem))`,
+            transition: 'transform 0.7s ease-in-out',
+          }}
+          // onTouchStart={onTouchStart}
+          // onTouchMove={onTouchMove}
+          // onTouchEnd={onTouchEnd}
+        >
+          {productItems.map((item) => (
+            <Flex
+              vertical
+              key={item.name}
+              className={`m-0 relative flex-none w-1/4 h-full object-cover object-center rounded-2xl bg-lightGreyColor`}
+              style={{
+                flexShrink: 0,
+                aspectRatio: '3/4',
+                boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+              }}
+            >
+              <Image
+                preview={false}
+                src={item.image}
+                alt={item.name}
+                className={`w-full h-full object-cover object-center rounded-2xl`}
+              />
+              <Flex
+                vertical
+                className={`absolute left-0 right-0 text-center h-full w-full flex flex-col justify-between py-9 px-2`}
+              >
+                <Flex vertical className={`gap-y-1`}>
+                  <Title level={4}>{item.name}</Title>
+                  <Paragraph>{item.subTitle}</Paragraph>
+                </Flex>
+                <Link href={item.link}>View here</Link>
+              </Flex>
+            </Flex>
+          ))}
+        </Flex>
+      </div>
       <button
         onClick={handlePrev}
-        className="absolute"
+        className="absolute lg:mr-40"
         style={{right: '90px', top: 'calc(100% + 14px)'}}
       >
         <img src={arrowLeftIcon} alt="iKrusher" />
       </button>
       <button
         onClick={handleNext}
-        className="absolute"
+        className="absolute lg:mr-40"
         style={{right: '30px', top: 'calc(100% + 14px)'}}
       >
         <img src={arrowRightIcon} alt="iKrusher" />

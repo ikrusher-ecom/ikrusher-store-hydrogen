@@ -39,7 +39,10 @@ export function FaqAccordion() {
   };
 
   return (
-    <Flex vertical className={`mx-8 mb-20 gap-y-4`}>
+    <Flex
+      vertical
+      className={`mx-8 mb-20 gap-y-4 lg:mb-40 lg:max-w-screen-lg lg:mx-auto`}
+    >
       <Title level={2} className={`text-center`}>
         FAQ
       </Title>

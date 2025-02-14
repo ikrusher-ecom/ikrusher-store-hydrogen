@@ -54,7 +54,7 @@ type LayoutProps = {
 export function PageLayout({children, layout}: LayoutProps) {
   const {headerMenu, footerMenu} = layout || {};
   return (
-    <AntdLayout>
+    <AntdLayout className={`bg-contrast`}>
       <div className="relative flex flex-col">
         <div className="">
           <a href="#mainContent" className="sr-only">

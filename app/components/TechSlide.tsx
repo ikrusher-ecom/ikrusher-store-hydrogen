@@ -16,10 +16,12 @@ interface TechContentItem {
 
 interface TechSlideItem {
   id: string;
-  imgUrl: string;
+  imgUrl?: string;
+  bgImgUrl?: string;
   mainTitle: string;
   subTitle: string;
   content: TechContentItem[];
+  customStyle?: CSSProperties;
 }
 
 interface TechSlideProps {
@@ -131,13 +133,15 @@ export function TechSlide({slideData, titleData}: TechSlideProps): JSX.Element {
   };
 
   return (
-    <div className={`relative mb-20`}>
+    <div
+      className={`relative mb-20 lg:mb-40 lg:max-w-screen-2xl lg:ml-auto lg:mr-0`}
+    >
       <TitleDiv
         subTitle={titleData.subTitle}
         mainTitle={titleData.mainTitle}
         description={titleData.description}
       />
-      <div className={`overflow-hidden`}>
+      <div className={`overflow-hidden lg:hidden block`}>
         <Flex
           gap="middle"
           className={`py-2 pl-1 pr-4 flex-slide ml-7`}
@@ -162,21 +166,37 @@ export function TechSlide({slideData, titleData}: TechSlideProps): JSX.Element {
                   flexShrink: 0,
                   aspectRatio: '3/4',
                   boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+                  ...(item.bgImgUrl
+                    ? {
+                        backgroundImage: `url(${item.bgImgUrl})`,
+                        backgroundPosition: '85%',
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                      }
+                    : {}),
+                  ...item.customStyle,
                 }}
               >
                 <Flex
                   vertical
                   className={`h-full w-full justify-between text-center items-center`}
+                  style={{...item.customStyle}}
                 >
-                  <div>
-                    <Title level={4}>{item.mainTitle}</Title>
-                    <Paragraph>{item.subTitle}</Paragraph>
+                  <div style={{...item.customStyle}}>
+                    <Title style={{...item.customStyle}} level={4}>
+                      {item.mainTitle}
+                    </Title>
+                    <Paragraph style={{...item.customStyle}}>
+                      {item.subTitle}
+                    </Paragraph>
                   </div>
-                  <img
-                    src={item.imgUrl}
-                    alt={item.mainTitle}
-                    className={`h-56 w-auto`}
-                  />
+                  {item.imgUrl && (
+                    <img
+                      src={item.imgUrl}
+                      alt={item.mainTitle}
+                      className={`h-56 w-auto`}
+                    />
+                  )}
                 </Flex>
                 <Button
                   onClick={() => showModal(item.id)}
@@ -220,11 +240,16 @@ export function TechSlide({slideData, titleData}: TechSlideProps): JSX.Element {
                               {content.description}
                             </Paragraph>
                           </Flex>
-                          <img
-                            src={content.image}
-                            alt={content.title}
-                            className={`rounded-b-2xl`}
-                          />
+                          <Flex
+                            vertical
+                            className={`justify-center items-center pb-10`}
+                          >
+                            <img
+                              src={content.image}
+                              alt={content.title}
+                              className={`rounded-b-2xl`}
+                            />
+                          </Flex>
                         </div>
                       ))}
                     </div>
@@ -235,16 +260,132 @@ export function TechSlide({slideData, titleData}: TechSlideProps): JSX.Element {
           })}
         </Flex>
       </div>
+      <div className={`overflow-hidden hidden lg:block`}>
+        <Flex
+          gap="middle"
+          className={`py-2 pl-1 pr-4 flex-slide ml-7`}
+          style={{
+            transform: `translateX(calc(-${currentIndex * 25}% - ${
+              currentIndex * 0
+            }rem))`,
+            transition: 'transform 0.7s ease-in-out',
+          }}
+          // onTouchStart={onTouchStart}
+          // onTouchMove={onTouchMove}
+          // onTouchEnd={onTouchEnd}
+        >
+          {slideData.map((item) => (
+            <Flex
+              vertical
+              key={item.id}
+              className={`m-0 relative flex-none w-1/4 h-full object-cover object-center rounded-2xl bg-lightGreyColor pt-9 pb-20 px-4`}
+              style={{
+                flexShrink: 0,
+                aspectRatio: '3/4',
+                boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+                ...(item.bgImgUrl
+                  ? {
+                      backgroundImage: `url(${item.bgImgUrl})`,
+                      backgroundPosition: '85%',
+                      backgroundSize: 'cover',
+                      backgroundRepeat: 'no-repeat',
+                    }
+                  : {}),
+                ...item.customStyle,
+              }}
+            >
+              <Flex
+                vertical
+                className={`h-full w-full justify-between text-center items-center`}
+                style={{...item.customStyle}}
+              >
+                <div style={{...item.customStyle}}>
+                  <Title style={{...item.customStyle}} level={4}>
+                    {item.mainTitle}
+                  </Title>
+                  <Paragraph style={{...item.customStyle}}>
+                    {item.subTitle}
+                  </Paragraph>
+                </div>
+                {item.imgUrl && (
+                  <img
+                    src={item.imgUrl}
+                    alt={item.mainTitle}
+                    className={`h-56 w-auto`}
+                  />
+                )}
+              </Flex>
+              <Button
+                onClick={() => showModal(item.id)}
+                type="link"
+                className={`absolute right-4 bottom-9`}
+              >
+                <img src={plusButtonIcon} alt="iKrusher" />
+              </Button>
+              <Modal
+                open={isOpen && openTech === item.id}
+                onOk={handleCloseModal}
+                onCancel={handleCloseModal}
+                footer={null}
+                centered
+                className={`bg-contrast rounded-2xl px-7 py-12 techSlideModal`}
+                style={{
+                  boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+                  padding: '48px 28px',
+                }}
+              >
+                {openTech === item.id && (
+                  <div>
+                    <Text className={`text-greyColor`}>
+                      {titleData.subTitle}
+                    </Text>
+                    <Title
+                      level={2}
+                      className={`mt-3`}
+                      style={{marginTop: '12px'}}
+                    >
+                      {item.mainTitle}
+                    </Title>
+                    {item.content.map((content) => (
+                      <div
+                        key={content.title}
+                        className={`mt-8 rounded-2xl bg-lightGreyColor`}
+                      >
+                        <Flex vertical className={`pt-6 px-6 pb-10 gap-y-3`}>
+                          <Title level={4}>{content.title}</Title>
+                          <Paragraph className={`text-greyColor`}>
+                            {content.description}
+                          </Paragraph>
+                        </Flex>
+                        <Flex
+                          vertical
+                          className={`justify-center items-center pb-10`}
+                        >
+                          <img
+                            src={content.image}
+                            alt={content.title}
+                            className={`rounded-b-2xl`}
+                          />
+                        </Flex>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </Modal>
+            </Flex>
+          ))}
+        </Flex>
+      </div>
       <button
         onClick={handlePrev}
-        className="absolute"
+        className="absolute lg:mr-40"
         style={{right: '90px', top: 'calc(100% + 20px)'}}
       >
         <img src={arrowLeftIcon} alt="iKrusher" />
       </button>
       <button
         onClick={handleNext}
-        className="absolute"
+        className="absolute lg:mr-40"
         style={{right: '30px', top: 'calc(100% + 20px)'}}
       >
         <img src={arrowRightIcon} alt="iKrusher" />

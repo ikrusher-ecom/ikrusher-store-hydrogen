@@ -43,7 +43,7 @@ import {ProductComparison} from '~/components/ProductComparison';
 import {productSpecs} from '~/data/products';
 import {ImageTicker} from '~/components/ImageTicker';
 import {BlogSlide} from '~/components/BlogSlide';
-import { FaqAccordion } from '~/components/FaqAccordion';
+import {FaqAccordion} from '~/components/FaqAccordion';
 
 const {Title} = Typography;
 
@@ -202,10 +202,12 @@ export default function Collection() {
 
   interface TechSlideItem {
     id: string;
-    imgUrl: string;
+    imgUrl?: string;
+    bgImgUrl?: string;
     mainTitle: string;
     subTitle: string;
     content: TechContentItem[];
+    customStyle?: CSSProperties;
   }
 
   const aioTitle = {
@@ -231,21 +233,21 @@ export default function Collection() {
           description:
             'Unlock the full potential of your vape with ceramic core technology. Crafted for precision and purity, ceramic cores provide consistent heat, preserve authentic flavors.',
           image:
-            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/8d6f3e0d4192fa5cb8c460e4c6d0e294.jpg?v=1738794134',
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/VATRA_1.194_11.png?v=1739489166',
         },
         {
           title: 'Felt Fabric Material',
           description:
             'The felt acts as an efficient wick, ensuring that your concentrate is thoroughly absorbed and vaporized.',
           image:
-            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/80e8dd22528f2c63283b986817aee1a9.jpg?v=1738794134',
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/VATRA_1.194_11.png?v=1739489166',
         },
         {
           title: 'Heating Element',
           description:
             'Engineered for superior flavor, even heat distribution, and long-lasting durability, our ceramic technology minimizes dry hits, reduces.',
           image:
-            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/8d6f3e0d4192fa5cb8c460e4c6d0e294_1.jpg?v=1738794134',
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/VATRA_1.194_11.png?v=1739489166',
         },
       ],
     },
@@ -261,34 +263,76 @@ export default function Collection() {
           description:
             'With its angular, robust design, this offers enhanced stability and durability, making it perfect for daily use.',
           image:
-            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/8d6f3e0d4192fa5cb8c460e4c6d0e294.jpg?v=1738794134',
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/VATRA_1.194_11.png?v=1739489166',
         },
         {
           title: 'Superior Flavor Quality',
           description:
             'Experience pure, untainted vapor with a postless design that reduces metal contact, ensuring your cannabis.',
           image:
-            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/80e8dd22528f2c63283b986817aee1a9.jpg?v=1738794134',
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/VATRA_1.194_11.png?v=1739489166',
         },
         {
           title: 'Zero Contact',
           description: `The concentrates aren't in direct contact with metal posts compare to traditional designs, this reduces the risk of a metallic taste.`,
           image:
-            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/8d6f3e0d4192fa5cb8c460e4c6d0e294_1.jpg?v=1738794134',
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/VATRA_1.194_11.png?v=1739489166',
         },
         {
           title: 'Consistent Heating Distribution',
           description:
             'iKonic Flux prevents hot spots and ensuring that your concentrates are fully vaporized.',
           image:
-            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/8d6f3e0d4192fa5cb8c460e4c6d0e294.jpg?v=1738794134',
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/VATRA_1.194_11.png?v=1739489166',
         },
         {
           title: 'Efficient Airflow & Vapor Production',
           description:
             'Allows for smoother, more direct airflow, resulting in larger, more consistent clouds of vapor. Say goodbye to harsh hits and hello to seamless, enjoyable draws with every session.',
           image:
-            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/8d6f3e0d4192fa5cb8c460e4c6d0e294_1.jpg?v=1738794134',
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/VATRA_1.194_11.png?v=1739489166',
+        },
+      ],
+    },
+    {
+      id: 'tech-omni-connect',
+      bgImgUrl:
+        'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/c0dab33c82170ce0642ed777474826c1.png?v=1739478516',
+      mainTitle: 'OMNI Connect',
+      subTitle: 'Smooth Hits. Pure Power.',
+      content: [
+        {
+          title: 'Dual NFC',
+          description:
+            'Ceramic Core Unlock the full potential of your vape with ceramic core technology.',
+          image:
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Rectangle_364_1.png?v=1739488357',
+        },
+        {
+          title: 'Tempature Control',
+          description:
+            'Ceramic Core Unlock the full potential of your vape with ceramic core technology.',
+          image:
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Rectangle_364.png?v=1739488357',
+        },
+      ],
+      customStyle: {
+        color: '#fff',
+      },
+    },
+    {
+      id: 'tech-dual-airflow',
+      imgUrl:
+        'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/faffb1cf39c7f46a4ce7c82f7d804c5b.jpg?v=1739478571',
+      mainTitle: 'Dual Airflow',
+      subTitle: 'No Clogs, Just Power',
+      content: [
+        {
+          title: 'Prevents Clogging and Build-Up',
+          description:
+            'This innovative feature uses two independent airflow channels, ensuring smooth, uninterrupted airflow and preventing the build-up of resin, oils.',
+          image:
+            'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/VATRA_1.194_11.png?v=1739489166',
         },
       ],
     },
@@ -370,7 +414,7 @@ export default function Collection() {
       {/* All in one */}
       {collection.handle === 'disposable-vapes' && (
         <>
-          <div className={`mb-20`}>
+          <div className={`mb-20 lg:mb-40`}>
             <HeroBanner
               handle={collection.handle}
               title={
@@ -380,12 +424,16 @@ export default function Collection() {
                   style={{color: 'rgb(var(--color-contrast))'}}
                 >
                   <span className={`text-blueColor`}>All-in-One</span>
-                  <br /> Hardware
+                  <br />
+                  Disposable Vapes
                 </Title>
               }
-              description={`Premium all-in-one disposable vape hardware for your business needs.`}
+              description={`With the OMNI consumer experience, end users can access customizable.`}
               image={
                 'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/fba26fbd3740796227522c4f7007912b.png?v=1738696050'
+              }
+              desktopImage={
+                'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/b1285071ce337ff6b5a1c62c818120b8_1.png?v=1739472341'
               }
             />
           </div>
@@ -394,7 +442,7 @@ export default function Collection() {
             subTitle="The Fresh Line-Up"
             mainTitle={
               <span>
-                New All-in-One
+                New <span className={`text-themeColor`}>All-in-One</span>
                 <br />
                 Vape Hardware
               </span>
@@ -416,11 +464,17 @@ export default function Collection() {
             productItems={productComparisonItems}
             titleData={{
               subTitle: 'Comparison Chart',
-              mainTitle: 'Find Your Perfect AIO Device',
+              mainTitle: (
+                <span>
+                  Find Your Perfect
+                  <br />
+                  AIO Device
+                </span>
+              ),
               description: (
                 <span className={`text-greyColor`}>
                   For any assistance, speak with
-                  <br />
+                  <br className={`lg:hidden`} />{' '}
                   <a className={`text-themeColor`} href="/contact">
                     our specialist
                   </a>
