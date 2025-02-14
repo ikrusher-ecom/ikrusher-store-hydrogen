@@ -491,7 +491,7 @@ export default function Collection() {
       <FaqAccordion />
 
       {blogData && (
-        <div className={`mb-28`}>
+        <div className={`mb-20 pb-20 lg:pb-0 lg:mb-40`}>
           <Suspense>
             <Await resolve={blogData}>
               {(response) => {

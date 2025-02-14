@@ -420,7 +420,7 @@ export default function Homepage() {
       </div>
 
       {blogData && (
-        <div className={`mb-20 lg:mb-40`}>
+        <div className={`mb-20 pb-20 lg:pb-0 lg:mb-40`}>
           <Suspense>
             <Await resolve={blogData}>
               {(response) => {
