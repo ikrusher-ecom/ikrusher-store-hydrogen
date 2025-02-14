@@ -138,7 +138,7 @@ shop-pay-button {
   display: none;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
   .ant-carousel .slick-slide img.hidden.md\:block {
     display: block;
   }
@@ -563,23 +563,23 @@ ul.ant-menu-sub li.ant-menu-item {
   padding-top: 16px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   @keyframes ticker-kf {
     0% {
       transform: translateX(0);
     }
-  
+
     100% {
       /* 10rem for each logo x 6 logos total = -60rem */
       transform: translateX(calc(-120rem + 100vw));
     }
   }
-  
+
   @keyframes ticker-rev {
     0% {
       transform: translateX(calc(-120rem + 100vw));
     }
-  
+
     100% {
       /* 10rem for each logo x 6 logos total = -60rem */
       transform: translateX(0);
@@ -587,7 +587,7 @@ ul.ant-menu-sub li.ant-menu-item {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .mobile-border {
     border-bottom: 2px solid #fff;
   }
@@ -602,7 +602,7 @@ ul.ant-menu-sub li.ant-menu-item {
     border-radius: 100%;
   }
 
-  footer section button > h4 {
+  footer section button>h4 {
     max-width: 100% !important;
   }
 }
@@ -639,7 +639,8 @@ li.ant-menu-item::after {
 .ant-menu-submenu.ant-menu-submenu-popup.ant-menu.products ul.ant-menu-sub {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Ensure two distinct columns */
+  justify-content: space-between;
+  /* Ensure two distinct columns */
   align-items: flex-start;
   /* height: calc(248px + 10.75rem); */
   padding-bottom: 0 !important;
@@ -657,7 +658,8 @@ li.ant-menu-item::after {
 
 /* Group first 5 items into the left column */
 .ant-menu-submenu.ant-menu-submenu-popup.ant-menu.products ul .ant-menu-item:nth-child(-n+5) {
-  width: 30%; /* Left column */
+  width: 30%;
+  /* Left column */
 }
 
 .ant-menu-submenu.ant-menu-submenu-popup.ant-menu.products ul .ant-menu-item:nth-child(1)::before {
@@ -671,8 +673,10 @@ li.ant-menu-item::after {
 
 /* Group last 2 items into the right column */
 .ant-menu-submenu.ant-menu-submenu-popup.ant-menu.products ul .ant-menu-item:nth-last-child(-n+2) {
-  width: 30%; /* Right column */
-  margin-left: 30% !important; /* Push to right */
+  width: 30%;
+  /* Right column */
+  margin-left: 30% !important;
+  /* Push to right */
   align-self: flex-start;
 }
 
@@ -693,26 +697,27 @@ li.ant-menu-item::after {
 .ant-menu-submenu.ant-menu-submenu-popup.ant-menu.products ul.ant-menu-sub::after {
   content: "";
   display: block;
-  width: 30%; /* Match left column width */
+  width: 30%;
+  /* Match left column width */
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
   @keyframes ticker-kf {
     0% {
       transform: translateX(0);
     }
-  
+
     100% {
       /* 10rem for each logo x 6 logos total = -60rem */
       transform: translateX(calc(-120rem));
     }
   }
-  
+
   @keyframes ticker-rev {
     0% {
       transform: translateX(calc(-120rem));
     }
-  
+
     100% {
       /* 10rem for each logo x 6 logos total = -60rem */
       transform: translateX(0);
@@ -753,7 +758,7 @@ li.ant-menu-item::after {
   }
 }
 
-@media (min-width: 769px) and (max-width: 1279px) {
+@media (min-width: 768px) and (max-width: 1279px) {
   #mainContent {
     top: 96px;
   }
@@ -801,7 +806,7 @@ li.ant-menu-item::after {
   }
 }
 
-@media (min-width: 1280px) and (max-width: 1536px) {
+@media (min-width: 1280px) and (max-width: 1535px) {
   /* .dropdownMenuContent {
     left: calc(-6rem - 100px) !important;
     top: 1.5rem !important;
@@ -823,14 +828,18 @@ li.ant-menu-item::after {
   }
 }
 
-@media (min-width: 1537px) {
+@media (min-width: 1536px) {
   .headerMenuText {
     font-size: 1.25rem !important;
     line-height: 1.75rem;
   }
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1024px) {
+  .footerGrid {
+    grid-template-columns: 28% 18% 18% 18% 18% !important;
+  }
+
   .techSlideModal {
     width: 60% !important;
     top: 100px !important;
@@ -840,7 +849,7 @@ li.ant-menu-item::after {
     display: none;
   }
 
-  .ikraftDesktopSection > div {
+  .ikraftDesktopSection>div {
     width: 50%;
     display: inline-block;
     margin-bottom: 0 !important;

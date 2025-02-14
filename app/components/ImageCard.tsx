@@ -60,7 +60,7 @@ export function ImageCard({imageCardData}: ImageCardProps): JSX.Element {
             </Paragraph>
             <a
               href={imageCardData.button.link}
-              className={`bg-yellowColor text-black border-0 rounded-3xl py-2 px-4 font-semibold my-8`}
+              className={`bg-yellowColor text-black border-0 rounded-3xl py-2 px-4 font-semibold my-8 no-underline hover:no-underline`}
             >
               {imageCardData.button.text}
             </a>

@@ -80,7 +80,7 @@ export function PageLayout({children, layout}: LayoutProps) {
         <main
           role="main"
           id="mainContent"
-          className={`flex-grow relative w-screen top-0`}
+          className={`flex-grow relative w-screen lg:top-0 top-16`}
         >
           {children}
           <div
@@ -267,9 +267,13 @@ function MobileHeader({
       className={`fixed bg-themeColor text-contrast flex xl:hidden items-center h-nav backdrop-blur-lg z-40 top-0 left-0 justify-between w-screen leading-none gap-4 px-4 xl:px-8`}
     >
       <div className="flex items-center justify-between w-full gap-4">
-        <Link className="flex items-center h-full" to="/">
+        <Link
+          className="flex items-center h-full text-transparent"
+          to="/"
+          style={{color: 'transparent'}}
+        >
           <img src={logoIcon} alt="iKrusher icon" />
-          <Heading className={`text-transparent w-0`} as="h1">
+          <Heading className={`text-transparent w-0 no-underline`} as="h1">
             {title}
           </Heading>
         </Link>
@@ -336,13 +340,13 @@ function DesktopHeader({
     >
       <div className="flex gap-12 2xl:gap-20 justify-center items-center">
         <Link
-          className="font-bold flex flex-col justify-center items-center no-underline hover:no-underline h-full"
+          className="font-bold flex flex-col justify-center items-center no-underline hover:no-underline h-full text-transparent"
           to="/"
           prefetch="intent"
-          style={{width: '100px'}}
+          style={{width: '100px', color: 'transparent'}}
         >
           <img src={logoIcon} alt="iKrusher icon" className={`w-full h-auto`} />
-          <Heading className={`text-transparent w-0 h-0`} as="h1">
+          <Heading className={`text-transparent w-0 h-0 no-underline`} as="h1">
             {title}
           </Heading>
         </Link>
@@ -514,11 +518,10 @@ function Footer({menu}: {menu?: EnhancedMenu}) {
         style={{padding: '0', gap: '0'}}
       >
         <div
-          className={`border-none mx-auto grid min-h-[25rem] items-start grid-flow-row w-full px-0 pt-16 pb-0 grid-cols-1 lg:grid-cols-5 bg-primary text-contrast overflow-hidden relative max-w-screen-xl`}
+          className={`footerGrid border-none mx-auto grid min-h-[25rem] items-start grid-flow-row w-full px-0 lg:pt-16 pt-8 pb-0 grid-cols-1 bg-primary text-contrast overflow-hidden relative max-w-screen-xl`}
           style={{
             paddingLeft: '0',
             paddingRight: '0',
-            gridTemplateColumns: '28% 18% 18% 18% 18%',
           }}
         >
           <FooterLocations />
@@ -529,7 +532,9 @@ function Footer({menu}: {menu?: EnhancedMenu}) {
           </div>
           {/* <CountrySelector /> */}
         </div>
-        <div className={`bg-primary text-contrast z-10 py-8 -mt-1`}>
+        <div
+          className={`bg-primary text-contrast z-10 py-8 -mt-1 hidden lg:block`}
+        >
           <FooterSocialPayment />
         </div>
       </Section>
@@ -565,7 +570,7 @@ function FooterLink({item}: {item: ChildEnhancedMenuItem}) {
 
 function FooterMenu({menu}: {menu?: EnhancedMenu}) {
   const styles = {
-    section: 'grid gap-4 px-5 w-full mobile-border',
+    section: 'grid gap-4 px-5 pt-5 w-full mobile-border',
     nav: 'grid gap-2 pb-5',
   };
 

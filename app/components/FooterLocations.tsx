@@ -291,7 +291,7 @@ export default function FooterLocations() {
 
   return (
     <div
-      className={`flex flex-col pt-4 px-5 pb-8 lg:pt-0 gap-5 mobile-border footerLocations`}
+      className={`flex flex-col pt-4 px-5 pb-8 lg:pt-5 gap-5 mobile-border footerLocations`}
     >
       <h4 className={`font-semibold text-[22px] m-0`}>
         iKrusher Location Near Me
