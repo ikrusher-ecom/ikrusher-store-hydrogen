@@ -744,7 +744,7 @@ li.ant-menu-item::after {
   .ant-carousel .mainCarousel .slick-dots li button:hover,
   .ant-carousel .mainCarousel .slick-dots li button:focus,
   .ant-carousel .mainCarousel .slick-dots li.slick-active button {
-    color: rgb(var(--color-theme));
+    color: rgb(var(--color-theme)) !important;
   }
 
   .ant-carousel .mainCarousel .slick-dots li {
