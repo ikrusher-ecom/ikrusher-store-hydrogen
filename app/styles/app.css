@@ -701,6 +701,10 @@ li.ant-menu-item::after {
   /* Match left column width */
 }
 
+.tankCapacityValue span:not(:last-child)::after {
+  content: ' | ';
+}
+
 @media (min-width: 768px) {
   @keyframes ticker-kf {
     0% {

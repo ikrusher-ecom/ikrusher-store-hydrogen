@@ -154,7 +154,8 @@ export function CarouselMain(): JSX.Element {
             <img
               src={item.mobileImgUrl}
               alt="iKrusher"
-              className={`block md:hidden`}
+              className={`block md:hidden object-cover`}
+              style={{aspectRatio: '425/525'}}
             />
             <div
               className={`flex flex-col absolute lg:top-1/2 bottom-8 top-auto lg:bottom-auto gap-y-4 heroDesktopText lg:items-start lg:text-left items-center text-center px-8 lg:px-0`}

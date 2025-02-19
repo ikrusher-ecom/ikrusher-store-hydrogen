@@ -349,11 +349,11 @@ export default function Collection() {
     name: string;
     id: string;
     type: string;
+    batteryCapacity?: string;
     heatingElement?: string;
     centerPost?: string;
     maxFillVolume?: string;
     activation?: string;
-    batteryCapacity?: string;
     outputVoltage?: string;
     resistance?: string;
     aperture?: string;

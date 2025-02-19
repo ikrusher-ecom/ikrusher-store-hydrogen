@@ -1,5 +1,4 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable react/no-array-index-key */
 import {useEffect, useState} from 'react';
 
 interface ImageTickerProps {
@@ -24,33 +23,25 @@ export function ImageTicker({imageUrls}: ImageTickerProps) {
           imageUrls
             .slice(0, Math.ceil(imageUrls.length / 2))
             .map((image, i) => {
-              return (
-                <img key={`ticker-mobile-1-${i}`} src={image} alt="iKrusher" />
-              );
+              return <img key={image} src={image} alt="iKrusher" />;
             })}
       </div>
       <div className={`ticker-div-rev flex -mx-4 lg:hidden`}>
         {imageUrls.length > 0 &&
           imageUrls.slice(Math.ceil(imageUrls.length / 2)).map((image, i) => {
-            return (
-              <img key={`ticker-mobile-2-${i}`} src={image} alt="iKrusher" />
-            );
+            return <img key={image} src={image} alt="iKrusher" />;
           })}
       </div>
       <div className={`ticker-div lg:flex hidden gap-x-4`}>
         {imageUrls.length > 0 &&
           imageUrls.map((image, i) => {
-            return (
-              <img key={`ticker-desktop-1-${i}`} src={image} alt="iKrusher" />
-            );
+            return <img key={image} src={image} alt="iKrusher" />;
           })}
       </div>
       <div className={`ticker-div-rev lg:flex hidden gap-x-4`}>
         {imageUrls.length > 0 &&
-          imageUrls.reverse().map((image, i) => {
-            return (
-              <img key={`ticker-desktop-2-${i}`} src={image} alt="iKrusher" />
-            );
+          [...imageUrls].reverse().map((image, i) => {
+            return <img key={image} src={image} alt="iKrusher" />;
           })}
       </div>
     </div>

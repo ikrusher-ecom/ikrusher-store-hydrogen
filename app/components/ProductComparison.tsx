@@ -3,6 +3,18 @@ import {ConfigProvider, Flex, Select, Typography} from 'antd';
 
 import {TitleDiv} from '~/components/TitleDiv';
 import whiteArrow from '~/assets/white-arrow.svg';
+import oilType from '~/assets/oil-type.svg';
+import ikonicFlux from '~/assets/ikonic-flux.svg';
+import ikonicArc from '~/assets/ikonic-arc.svg';
+import buttonActivation from '~/assets/button-activation.svg';
+import inhaleActivation from '~/assets/inhale-activation.svg';
+import omniTwo from '~/assets/omni-2.svg';
+import tankCapacity from '~/assets/tank-capacity.svg';
+import mouthpiece from '~/assets/mouthpiece.png';
+import powerCurve from '~/assets/power-curve.svg';
+import resistance from '~/assets/resistance.svg';
+import aperture from '~/assets/aperture.svg';
+import usbC from '~/assets/usb-c.svg';
 
 const {Text, Link, Paragraph, Title} = Typography;
 
@@ -64,7 +76,7 @@ export function ProductComparison({
         customClass={`bg-lightGreyColor pt-12 lg:w-full lg:min-w-max lg:max-w-screen-lg lg:mx-auto lg:pr-16 lg:flex lg:flex-col lg:justify-center lg:h-full lg:gap-y-4 lg:text-center lg:items-center`}
       />
       <Flex
-        className={`px-7 pb-12 bg-lightGreyColor gap-x-12 lg:w-full lg:min-w-max lg:max-w-screen-lg mx-auto lg:justify-center`}
+        className={`w-full px-7 pb-12 bg-lightGreyColor gap-x-12 lg:w-full lg:min-w-max lg:max-w-screen-lg mx-auto lg:justify-center`}
       >
         <Flex vertical className={`w-1/2 lg:w-1/4 lg:items-center`}>
           <ConfigProvider
@@ -89,6 +101,7 @@ export function ProductComparison({
             }}
           >
             <Select
+              className={`w-full`}
               placeholder="Select Product"
               placement="bottomLeft"
               listHeight={160}
@@ -133,35 +146,209 @@ export function ProductComparison({
               <Title level={5}>{selectedProductLeft?.name}</Title>
             </Flex>
             {selectedProductLeft &&
-              Object.entries(selectedProductLeft.specs).map(([key, value]) => (
-                <Flex vertical key={key}>
-                  {/* {key === 'type' && <Text>{value}</Text>} */}
-                  {key === 'batteryCapacity' && (
-                    <Flex vertical className={`items-center`}>
-                      <Flex className={`items-end gap-x-1`}>
-                        <Text
-                          strong
-                          style={{fontSize: '32px', lineHeight: '32px'}}
-                        >
-                          {value.split(' ')[0]}
-                        </Text>
-                        <Text strong>{value.split(' ')[1]}</Text>
-                      </Flex>
-                      <Text>Battery Capacity</Text>
+              Object.entries(selectedProductLeft.specs).map(([key, value]) => {
+                if (value) {
+                  return (
+                    <Flex vertical key={key} className={`gap-y-3`}>
+                      {/* {key === 'type' && <Text>{value}</Text>} */}
+                      {key === 'batteryCapacity' && (
+                        <Flex vertical className={`items-center`}>
+                          <Flex className={`items-end gap-x-1`}>
+                            <Text
+                              strong
+                              style={{fontSize: '32px', lineHeight: '32px'}}
+                            >
+                              {value.split(' ')[0]}
+                            </Text>
+                            <Text strong>{value.split(' ')[1]}</Text>
+                          </Flex>
+                          <Text>Battery Capacity</Text>
+                        </Flex>
+                      )}
+                      {key === 'recommendedOilType' && (
+                        <>
+                          <img
+                            src={oilType}
+                            alt="iKrusher"
+                            width="60"
+                            className={`mx-auto`}
+                          />
+                          {value.split('; ').map((oilItem: string) => (
+                            <Text className={`leading-none`} key={oilItem}>
+                              {oilItem}
+                            </Text>
+                          ))}
+                        </>
+                      )}
+                      {key === 'heatingElement' && (
+                        <>
+                          <img
+                            src={
+                              value === 'iKonic Flux' ? ikonicFlux : ikonicArc
+                            }
+                            alt="iKrusher"
+                            width="45"
+                            className={`mx-auto`}
+                          />
+                          <Text className={`leading-none`}>{value}</Text>
+                          <Text className={`leading-none`}>
+                            {value === 'iKonic Flux' && 'Postless'}
+                            {''}
+                            {value === 'iKonic Arc' && 'Center Post'}
+                          </Text>
+                        </>
+                      )}
+                      {key === 'activation' && (
+                        <>
+                          <img
+                            src={
+                              value === 'Button'
+                                ? buttonActivation
+                                : inhaleActivation
+                            }
+                            alt="iKrusher"
+                            width="45"
+                            className={`mx-auto`}
+                          />
+                          <Text className={`leading-none`}>
+                            Activation {value}
+                          </Text>
+                        </>
+                      )}
+                      {key === 'omniCompatibility' && (
+                        <>
+                          <img
+                            src={omniTwo}
+                            alt="iKrusher"
+                            width="45"
+                            className={`mx-auto`}
+                          />
+                          <Text className={`leading-none`}>
+                            OMNI Connect {value}
+                          </Text>
+                        </>
+                      )}
+                      {key === 'maxFillVolume' && (
+                        <>
+                          <img
+                            src={tankCapacity}
+                            alt="iKrusher"
+                            width="45"
+                            className={`mx-auto`}
+                          />
+                          <Text className={`leading-none`}>Tank Capacity</Text>
+                          <Text className={`leading-none tankCapacityValue`}>
+                            {value.split(' / ').map((tankItem: string) => (
+                              <span key={tankItem}>{tankItem}</span>
+                            ))}
+                          </Text>
+                        </>
+                      )}
+                      {key === 'centerPost' && (
+                        <>
+                          <Text className={`leading-none`}>Center Post</Text>
+                          <Text className={`leading-none`}>{value}</Text>
+                        </>
+                      )}
+                      {key === 'mouthpiece' && (
+                        <>
+                          <img
+                            src={mouthpiece}
+                            alt="iKrusher"
+                            width="45"
+                            className={`mx-auto`}
+                          />
+                          <Text className={`leading-none`}>
+                            Mouthpiece made with
+                          </Text>
+                          <Text className={`leading-none`}>{value}</Text>
+                        </>
+                      )}
+                      {key === 'outputPower' && (
+                        <>
+                          <img
+                            src={powerCurve}
+                            alt="iKrusher"
+                            width="45"
+                            className={`mx-auto`}
+                          />
+                          <Text className={`leading-none`}>
+                            Default Power Curve
+                          </Text>
+                          {value.split('; ').map((powerItem: string) => (
+                            <Text className={`leading-none`} key={powerItem}>
+                              {powerItem}
+                            </Text>
+                          ))}
+                        </>
+                      )}
+                      {key === 'outputVoltage' && (
+                        <>
+                          <Text className={`leading-none`}>Output Voltage</Text>
+                          <Text className={`leading-none`}>{value}</Text>
+                        </>
+                      )}
+                      {key === 'resistance' && (
+                        <>
+                          <img
+                            src={resistance}
+                            alt="iKrusher"
+                            width="45"
+                            className={`mx-auto`}
+                          />
+                          <Text className={`leading-none`}>Resistance</Text>
+                          <Text className={`leading-none`}>{value}</Text>
+                        </>
+                      )}
+                      {key === 'aperture' && (
+                        <>
+                          <img
+                            src={aperture}
+                            alt="iKrusher"
+                            width="45"
+                            className={`mx-auto`}
+                          />
+                          <Text className={`leading-none`}>Aperture</Text>
+                          <Text className={`leading-none`}>{value}</Text>
+                        </>
+                      )}
+                      {key === 'chargePort' && (
+                        <>
+                          <img
+                            src={usbC}
+                            alt="iKrusher"
+                            width="45"
+                            className={`mx-auto`}
+                          />
+                          {value.split(' / ').map((chargeItem: string) => (
+                            <Text key={chargeItem} className={`leading-none`}>
+                              {chargeItem}
+                            </Text>
+                          ))}
+                        </>
+                      )}
+                      {key === 'tankMaterial' && (
+                        <>
+                          <Text className={`leading-none`}>Tank Material</Text>
+                          <Text className={`leading-none`}>{value}</Text>
+                        </>
+                      )}
+                      {key === 'dimensions' && (
+                        <>
+                          <Text className={`leading-none`}>Dimensions</Text>
+                          <Text className={`leading-none`}>{value}</Text>
+                        </>
+                      )}
+                      {key === 'shellMaterial' && (
+                        <>
+                          <Text className={`leading-none`}>Shell Material</Text>
+                          <Text className={`leading-none`}>{value}</Text>
+                        </>
+                      )}
                     </Flex>
-                  )}
-                  {key === 'heatingElement' && <Text>{value}</Text>}
-                  {key === 'centerPost' && <Text>{value}</Text>}
-                  {key === 'maxFillVolume' && <Text>{value}</Text>}
-                  {key === 'activation' && <Text>{value}</Text>}
-                  {key === 'outputVoltage' && <Text>{value}</Text>}
-                  {key === 'resistance' && <Text>{value}</Text>}
-                  {key === 'aperture' && <Text>{value}</Text>}
-                  {key === 'tankMaterial' && <Text>{value}</Text>}
-                  {key === 'chargePort' && <Text>{value}</Text>}
-                  {key === 'mouthpiece' && <Text>{value}</Text>}
-                </Flex>
-              ))}
+                  );
+                }
+              })}
           </Flex>
         </Flex>
         <Flex vertical className={`w-1/2 lg:w-1/4 lg:items-center`}>
@@ -187,6 +374,7 @@ export function ProductComparison({
             }}
           >
             <Select
+              className={`w-full`}
               placeholder="Select Product"
               placement="bottomLeft"
               listHeight={160}
@@ -255,6 +443,7 @@ export function ProductComparison({
             }}
           >
             <Select
+              className={`w-full`}
               placeholder="Select Product"
               placement="bottomLeft"
               listHeight={160}
@@ -323,6 +512,7 @@ export function ProductComparison({
             }}
           >
             <Select
+              className={`w-full`}
               placeholder="Select Product"
               placement="bottomLeft"
               listHeight={160}
