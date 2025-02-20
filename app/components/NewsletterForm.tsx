@@ -23,7 +23,7 @@ export const NewsLetterForm = forwardRef<HTMLDivElement, NewsLetterInputProps>(
     const {ok, errorMessage} = data || {};
 
     return (
-      <div ref={ref} {...rest} className={`w-full mt-2`}>
+      <div ref={ref} {...rest} className={`w-full mt-4`}>
         <Form
           method="POST"
           action="/api/customer"

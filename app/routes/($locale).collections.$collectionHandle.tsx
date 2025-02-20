@@ -208,6 +208,7 @@ export default function Collection() {
     subTitle: string;
     content: TechContentItem[];
     customStyle?: CSSProperties;
+    isDarkBg?: boolean;
   }
 
   const aioTitle = {
@@ -316,14 +317,12 @@ export default function Collection() {
             'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Rectangle_364.png?v=1739488357',
         },
       ],
-      customStyle: {
-        color: '#fff',
-      },
+      isDarkBg: true,
     },
     {
       id: 'tech-dual-airflow',
       imgUrl:
-        'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/faffb1cf39c7f46a4ce7c82f7d804c5b.jpg?v=1739478571',
+        'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/VATRA_1.194_2_1.png?v=1740005242',
       mainTitle: 'Dual Airflow',
       subTitle: 'No Clogs, Just Power',
       content: [

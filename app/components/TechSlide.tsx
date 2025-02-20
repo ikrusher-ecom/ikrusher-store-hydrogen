@@ -1,4 +1,4 @@
-import {CSSProperties, useState} from 'react';
+import {CSSProperties, useEffect, useState} from 'react';
 import {Button, Flex, Typography, Modal, Image} from 'antd';
 
 import {TitleDiv} from '~/components/TitleDiv';
@@ -22,6 +22,7 @@ interface TechSlideItem {
   subTitle: string;
   content: TechContentItem[];
   customStyle?: CSSProperties;
+  isDarkBg?: boolean;
 }
 
 interface TechSlideProps {
@@ -32,6 +33,31 @@ interface TechSlideProps {
     description?: string;
   };
 }
+
+const useWindowSize = () => {
+  const [windowSize, setWindowSize] = useState({
+    width: 0,
+    height: 0,
+  });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const handleResize = () => {
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      };
+
+      window.addEventListener('resize', handleResize);
+      handleResize(); // Set initial size
+
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
+
+  return windowSize;
+};
 
 export function TechSlide({slideData, titleData}: TechSlideProps): JSX.Element {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -119,6 +145,7 @@ export function TechSlide({slideData, titleData}: TechSlideProps): JSX.Element {
 
   const [isOpen, setIsOpen] = useState(false);
   const [openTech, setOpenTech] = useState<string>('');
+  const {width: windowWidth, height: windowHeight} = useWindowSize();
 
   const showModal = (id: string) => {
     setIsOpen(true);
@@ -174,19 +201,20 @@ export function TechSlide({slideData, titleData}: TechSlideProps): JSX.Element {
                         backgroundRepeat: 'no-repeat',
                       }
                     : {}),
-                  ...item.customStyle,
                 }}
               >
                 <Flex
                   vertical
                   className={`h-full w-full justify-between text-center items-center`}
-                  style={{...item.customStyle}}
                 >
-                  <div style={{...item.customStyle}}>
-                    <Title style={{...item.customStyle}} level={4}>
+                  <div>
+                    <Title
+                      style={{color: item.isDarkBg ? '#fff' : '#000'}}
+                      level={4}
+                    >
                       {item.mainTitle}
                     </Title>
-                    <Paragraph style={{...item.customStyle}}>
+                    <Paragraph style={{color: item.isDarkBg ? '#fff' : '#000'}}>
                       {item.subTitle}
                     </Paragraph>
                   </div>
@@ -194,7 +222,10 @@ export function TechSlide({slideData, titleData}: TechSlideProps): JSX.Element {
                     <img
                       src={item.imgUrl}
                       alt={item.mainTitle}
-                      className={`h-56 w-auto`}
+                      className={`h-56 w-auto img-${item.mainTitle
+                        .toLowerCase()
+                        .split(' ')
+                        .join('-')}`}
                     />
                   )}
                 </Flex>
@@ -206,12 +237,12 @@ export function TechSlide({slideData, titleData}: TechSlideProps): JSX.Element {
                   <img src={plusButtonIcon} alt="iKrusher" />
                 </Button>
                 <Modal
-                  open={isOpen && openTech === item.id}
+                  open={isOpen && openTech === item.id && windowWidth < 1024}
                   onOk={handleCloseModal}
                   onCancel={handleCloseModal}
                   footer={null}
                   centered
-                  className={`bg-contrast rounded-2xl px-7 py-12 techSlideModal`}
+                  className={`bg-contrast rounded-2xl px-7 py-12 techSlideModal lg:hidden block`}
                   style={{
                     boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
                     padding: '48px 28px',
@@ -242,7 +273,7 @@ export function TechSlide({slideData, titleData}: TechSlideProps): JSX.Element {
                           </Flex>
                           <Flex
                             vertical
-                            className={`justify-center items-center pb-10`}
+                            className={`justify-center items-center pb-0`}
                           >
                             <img
                               src={content.image}
@@ -274,106 +305,143 @@ export function TechSlide({slideData, titleData}: TechSlideProps): JSX.Element {
           // onTouchMove={onTouchMove}
           // onTouchEnd={onTouchEnd}
         >
-          {slideData.map((item) => (
-            <Flex
-              vertical
-              key={item.id}
-              className={`m-0 relative flex-none w-1/4 h-full object-cover object-center rounded-2xl bg-lightGreyColor pt-9 pb-20 px-4`}
-              style={{
-                flexShrink: 0,
-                aspectRatio: '3/4',
-                boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
-                ...(item.bgImgUrl
-                  ? {
-                      backgroundImage: `url(${item.bgImgUrl})`,
-                      backgroundPosition: '85%',
-                      backgroundSize: 'cover',
-                      backgroundRepeat: 'no-repeat',
-                    }
-                  : {}),
-                ...item.customStyle,
-              }}
-            >
+          {slideData.map((item) => {
+            const itemLength = item.content.length;
+            return (
               <Flex
                 vertical
-                className={`h-full w-full justify-between text-center items-center`}
-                style={{...item.customStyle}}
-              >
-                <div style={{...item.customStyle}}>
-                  <Title style={{...item.customStyle}} level={4}>
-                    {item.mainTitle}
-                  </Title>
-                  <Paragraph style={{...item.customStyle}}>
-                    {item.subTitle}
-                  </Paragraph>
-                </div>
-                {item.imgUrl && (
-                  <img
-                    src={item.imgUrl}
-                    alt={item.mainTitle}
-                    className={`h-56 w-auto`}
-                  />
-                )}
-              </Flex>
-              <Button
-                onClick={() => showModal(item.id)}
-                type="link"
-                className={`absolute right-4 bottom-9`}
-              >
-                <img src={plusButtonIcon} alt="iKrusher" />
-              </Button>
-              <Modal
-                open={isOpen && openTech === item.id}
-                onOk={handleCloseModal}
-                onCancel={handleCloseModal}
-                footer={null}
-                centered
-                className={`bg-contrast rounded-2xl px-7 py-12 techSlideModal`}
+                key={item.id}
+                className={`m-0 relative flex-none w-1/4 h-full object-cover object-center rounded-2xl bg-lightGreyColor pt-9 pb-20 px-4`}
                 style={{
+                  flexShrink: 0,
+                  aspectRatio: '3/4',
                   boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
-                  padding: '48px 28px',
+                  ...(item.bgImgUrl
+                    ? {
+                        backgroundImage: `url(${item.bgImgUrl})`,
+                        backgroundPosition: '85%',
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                      }
+                    : {}),
+                  ...item.customStyle,
                 }}
               >
-                {openTech === item.id && (
+                <Flex
+                  vertical
+                  className={`h-full w-full justify-between text-center items-center`}
+                >
                   <div>
-                    <Text className={`text-greyColor`}>
-                      {titleData.subTitle}
-                    </Text>
                     <Title
-                      level={2}
-                      className={`mt-3`}
-                      style={{marginTop: '12px'}}
+                      style={{color: item.isDarkBg ? '#fff' : '#000'}}
+                      level={4}
                     >
                       {item.mainTitle}
                     </Title>
-                    {item.content.map((content) => (
-                      <div
-                        key={content.title}
-                        className={`mt-8 rounded-2xl bg-lightGreyColor`}
-                      >
-                        <Flex vertical className={`pt-6 px-6 pb-10 gap-y-3`}>
-                          <Title level={4}>{content.title}</Title>
-                          <Paragraph className={`text-greyColor`}>
-                            {content.description}
-                          </Paragraph>
-                        </Flex>
-                        <Flex
-                          vertical
-                          className={`justify-center items-center pb-10`}
-                        >
-                          <img
-                            src={content.image}
-                            alt={content.title}
-                            className={`rounded-b-2xl`}
-                          />
-                        </Flex>
-                      </div>
-                    ))}
+                    <Paragraph style={{color: item.isDarkBg ? '#fff' : '#000'}}>
+                      {item.subTitle}
+                    </Paragraph>
                   </div>
-                )}
-              </Modal>
-            </Flex>
-          ))}
+                  {item.imgUrl && (
+                    <img
+                      src={item.imgUrl}
+                      alt={item.mainTitle}
+                      className={`h-56 w-auto img-${item.mainTitle
+                        .toLowerCase()
+                        .split(' ')
+                        .join('-')}`}
+                    />
+                  )}
+                </Flex>
+                <Button
+                  onClick={() => showModal(item.id)}
+                  type="link"
+                  className={`absolute right-4 bottom-9`}
+                >
+                  <img src={plusButtonIcon} alt="iKrusher" />
+                </Button>
+                <Modal
+                  open={isOpen && openTech === item.id && windowWidth >= 1024}
+                  onOk={handleCloseModal}
+                  onCancel={handleCloseModal}
+                  footer={null}
+                  centered
+                  className={`bg-contrast rounded-2xl px-7 py-12 techSlideModal lg:block hidden`}
+                  style={{
+                    boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+                    padding: '48px 28px',
+                  }}
+                >
+                  {openTech === item.id && (
+                    <div>
+                      <Text
+                        className={`text-greyColor text-lg`}
+                        style={{fontSize: '1.125rem', lineHeight: '1'}}
+                      >
+                        {titleData.subTitle}
+                      </Text>
+                      <Title
+                        level={2}
+                        className={`mt-3 text-6xl`}
+                        style={{marginTop: '12px', fontSize: '3.75rem'}}
+                      >
+                        {item.mainTitle}
+                      </Title>
+                      <div
+                        className={`techContentGroup grid grid-cols-2 gap-4 mt-8`}
+                        style={{
+                          gridTemplateRows:
+                            itemLength === 1
+                              ? 'repeat(1, auto)'
+                              : itemLength === 2 || itemLength === 3
+                              ? 'repeat(2, auto)'
+                              : itemLength === 5
+                              ? 'repeat(4, auto)'
+                              : undefined,
+                        }}
+                      >
+                        {item.content.map((content, i) => (
+                          <div
+                            key={content.title}
+                            className={`techContent-total${itemLength}-id${i} rounded-2xl bg-lightGreyColor`}
+                          >
+                            <Flex
+                              vertical
+                              className={`pt-10 px-8 pb-16 gap-y-3`}
+                            >
+                              <Title
+                                className={`text-4xl`}
+                                level={4}
+                                style={{fontSize: '2.25rem', lineHeight: '1'}}
+                              >
+                                {content.title}
+                              </Title>
+                              <Paragraph
+                                className={`text-greyColor text-xl`}
+                                style={{fontSize: '1.25rem', lineHeight: '1'}}
+                              >
+                                {content.description}
+                              </Paragraph>
+                            </Flex>
+                            <Flex
+                              vertical
+                              className={`justify-center items-center pb-0`}
+                            >
+                              <img
+                                src={content.image}
+                                alt={content.title}
+                                className={`rounded-b-2xl`}
+                              />
+                            </Flex>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </Modal>
+              </Flex>
+            );
+          })}
         </Flex>
       </div>
       <button
