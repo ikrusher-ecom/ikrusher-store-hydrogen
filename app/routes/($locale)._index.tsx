@@ -166,11 +166,11 @@ interface SlideItem {
 
 const categorySlide: SlideItem[] = [
   {
-    id: 'slide-new-arrival',
+    id: 'slide-new-arrival-1',
     imgUrl:
-      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Rectangle_306_a43b71a6-d056-48ef-9a62-ff85bc0d10b0.png?v=1740087499',
     mobileImgUrl:
-      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/eb7f9e86d45850c03bba4fc41a90dde4.png?v=1740087570',
     linkUrl: '/collections/new-arrivals',
     customStyle: {
       aspectRatio: '3/4',
@@ -178,11 +178,11 @@ const categorySlide: SlideItem[] = [
     },
   },
   {
-    id: 'slide-new-arrival-1',
+    id: 'slide-take-it-anywhere',
     imgUrl:
-      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/65d9e7062985a229dc68aa85d4186d6e.png?v=1737583944',
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Rectangle_306_3.png?v=1740087499',
     mobileImgUrl:
-      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/65d9e7062985a229dc68aa85d4186d6e.png?v=1737583944',
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/02fb42db4132bbe147f792cabffd5cc1.jpg?v=1740087569',
     linkUrl: '/collections/new-arrivals',
     customStyle: {
       aspectRatio: '3/4',
@@ -192,9 +192,9 @@ const categorySlide: SlideItem[] = [
   {
     id: 'slide-new-arrival-2',
     imgUrl:
-      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Rectangle_306_1.png?v=1740087499',
     mobileImgUrl:
-      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/32a057171127f84e97c1494768a964d7.png?v=1740087570',
     linkUrl: '/collections/new-arrivals',
     customStyle: {
       aspectRatio: '3/4',
@@ -202,11 +202,11 @@ const categorySlide: SlideItem[] = [
     },
   },
   {
-    id: 'slide-new-arrival-1',
+    id: 'slide-pod-power-perfected',
     imgUrl:
-      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/65d9e7062985a229dc68aa85d4186d6e.png?v=1737583944',
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Rectangle_306_4.png?v=1740087499',
     mobileImgUrl:
-      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/65d9e7062985a229dc68aa85d4186d6e.png?v=1737583944',
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/ea2e01467b527333c3e440c5d807da7d.jpg?v=1740087569',
     linkUrl: '/collections/new-arrivals',
     customStyle: {
       aspectRatio: '3/4',
@@ -214,11 +214,11 @@ const categorySlide: SlideItem[] = [
     },
   },
   {
-    id: 'slide-new-arrival-2',
+    id: 'slide-new-arrival-3',
     imgUrl:
-      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Rectangle_306_2.png?v=1740087499',
     mobileImgUrl:
-      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/61c72d0f61e7a90c7002f54426d1740f.jpg?v=1737510088',
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/dbc71e5fb3f695ba703b97096f52a729.png?v=1740087569',
     linkUrl: '/collections/new-arrivals',
     customStyle: {
       aspectRatio: '3/4',
@@ -226,11 +226,11 @@ const categorySlide: SlideItem[] = [
     },
   },
   {
-    id: 'slide-new-arrival-1',
+    id: 'slide-bilo',
     imgUrl:
-      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/65d9e7062985a229dc68aa85d4186d6e.png?v=1737583944',
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/Rectangle_306_5.png?v=1740087499',
     mobileImgUrl:
-      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/65d9e7062985a229dc68aa85d4186d6e.png?v=1737583944',
+      'https://cdn.shopify.com/s/files/1/0585/9386/9871/files/f58d44bf8407f6522c5078cdbdf192eb.png?v=1740087569',
     linkUrl: '/collections/new-arrivals',
     customStyle: {
       aspectRatio: '3/4',

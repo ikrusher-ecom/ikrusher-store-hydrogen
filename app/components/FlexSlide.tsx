@@ -181,24 +181,43 @@ export function FlexSlide({slideData, titleData}: FlexSlideProps): JSX.Element {
       </button>
       {titleData.subTitle === 'The Collection' && (
         <div className={`lg:block hidden max-w-screen-lg mx-auto`}>
-          <Row gutter={[16, 16]}>
-            {slideData.map((item, i) => {
-              return (
-                <Col
-                  className="gutter-row flex items-center"
-                  span={8}
-                  key={`desktop-${item.id}-${i}`}
-                >
-                  <img
-                    src={item.imgUrl}
-                    alt="iKrusher"
-                    className={`hidden md:block w-full rounded-xl`}
-                    style={{boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'}}
-                  />
-                </Col>
-              );
-            })}
-          </Row>
+          <Flex className={`gap-4 justify-between`}>
+            {Array.from({length: Math.ceil(slideData.length / 2)}).map(
+              (_, rowIndex) => {
+                const item1 = slideData[rowIndex * 2];
+                const item2 = slideData[rowIndex * 2 + 1];
+
+                return (
+                  <Flex
+                    vertical
+                    key={`row-${rowIndex}`}
+                    className={`gap-4 justify-between`}
+                  >
+                    {item1 && (
+                      <div style={{flex: '1 1 auto'}}>
+                        <img
+                          src={item1.imgUrl}
+                          alt="iKrusher"
+                          className={`hidden md:block w-full rounded-xl`}
+                          // style={{boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'}}
+                        />
+                      </div>
+                    )}
+                    {item2 && (
+                      <div style={{flex: '1 1 auto'}}>
+                        <img
+                          src={item2.imgUrl}
+                          alt="iKrusher"
+                          className={`hidden md:block w-full rounded-xl`}
+                          // style={{boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'}}
+                        />
+                      </div>
+                    )}
+                  </Flex>
+                );
+              },
+            )}
+          </Flex>
         </div>
       )}
       {titleData.subTitle === 'iKraft' && (
