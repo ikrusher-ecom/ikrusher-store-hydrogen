@@ -241,7 +241,7 @@ export function TechSlide({slideData, titleData}: TechSlideProps): JSX.Element {
                   onOk={handleCloseModal}
                   onCancel={handleCloseModal}
                   footer={null}
-                  centered
+                  // centered
                   className={`bg-contrast rounded-2xl px-7 py-12 techSlideModal lg:hidden block`}
                   style={{
                     boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',

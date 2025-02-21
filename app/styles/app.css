@@ -146,6 +146,12 @@ shop-pay-button {
   .ant-carousel .slick-slide img.block.md\:hidden {
     display: none;
   }
+
+  .videoModal {
+    transform: translate(-50%, -25%) !important;
+    left: 50%;
+    width: 60% !important;
+  }
 }
 
 @layer base {
@@ -775,6 +781,25 @@ img.img-dual-airflow {
 
 footer a {
   line-height: 1;
+}
+
+.ikraftDesktopSection .ant-carousel .slick-dots li.slick-active button,
+.ikraftDesktopSection .ant-carousel .slick-dots li button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.ikraftDesktopSection .ant-carousel .slick-dots li button {
+  background-color: rgb(var(--color-midGrey));
+}
+
+.ikraftDesktopSection .ant-carousel .slick-dots li.slick-active button {
+  background-color: rgb(var(--color-theme));
+}
+
+.ikraftDesktopSection .ant-carousel .slick-dots-bottom {
+  bottom: -12px;
 }
 
 @media (min-width: 768px) {

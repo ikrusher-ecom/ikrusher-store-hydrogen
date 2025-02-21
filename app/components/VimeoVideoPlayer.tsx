@@ -78,7 +78,7 @@ export function VimeoVideoPlayer({
           top: '50%',
           transform: 'translateY(-15%)',
         }}
-        className={`w-full h-full p-0 m-0`}
+        className={`w-full h-full p-0 m-0 videoModal`}
       >
         <div
           className={className}
