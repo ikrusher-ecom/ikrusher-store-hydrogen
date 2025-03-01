@@ -25,6 +25,7 @@ export default async function handleRequest(
       'https://*.googleapis.com',
       'https://f.vimeocdn.com',
       'https://www.gstatic.com',
+      'https://cdn.judge.me',
       ...(process.env.NODE_ENV !== 'production' ? ['http://localhost:*'] : []),
     ],
     connectSrc: [
@@ -35,6 +36,7 @@ export default async function handleRequest(
       'https://cdn.shopify.com',
       'https://f.vimeocdn.com',
       'https://www.gstatic.com',
+      'https://cdn.judge.me',
       'wss://conversely-moved-aardvark.ngrok-free.app:*',
       ...(process.env.NODE_ENV !== 'production' ? ['http://localhost:*'] : []),
     ],
@@ -45,6 +47,7 @@ export default async function handleRequest(
       'https://cdn.shopify.com',
       'https://player.vimeo.com',
       'https://www.gstatic.com',
+      'https://cdn.judge.me',
       ...(process.env.NODE_ENV !== 'production' ? ['http://localhost:*'] : []),
     ],
     imgSrc: [
@@ -55,6 +58,7 @@ export default async function handleRequest(
       'https://i.vimeocdn.com',
       'https://f.vimeocdn.com',
       'https://placehold.co',
+      'https://cdn.judge.me',
       ...(process.env.NODE_ENV !== 'production' ? ['http://localhost:*'] : []),
     ],
   });

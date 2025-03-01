@@ -22,17 +22,17 @@ import {
 import invariant from 'tiny-invariant';
 import {Typography} from 'antd';
 
+import {PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
+import {routeHeaders} from '~/data/cache';
+import {seoPayload} from '~/lib/seo.server';
+import {getImageLoadingPriority, PAGINATION_SIZE} from '~/lib/const';
+import {parseAsCurrency} from '~/lib/utils';
 import {PageHeader, Section, Text} from '~/components/Text';
 import {Grid} from '~/components/Grid';
 import {Button} from '~/components/Button';
 import {ProductCard} from '~/components/ProductCard';
 import {SortFilter, type SortParam} from '~/components/SortFilter';
-import {PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
-import {routeHeaders} from '~/data/cache';
-import {seoPayload} from '~/lib/seo.server';
 import {FILTER_URL_PREFIX} from '~/components/SortFilter';
-import {getImageLoadingPriority, PAGINATION_SIZE} from '~/lib/const';
-import {parseAsCurrency} from '~/lib/utils';
 import {HeroBanner} from '~/components/HeroBanner';
 import {TitleDiv} from '~/components/TitleDiv';
 import {ProductSlide} from '~/components/ProductSlide';
@@ -345,20 +345,22 @@ export default function Collection() {
   }
 
   interface SpecItem {
-    name: string;
     id: string;
+    name: string;
     type: string;
     batteryCapacity?: string;
-    heatingElement?: string;
+    oilTypes?: string;
     centerPost?: string;
-    maxFillVolume?: string;
     activation?: string;
+    omniCompatibility?: string;
+    maxFillVolume?: string;
+    mouthpiece?: string;
     outputVoltage?: string;
     resistance?: string;
+    heatingElement?: string;
     aperture?: string;
     tankMaterial?: string;
     chargePort?: string;
-    mouthpiece?: string;
   }
 
   const productComparisonItems: ProductComparisonItem[] =

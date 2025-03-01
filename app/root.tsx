@@ -15,6 +15,7 @@ import {
   useRouteLoaderData,
   useRouteError,
   type ShouldRevalidateFunction,
+  useLoaderData,
 } from '@remix-run/react';
 import {
   useNonce,
@@ -24,6 +25,7 @@ import {
   type SeoConfig,
 } from '@shopify/hydrogen';
 import invariant from 'tiny-invariant';
+import {useJudgeme} from '@judgeme/shopify-hydrogen';
 
 import {PageLayout} from '~/components/PageLayout';
 import {GenericError} from '~/components/GenericError';
@@ -85,9 +87,24 @@ export async function loader(args: LoaderFunctionArgs) {
   // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
 
+  const {context} = args;
+
+  const hasJudgemeConfig =
+    context.env.JUDGEME_SHOP_DOMAIN &&
+    context.env.JUDGEME_PUBLIC_TOKEN &&
+    context.env.JUDGEME_CDN_HOST;
+
   return defer({
     ...deferredData,
     ...criticalData,
+    judgeme: hasJudgemeConfig
+      ? {
+          shopDomain: context.env.JUDGEME_SHOP_DOMAIN,
+          publicToken: context.env.JUDGEME_PUBLIC_TOKEN,
+          cdnHost: context.env.JUDGEME_CDN_HOST,
+          delay: 500,
+        }
+      : null,
   });
 }
 
@@ -179,6 +196,17 @@ function Layout({children}: {children?: React.ReactNode}) {
 }
 
 export default function App() {
+  const data = useLoaderData<typeof loader>('root');
+  const judgemeConfig = data.judgeme || {
+    shopDomain: '',
+    publicToken: '',
+    cdnHost: '',
+    delay: 500,
+  };
+  console.log('judgemeConfig', judgemeConfig);
+
+  useJudgeme(judgemeConfig);
+
   return (
     <Layout>
       <Outlet />
